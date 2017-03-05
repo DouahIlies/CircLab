@@ -190,14 +190,15 @@ namespace WpfApplication9.Component
                 btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
                 x2 = btn2Point.X;
                 y2 = btn2Point.Y;
-           // }
+            // }
+            l1.Stroke = new SolidColorBrush(Colors.Black);
             l1.X1 = x1 + 0/*btn11.ActualWidth*/;
             l1.X2 = (x1 + x2 + 2 * btn11.ActualWidth) / 2;
             l1.Y1 = y1 + btn11.ActualHeight / 2;
             l1.Y2 = y1 + btn11.ActualHeight / 2;
             //myCanvas.Children.Add(l1);
             //l2 = new Line();
-           // l2.Stroke = new SolidColorBrush(Colors.Black);
+            l2.Stroke = new SolidColorBrush(Colors.Black);
            // l2.StrokeThickness = 2.0;
             l2.X1 = l1.X2;
             l2.X2 = l1.X2;
@@ -206,7 +207,7 @@ namespace WpfApplication9.Component
             //myCanvas.Children.Add(l2);
 
             //l3 = new Line();
-            //l3.Stroke = new SolidColorBrush(Colors.Black);
+            l3.Stroke = new SolidColorBrush(Colors.Black);
             //l3.StrokeThickness = 2.0;
             l3.X1 = l2.X2;
             l3.X2 = (x2);//btn2Point.X;

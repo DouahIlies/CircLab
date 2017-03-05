@@ -172,32 +172,6 @@ namespace WpfApplication9
             }
         }
 
-        private void open(object sender, RoutedEventArgs e)
-        {
-            if (popup.Visibility == Visibility.Visible)
-            {
-                popup.Visibility = Visibility.Hidden;
-                clear.Content = "+";
-            }
-            else
-            {
-                popup.Visibility = Visibility.Visible;
-                clear.Content = "-";
-            }
-        }
-
-        private void open2(object sender, RoutedEventArgs e)
-        {
-            if (popup1.Visibility == Visibility.Visible)
-            {
-                popup1.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                popup1.Visibility = Visibility.Visible;
-            }
-        }
-
 
         private void addXNOR(object sender, RoutedEventArgs e)
         {
@@ -242,6 +216,23 @@ namespace WpfApplication9
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void closeWindow(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
+
+        private void RightDrawerHostOpen(object sender, RoutedEventArgs e)
+        {
+            drawerHost.IsRightDrawerOpen = true;
+            drawerHost.IsLeftDrawerOpen = false;
+        }
+
+        private void BottomDrawerHostOpen(object sender, RoutedEventArgs e)
+        {
+            drawerHost.IsBottomDrawerOpen = true;
+            MessageBox.Show("hi");
         }
     }
 
