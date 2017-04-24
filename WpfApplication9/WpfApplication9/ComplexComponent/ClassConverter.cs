@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApplication9.ComplexComponent
+namespace CircLab.ComplexComponent
 {
     static class ClassConverter
     {

@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace WpfApplication9.Component
+namespace CircLab.Component
 {
 
     public partial class Wireclass : UserControl

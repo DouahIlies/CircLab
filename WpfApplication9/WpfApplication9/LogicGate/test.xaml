@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="WpfApplication9.LogicGate.test"
+﻿<UserControl x:Class="CircLab.LogicGate.test"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:WpfApplication9.LogicGate"
+             xmlns:local="clr-namespace:CircLab.LogicGate"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">

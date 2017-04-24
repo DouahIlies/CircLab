@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using WpfApplication9.Component;
+using CircLab.Component;
 
-namespace WpfApplication9.LogicGate
+namespace CircLab.LogicGate
 {
     class SeptSegmentsClass : StandardComponent
     {

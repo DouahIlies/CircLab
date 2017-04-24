@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication9.Component
+namespace CircLab.Component
 {
     /// <summary>
     /// Interaction logic for terminal.xaml

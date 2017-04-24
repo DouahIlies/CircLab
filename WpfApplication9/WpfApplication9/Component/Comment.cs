@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfApplication9.Component
+namespace CircLab.Component
 {
     class Comment : StandardComponent
     {

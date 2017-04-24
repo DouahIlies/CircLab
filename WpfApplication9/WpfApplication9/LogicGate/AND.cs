@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfApplication9.Component;
+using CircLab.Component;
 
 
-namespace WpfApplication9.LogicGate
+namespace CircLab.LogicGate
 {
     class AND:StandardComponent
     {

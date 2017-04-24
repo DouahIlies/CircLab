@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace WpfApplication9.SequentialComponent
+namespace CircLab.SequentialComponent
 {
     /// <summary>
     /// Interaction logic for ChronoWindow.xaml

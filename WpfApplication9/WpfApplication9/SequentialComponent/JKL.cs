@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using WpfApplication9.Component;
+using CircLab.Component;
 
-namespace WpfApplication9.SequentialComponent
+namespace CircLab.SequentialComponent
 {
     class JK : StandardComponent
     {

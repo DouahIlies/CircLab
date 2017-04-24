@@ -7,12 +7,12 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
-using WpfApplication9.Component;
+using CircLab.Component;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WpfApplication9.SequentialComponent
+namespace CircLab.SequentialComponent
 {
     class Chronogramme : StandardComponent
     {

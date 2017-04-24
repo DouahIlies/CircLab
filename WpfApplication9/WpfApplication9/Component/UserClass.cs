@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WpfApplication9.LogicGate;
+using CircLab.LogicGate;
 
-namespace WpfApplication9.Component
+namespace CircLab.Component
 {
     public static class UserClass
     {

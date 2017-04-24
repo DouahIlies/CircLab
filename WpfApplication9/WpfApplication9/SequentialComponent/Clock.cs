@@ -8,9 +8,9 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using WpfApplication9.Component;
+using CircLab.Component;
 
-namespace WpfApplication9.SequentialComponent
+namespace CircLab.SequentialComponent
 {
     class Clock:StandardComponent, ISequential
     {

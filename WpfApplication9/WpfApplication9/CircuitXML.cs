@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml.Linq;
-using WpfApplication9.Component;
-using WpfApplication9.LogicGate;
-using WpfApplication9.SequentialComponent;
+using CircLab.Component;
+using CircLab.LogicGate;
+using CircLab.SequentialComponent;
 
-namespace WpfApplication9
+namespace CircLab
 {
     static class CircuitXML
     {

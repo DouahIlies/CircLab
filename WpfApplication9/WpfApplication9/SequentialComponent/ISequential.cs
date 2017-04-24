@@ -1,4 +1,4 @@
-﻿namespace WpfApplication9.SequentialComponent
+﻿namespace CircLab.SequentialComponent
 {
     internal interface ISequential
     {

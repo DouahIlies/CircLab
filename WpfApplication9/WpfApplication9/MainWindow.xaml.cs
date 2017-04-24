@@ -14,17 +14,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApplication9.Component;
-using WpfApplication9.LogicGate;
-using WpfApplication9.SequentialComponent;
+using CircLab.Component;
+using CircLab.LogicGate;
+using CircLab.SequentialComponent;
 using MaterialDesignThemes.Wpf;
 using System.IO;
 using System.Windows.Markup;
 using System.Threading;
 using System.ComponentModel;
-using WpfApplication9.ComplexComponent;
+using CircLab.ComplexComponent;
 
-namespace WpfApplication9
+namespace CircLab
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication9.LogicGate
+namespace CircLab.LogicGate
 {
     /// <summary>
     /// Interaction logic for test.xaml

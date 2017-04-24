@@ -13,11 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApplication9.Component;
-using WpfApplication9.LogicGate;
-using WpfApplication9.SequentialComponent;
+using CircLab.Component;
+using CircLab.LogicGate;
+using CircLab.SequentialComponent;
 
-namespace WpfApplication9.ComplexComponent
+namespace CircLab.ComplexComponent
 {
     class Multiplexer : StandardComponent
     {

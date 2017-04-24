@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication9.SequentialComponent
+namespace CircLab.SequentialComponent
 {
     /// <summary>
     /// Interaction logic for chronogramme.xaml

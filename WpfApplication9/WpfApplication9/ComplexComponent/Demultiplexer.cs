@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApplication9.ComplexComponent;
-using WpfApplication9.Component;
+using CircLab.ComplexComponent;
+using CircLab.Component;
 
-namespace WpfApplication9.ComplexComponent
+namespace CircLab.ComplexComponent
 {
     class Demultiplexer : StandardComponent
     {

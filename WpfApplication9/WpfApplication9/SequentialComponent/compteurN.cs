@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApplication9.Component;
-using WpfApplication9.ComplexComponent;
+using CircLab.Component;
+using CircLab.ComplexComponent;
 using System.Windows.Media;
 using System.Windows;
 
-namespace WpfApplication9.SequentialComponent
+namespace CircLab.SequentialComponent
 {
     class compteurN : StandardComponent
     {
