@@ -433,9 +433,10 @@ namespace CircLab.Component
                 }
                 i++;
             }
+            i = 0;
             foreach (Terminal terminal in selectionStack.Children)
             {
-                inputs_tab.Add(false);
+                selections_tab.Add(false);
                 if (terminal.wires.Count != 0)
                 {
 

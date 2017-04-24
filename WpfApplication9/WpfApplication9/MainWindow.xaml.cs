@@ -73,6 +73,7 @@ namespace CircLab
             Wireclass.myCanvas = canvas;
             desactiveProp();
             StandardComponent.canvas = canvas;
+            StandardComponent.fenetre = this;
             canvas.PreviewMouseMove += this.MouseMove2;
             canvas.PreviewMouseLeftButtonUp += this.PreviewMouseLeftButtonUp2;
             this.PreviewKeyDown += new KeyEventHandler(Window1_EditFull_KeyDown);
