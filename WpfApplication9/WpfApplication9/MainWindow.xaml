@@ -263,13 +263,12 @@
                 </materialDesign:ColorZone>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MaxWidth="300" Width="50*" />
-                        <ColumnDefinition Width="221*"/>
+                        <ColumnDefinition MaxWidth="300" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="812*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Background="#FF303030"
-                               LastChildFill="False" Grid.ColumnSpan="2">
+                               LastChildFill="False">
                         <DockPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Foreground"
@@ -568,7 +567,7 @@
                         </Grid>
 
                     </DockPanel>
-                    <GridSplitter Grid.Column="2"
+                    <GridSplitter Grid.Column="1"
                                   ResizeDirection="Columns"
                                   Width="10"
                                   HorizontalAlignment="Center"
@@ -576,7 +575,7 @@
                                   Margin="0"
                                   x:Name="GridSplitter1" />
                     <ScrollViewer   x:Name="canvasScroller"
-                                    Grid.Column="3"
+                                    Grid.Column="2"
                                     HorizontalScrollBarVisibility="Auto"
                                     VerticalScrollBarVisibility="Auto">
                         <Canvas x:Name="canvas"
@@ -584,12 +583,6 @@
                                 MouseDown="canvas_MouseDown"
                                 Width="2000"
                                 Height="2000">
-                            <Canvas.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Coller" Click="coller"/>
-
-                                </ContextMenu>
-                            </Canvas.ContextMenu>
                             <Canvas.Background>
                                 <!-- see http://mark-dot-net.blogspot.com/2007/06/creating-hatched-patterned-brush-in-wpf.html -->
                                 <VisualBrush TileMode="Tile"
@@ -628,12 +621,12 @@
                             BorderBrush="{x:Null}"
                             VerticalAlignment="Bottom"
                             RenderTransformOrigin="1.711,0.605"
-                            Grid.Column="3"
+                            Grid.Column="2"
                             Foreground="#DDFFFFFF" />
 
                     <DockPanel x:Name="Toolbox"
                                Height="200"
-                               Grid.Column="3"
+                               Grid.Column="2"
                                VerticalAlignment="Bottom"
                                Background="#FF303030"
                                Panel.ZIndex="2"
@@ -807,7 +800,7 @@
                     </DockPanel>
                     <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
                                              x:Name="MainSnackbar"
-                                             Grid.Column="3" Margin="261.75,0" />
+                                             Grid.Column="2" />
                 </Grid>
 
 
