@@ -220,7 +220,7 @@
                                     </Button>
                                 </StackPanel>
                             </ListBoxItem>
-                            
+
                         </ListBox>
                     </StackPanel>
                 </DockPanel>
@@ -263,12 +263,13 @@
                 </materialDesign:ColorZone>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MaxWidth="300" />
+                        <ColumnDefinition MaxWidth="300" Width="50*" />
+                        <ColumnDefinition Width="221*"/>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="812*" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Background="#FF303030"
-                               LastChildFill="False">
+                               LastChildFill="False" Grid.ColumnSpan="2">
                         <DockPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Foreground"
@@ -495,7 +496,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            
+
                             <TextBlock HorizontalAlignment="Center"><Run Text="Delay" /></TextBlock>
                             <Slider x:Name="delay"
                                     Grid.Column="1"
@@ -567,7 +568,7 @@
                         </Grid>
 
                     </DockPanel>
-                    <GridSplitter Grid.Column="1"
+                    <GridSplitter Grid.Column="2"
                                   ResizeDirection="Columns"
                                   Width="10"
                                   HorizontalAlignment="Center"
@@ -575,7 +576,7 @@
                                   Margin="0"
                                   x:Name="GridSplitter1" />
                     <ScrollViewer   x:Name="canvasScroller"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     HorizontalScrollBarVisibility="Auto"
                                     VerticalScrollBarVisibility="Auto">
                         <Canvas x:Name="canvas"
@@ -583,6 +584,12 @@
                                 MouseDown="canvas_MouseDown"
                                 Width="2000"
                                 Height="2000">
+                            <Canvas.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Coller" Click="coller"/>
+
+                                </ContextMenu>
+                            </Canvas.ContextMenu>
                             <Canvas.Background>
                                 <!-- see http://mark-dot-net.blogspot.com/2007/06/creating-hatched-patterned-brush-in-wpf.html -->
                                 <VisualBrush TileMode="Tile"
@@ -621,12 +628,12 @@
                             BorderBrush="{x:Null}"
                             VerticalAlignment="Bottom"
                             RenderTransformOrigin="1.711,0.605"
-                            Grid.Column="2"
+                            Grid.Column="3"
                             Foreground="#DDFFFFFF" />
 
                     <DockPanel x:Name="Toolbox"
                                Height="200"
-                               Grid.Column="2"
+                               Grid.Column="3"
                                VerticalAlignment="Bottom"
                                Background="#FF303030"
                                Panel.ZIndex="2"
@@ -650,18 +657,18 @@
                                     BorderBrush="White"
                                     BorderThickness="0,1,0,0">
                             <TabControl.Resources>
-                                    <Style TargetType="{x:Type Button}"
+                                <Style TargetType="{x:Type Button}"
                                            BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                                        <Setter Property="Margin"
+                                    <Setter Property="Margin"
                                                 Value="5" />
-                                        <Setter Property="Height"
+                                    <Setter Property="Height"
                                                 Value="70" />
-                                        <Setter Property="Width"
+                                    <Setter Property="Width"
                                                 Value="70" />
-                                        <Setter Property="FontSize"
+                                    <Setter Property="FontSize"
                                                 Value="10" />
                                 </Style>
-                                    <Style TargetType="TabItem">
+                                <Style TargetType="TabItem">
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="TabItem">
@@ -702,36 +709,36 @@
                                                 Margin="8,24,16,24">
                                         <Button Content="AND"
                                             Click="addGate" />
-                                    <Button Content="NAND"
+                                        <Button Content="NAND"
                                             Click="addGate" />
-                                    <Button Content="NOR"
+                                        <Button Content="NOR"
                                             Click="addGate" />
-                                    <Button Content="OR"
+                                        <Button Content="OR"
                                             Click="addGate" />
-                                    <Button Content="XOR"
+                                        <Button Content="XOR"
                                             Click="addGate" />
-                                    <Button Content="XNOR"
+                                        <Button Content="XNOR"
                                             Click="addGate" />
-                                    <Button Content="Not"
+                                        <Button Content="Not"
                                             Click="addGate" />
 
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
                             <TabItem Header="Input/Output">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Disabled">
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Margin="8,24,16,24">
-                                    <Button Content="Input"
+                                        <Button Content="Input"
                                             Click="addGate" />
-                                    <Button Content="Output"
+                                        <Button Content="Output"
                                             Click="addGate" />
-                                    <Button Content="Chronogram"
+                                        <Button Content="Chronogram"
                                             Click="addGate" />
-                                    <Button Content="Comment"
+                                        <Button Content="Comment"
                                             Click="addGate" />
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
                             <TabItem Header="Complex Components">
@@ -763,44 +770,44 @@
                             <TabItem Header="Sequential Components">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Auto">
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Margin="8,24,16,24">
-                                    <Button Content="Clock"
+                                        <Button Content="Clock"
                                             Click="addGate" />
-                                    <Button Content="SToggle"
+                                        <Button Content="SToggle"
                                             Click="addGate" />
-                                    <Button Content="AToggle"
+                                        <Button Content="AToggle"
                                             Click="addGate" />
-                                    <Button Content="RSLatche"
+                                        <Button Content="RSLatche"
                                             Click="addGate" />
-                                    <Button Content="RSTLatche"
+                                        <Button Content="RSTLatche"
                                             Click="addGate" />
-                                    <Button Content="JK"
+                                        <Button Content="JK"
                                             Click="addGate" />
-                                    <Button Content="Register"
+                                        <Button Content="Register"
                                             Click="addGate" />
-                                    <Button Content="PRegister"
+                                        <Button Content="PRegister"
                                             Click="addGate" />
-                                    <Button Content="CRegister"
+                                        <Button Content="CRegister"
                                             Click="addGate" />
-                                    <Button Content="FDevider"
+                                        <Button Content="FDevider"
                                             Click="addGate" />
-                                    <Button Content="CounterN"
+                                        <Button Content="CounterN"
                                             Click="addGate" />
-                                    <Button Content="CounterModN"
+                                        <Button Content="CounterModN"
                                             Click="addGate" />
-                                    <Button Content="CDownN"
+                                        <Button Content="CDownN"
                                             Click="addGate" />
-                                    <Button Content="CDownMN"
+                                        <Button Content="CDownMN"
                                             Click="addGate" />
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
                         </TabControl>
                     </DockPanel>
                     <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
                                              x:Name="MainSnackbar"
-                                             Grid.Column="2" />
+                                             Grid.Column="3" Margin="261.75,0" />
                 </Grid>
 
 

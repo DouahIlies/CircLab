@@ -16,7 +16,7 @@ namespace CircLab.SequentialComponent
         }
 
         private int _nbroutputs;
-        private TriggerType _trigger = TriggerType.RisingEdge;
+        public TriggerType _trigger = TriggerType.RisingEdge;
         public TriggerType Trigger
         {
             get { return _trigger; }
@@ -30,7 +30,7 @@ namespace CircLab.SequentialComponent
         {
             _trigger = trigger;
             _nbroutputs = nbrinput;
-
+            TypeLabel.Text = "ProgrammableRegister";
             oldClockValue = false;//initialiser l'horloge 
             outputs_tab.Clear();//initialiser les sorties 
             for (int i = 0; i < _nbroutputs; i++)

@@ -88,7 +88,7 @@ namespace CircLab.Component
             listeLine.Add(l2);
             listeLine.Add(l3);
 
-            myCanvas.Children.Add(l2);
+            canvas.Children.Add(l2);
             l2.PreviewMouseMove += MouseMoveHorizental;
 
             l2.PreviewMouseLeftButtonDown += this.MouseLeftButtonDownHorizental;
@@ -96,11 +96,11 @@ namespace CircLab.Component
             //   l1.PreviewMouseLeftButtonDown += this.MouseLeftButtonDown1;
             l3.PreviewMouseMove += MouseMoveVertical;
             l3.PreviewMouseLeftButtonDown += this.MouseLeftButtonDownVertical;
-            myCanvas.Children.Add(l1);
+            canvas.Children.Add(l1);
 
-            myCanvas.Children.Add(l3);
+            canvas.Children.Add(l3);
 
-
+            myCanvas = canvas;
 
         }
 
@@ -241,6 +241,8 @@ namespace CircLab.Component
            
                 }
             }
+            this.recalculer(UserClass.TryFindParent<StandardComponent>(source).rotation, true);
+            this.recalculer(UserClass.TryFindParent<StandardComponent>(destination).rotation, false);
             dessinernoued();
 
         }
@@ -292,56 +294,110 @@ namespace CircLab.Component
             catch (NullReferenceException) { }
         }
 
-        public void recalculer()
+        public void recalculer(int rotation,bool isSource)
         {
 
-            if (UserClass.TryFindLogicalParent<Canvas>(btn111) == null)
-            {
-                myCanvas.UpdateLayout();
-            }
-        btn1Point = btn111.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
+            /*    if (UserClass.TryFindLogicalParent<Canvas>(btn111) == null)
+                {
+                    myCanvas.UpdateLayout();
+                }*/
+
+            myCanvas.UpdateLayout();
+               
+            btn1Point = btn111.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
+            btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             l1 = (Line)listeLine[0];
             l2 = (Line)listeLine[1];
-            if (firstIsHorizental)
+
+            if (isSource)
             {
-                l1.X1 = btn1Point.X;
-                l2.Y1 = btn1Point.Y;
-                l1.Y1 = btn1Point.Y+btn111.ActualHeight/2;
-                l1.Y2 = btn1Point.Y+btn111.ActualHeight/2;
-                l2.Y1 = l1.Y1;
-    
+                if (firstIsHorizental)
+                {
+
+
+                    l2.Y1 = btn1Point.Y;
+                    if ((rotation == 90 || rotation == -270))
+                    {
+                        l1.Y1 = btn1Point.Y - btn111.ActualHeight / 2;
+                        l1.X1 = btn1Point.X - btn111.ActualWidth / 2;
+                    }
+                    else
+                    {
+                        if (rotation == 180 || rotation == -180)
+                        {
+                            l1.Y1 = btn1Point.Y - btn111.ActualHeight / 2;
+                            l1.X1 = btn1Point.X;
+                        }
+                        else
+                        {
+                            l1.Y1 = btn1Point.Y + btn111.ActualHeight / 2;
+                            l1.X1 = btn1Point.X;
+                        }
+
+                    }
+
+                    l1.Y2 = l1.Y1;
+
+                    l2.Y1 = l1.Y1;
+
+                }
+                else
+                {
+                    l1.X1 = btn1Point.X;
+                    l1.X2 = btn1Point.X;
+                    l1.Y1 = btn1Point.Y;
+                    l2.X1 = l1.X1;
+
+
+                }
             }
-            else
-            {
-                l1.X1 = btn1Point.X;
-                l1.X2 = btn1Point.X;
-                l1.Y1 = btn1Point.Y;
-                l2.X1 = l1.X1;
+            else {
+               
 
 
+                l2 = (Line)(listeLine[listeLine.IndexOf(l3) - 1]);
+                if (lastIsHorizental)
+                {
+
+                    if (rotation == 90)
+                    {
+                        l3.Y2 = btn2Point.Y + btn222.ActualHeight / 2;
+                    }
+                    else
+                    {
+                        if (rotation == 180 || rotation == -180)
+                        {
+                            l3.Y2 = btn2Point.Y + btn222.ActualHeight / 2;
+
+                        }
+                        else
+                        {
+                            l3.Y2 = btn2Point.Y - btn222.ActualHeight / 2;
+                        }
+
+                    }
+                    l3.X2 = btn2Point.X;
+
+                    l3.Y1 = l3.Y2;
+                    l2.Y2 = l3.Y1;
+                }
+                else
+                {
+                    if(rotation==180 ||  rotation == -180)
+                    {
+                        l3.X1 = btn2Point.X;
+                    }
+                    else
+                    {
+                        l3.X1 = btn2Point.X + btn111.ActualWidth / 2;
+                    }
+                 
+                    l3.X2=l3.X1;
+                    l3.Y2 = btn2Point.Y;
+                    l2.X2 = l3.X1;
+
+                }
             }
-
-            btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
-
-
-            l2 = (Line)(listeLine[listeLine.IndexOf(l3) - 1]);
-            if (lastIsHorizental)
-            {
-        
-                l3.X2 = btn2Point.X;
-                l3.Y2 = btn2Point.Y-btn222.ActualHeight/2;
-                l3.Y1 = btn2Point.Y-btn222.ActualHeight/2;
-                l2.Y2 = l3.Y1;
-            }
-            else
-            {
-                l3.X2 = btn2Point.X+btn111.ActualWidth/2;
-                l3.X1 = btn2Point.X+btn111.ActualWidth/2;
-                l3.Y2 = btn2Point.Y;
-                l2.X2 = l3.X1;
-                
-            }
-
 
             if (Math.Abs((this.source.logestWire).l1.X1 - (this.source.logestWire).l1.X2) < Math.Abs(this.l1.X1 - this.l1.X2))
             {
@@ -350,6 +406,7 @@ namespace CircLab.Component
             }
 
             dessinernoued();
+          
 
         }
        
@@ -410,6 +467,8 @@ namespace CircLab.Component
       
             Line lBefore;
             Line lAfter;
+            btn111 = selection1;
+            btn222 = selection2;
             btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             btn1Point = btn111.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             if (e.LeftButton == MouseButtonState.Pressed && l==sender as Line)

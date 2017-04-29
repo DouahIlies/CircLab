@@ -17,7 +17,7 @@ namespace CircLab.SequentialComponent
         public RSHLatche()
             :base(3,2,0, "M 0,0 L 30,0 L 30,30 L 0,30 z", "RSHLatche")
         {
-
+            TypeLabel.Text = "RSHLatche";
             outputs_tab.Clear();
             for (int i = 0; i < 2; i++)
             {

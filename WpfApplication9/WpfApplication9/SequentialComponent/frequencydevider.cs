@@ -20,6 +20,7 @@ namespace CircLab.SequentialComponent
             outputs_tab.Add(false);
             outputs_tab.Add(true);
             oldClockValue = false;
+            TypeLabel.Text = "FrequencydDevider";
         }
 
         public override void Run()

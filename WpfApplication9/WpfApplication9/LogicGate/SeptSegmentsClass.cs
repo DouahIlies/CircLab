@@ -21,6 +21,7 @@ namespace CircLab.LogicGate
             sept.HorizontalAlignment = HorizontalAlignment.Left;
             sept.VerticalAlignment = VerticalAlignment.Top;
             grid.Children.Add(sept);
+            TypeLabel.Text = "7Segment";
         }
 
         

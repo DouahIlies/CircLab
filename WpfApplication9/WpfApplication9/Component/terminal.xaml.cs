@@ -46,11 +46,11 @@ namespace CircLab.Component
         }
 
         //Recalcule de position de chaque terminal en recaluculant la pos de tout les fils
-        public void recalculer()
+        public void recalculer(int rotation)
         {
             foreach(Wireclass wire in wires)
             {
-                wire.recalculer();
+                wire.recalculer(rotation,this.IsOutpt);
             }
         }
 

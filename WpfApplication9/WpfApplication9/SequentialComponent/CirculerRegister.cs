@@ -17,9 +17,9 @@ namespace CircLab.SequentialComponent
         {
             Right, Left
         }
-        private Type _type;
+        public Type _type;
         private int _nbroutputs;
-        private TriggerType _trigger = TriggerType.RisingEdge;
+        public TriggerType _trigger = TriggerType.RisingEdge;
         public TriggerType Trigger
         {
             get { return _trigger; }

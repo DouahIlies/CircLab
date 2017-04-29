@@ -18,11 +18,13 @@ namespace CircLab.SequentialComponent
     {
         ChronoWindow chronogramme;
         private DispatcherTimer t;
-
+        public int nbrEntrée;
         public Chronogramme(int nbrinputs)
             : base(nbrinputs, 1, 0, "M0.5,0.5 L27,0.5 L27,27.5 L0.5,27.5 z", "chronogramme")
         {
+            TypeLabel.Text = "Chronnogramme";
             this.OutputStack.Children.Clear();
+            this.nbrEntrée = nbrinputs;
             this.MouseDoubleClick += DoubleClickEventHandler;
         }
         public void doubleClick()
@@ -31,10 +33,9 @@ namespace CircLab.SequentialComponent
             t.Tick += timer_Tick;
             t.Interval = TimeSpan.FromMilliseconds(1000);
             t.IsEnabled = true;
-            for (int i = 0; i < inputs_tab.Count; i++)
+            for (int i = 0; i < nbrEntrée; i++)
             {
-                
-                chronogramme.chronogrammeStack.Children.Add(new Chart());
+               chronogramme.chronogrammeStack.Children.Add(new Chart());
             }
 
         }
@@ -81,6 +82,15 @@ namespace CircLab.SequentialComponent
         public override void Run()
         {
           
+        }
+
+
+        public void remove()
+        {
+            if (this.chronogramme != null)
+            {
+                chronogramme.Close();
+            }
         }
     }
 }

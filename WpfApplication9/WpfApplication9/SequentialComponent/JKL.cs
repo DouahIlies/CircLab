@@ -16,7 +16,7 @@ namespace CircLab.SequentialComponent
         }
 
         private bool _val1, _val2, _out1, _out2;
-        private TriggerType _trigger = TriggerType.RisingEdge;
+        public TriggerType _trigger = TriggerType.RisingEdge;
         public TriggerType Trigger
         {
             get { return _trigger; }
@@ -26,6 +26,7 @@ namespace CircLab.SequentialComponent
         public JK(TriggerType trigger)
             : base(3, 2,0, "M 0,0 L 30,0 L 30,30 L 0,30 z", "JK")
         {
+            
             TypeLabel.Text = "JK";
              _trigger = trigger;
             outputs_tab.Clear();

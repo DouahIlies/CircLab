@@ -29,6 +29,7 @@ namespace CircLab.SequentialComponent
         public DecompteurModN(int N, int nbr)
             :base(1,nbr,0, "M 0,0 L 30,0 L 30,30 L 0,30 z","frequencyDivider")
         {
+            TypeLabel.Text = "Decompteur";
             _nbroutputs = nbr;
             outputs_tab = ClassConverter.ConvertToBinary(N-1,_nbroutputs);
             _val = N;
