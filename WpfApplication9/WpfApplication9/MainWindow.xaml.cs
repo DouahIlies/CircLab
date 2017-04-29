@@ -91,7 +91,7 @@ namespace CircLab
    
         public new void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             // In this event, we get the current mouse position on the control to use it in the MouseMove event.
             Control img = sender as Control;
             Canvas canvas = img.Parent as Canvas;
@@ -152,6 +152,9 @@ namespace CircLab
                     Frequency.Visibility = Visibility.Collapsed;
                     Type.Visibility = Visibility.Collapsed;
                     Compteur.Visibility = Visibility.Collapsed;
+                    NbrEnreComparateur.Visibility = Visibility.Collapsed;
+                    TypeDec.Visibility = Visibility.Collapsed;
+                    TypeEnc.Visibility = Visibility.Collapsed;
 
                     if (elementsSelected[0].nbrInputs() != 8)
                         ComboBoxProperties.SelectedIndex = elementsSelected[0].nbrInputs() - 2;
@@ -311,6 +314,87 @@ namespace CircLab
                         TextCompteur.Text = "Modulo";
                     }
                 }
+                else if(elementsSelected[0] is Decodeur)
+                {
+                    TypeDec.Visibility = Visibility.Visible;
+                    GridCheckBox.Visibility = Visibility.Visible;
+                   
+                    if (elementsSelected[0].nbrInputs() == 2)
+                        ComboBoxPropertiesDec.SelectedIndex = 0;
+                    else ComboBoxPropertiesDec.SelectedIndex = 1;
+
+                    if (elementsSelected[0].nbrInputs() == 2)
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        for (int i = 2; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = false;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Collapsed;
+                        }
+
+                    }
+                    else if (elementsSelected[0].nbrInputs() == 3)
+                    {
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        for (int i = 3; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = false;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Collapsed;
+                        }
+
+                    }
+
+                }
+                else if (elementsSelected[0] is Encodeur)
+                {
+                    TypeEnc.Visibility = Visibility.Visible;
+                    GridCheckBox.Visibility = Visibility.Visible;
+                    if (elementsSelected[0].nbrInputs() == 4)
+                        ComboBoxPropertiesEnc.SelectedIndex = 0;
+                    else ComboBoxPropertiesEnc.SelectedIndex = 1;
+
+                    if (elementsSelected[0].nbrInputs() == 4)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        for (int i = 4; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = false;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Collapsed;
+                        }
+
+                    }
+                    else if (elementsSelected[0].nbrInputs() == 8)
+                    {
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        
+
+                    }
+
+                }
+                else if(elementsSelected[0] is Comparateur)
+                {
+                    NbrEnreComparateur.Visibility = Visibility.Visible;
+                    ComparatuerText.Text = (elementsSelected[0].nbrInputs()/2).ToString();
+
+                }
             }
           
             
@@ -325,7 +409,7 @@ namespace CircLab
         }
         private void CreateNewGate(string name)
         {
-            miseAJourPile();
+            //miseAJourPile();
             UIElement gate;
             switch (name)
             {
@@ -559,6 +643,9 @@ namespace CircLab
             Frequency.Visibility = Visibility.Collapsed;
             Type.Visibility = Visibility.Collapsed;
             Compteur.Visibility = Visibility.Collapsed;
+            TypeDec.Visibility = Visibility.Collapsed;
+            TypeEnc.Visibility = Visibility.Collapsed;
+            NbrEnreComparateur.Visibility = Visibility.Collapsed;
         }
 
         public void activeProp()
@@ -586,7 +673,7 @@ namespace CircLab
                
          private void checkBox2_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[1];
             terminal.IsInversed = checkBox2.IsChecked.Value;
             terminal.input_inversed();
@@ -595,7 +682,7 @@ namespace CircLab
 
         private void checkBox3_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[2];
             terminal.IsInversed = checkBox3.IsChecked.Value;
             terminal.input_inversed();
@@ -604,7 +691,7 @@ namespace CircLab
 
         private void checkBox4_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[3];
             terminal.IsInversed = checkBox4.IsChecked.Value;
             terminal.input_inversed();
@@ -613,7 +700,7 @@ namespace CircLab
 
         private void checkBox5_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[4];
             terminal.IsInversed = checkBox5.IsChecked.Value;
             terminal.input_inversed();
@@ -622,7 +709,7 @@ namespace CircLab
 
         private void checkBox6_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[5];
             terminal.IsInversed = checkBox6.IsChecked.Value;
             terminal.input_inversed();
@@ -631,7 +718,7 @@ namespace CircLab
 
         private void checkBox7_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[6];
             terminal.IsInversed = checkBox7.IsChecked.Value;
             terminal.input_inversed();
@@ -640,7 +727,7 @@ namespace CircLab
 
         private void checkBox8_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[7];
             terminal.IsInversed = checkBox8.IsChecked.Value;
             terminal.input_inversed();
@@ -649,7 +736,7 @@ namespace CircLab
 
         private void checkBox1_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[0];
             terminal.IsInversed = checkBox1.IsChecked.Value;
             terminal.input_inversed();
@@ -1794,7 +1881,7 @@ namespace CircLab
                     catch { };
 
                     /**/
-                    miseAJourPile();
+                    //miseAJourPile();
                     foreach (Terminal terminal in (tableau[i] as StandardComponent).inputStack.Children)
                     {
                         try
@@ -2068,6 +2155,112 @@ namespace CircLab
             for (int j = 0; j < liste_copier.Count; j++)
             {
                 canvas.Children.Add(liste_copier[j]);
+            }
+        }
+
+        private void ComboBoxPropertiesDec_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (elementsSelected != null)
+            {
+                if (elementsSelected.Count != 0)
+                {
+                        int selecteVal = ComboBoxPropertiesDec.SelectedIndex + 2;
+                  
+                        if (selecteVal != elementsSelected[0].nbrInputs())
+                        {
+                            
+                            while (selecteVal > elementsSelected[0].nbrInputs())
+                            {
+                                elementsSelected[0].AddInputs();
+                            }
+                            while (selecteVal < elementsSelected[0].nbrInputs())
+                            {
+                                elementsSelected[0].RemoveInputs();
+                            }
+
+                            elementsSelected[0].redessiner(elementsSelected[0].path);
+                            canvas.UpdateLayout();
+                            elementsSelected[0].Run();
+                        }
+                    
+                   modifieProperties();
+
+                }
+            }
+        }
+
+        private void ComboBoxPropertiesEnc_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (elementsSelected != null)
+            {
+                if (elementsSelected.Count != 0)
+                {
+                    int selecteVal;
+                    if (ComboBoxPropertiesEnc.SelectedIndex == 0) selecteVal = 4;
+                    else selecteVal = 8;
+
+                    if (selecteVal != elementsSelected[0].nbrInputs())
+                    {
+
+                        while (selecteVal > elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].AddInputs();
+                        }
+                        while (selecteVal < elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].RemoveInputs();
+                        }
+
+                        elementsSelected[0].redessiner(elementsSelected[0].path);
+                        canvas.UpdateLayout();
+                        elementsSelected[0].Run();
+                    }
+
+                    modifieProperties();
+
+                }
+            }
+        }
+
+        private void ComparatuerText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (elementsSelected != null)
+            {
+                if (elementsSelected.Count != 0)
+                {
+                    int selecteVal=0;
+                  
+                    try
+                    {
+                        selecteVal = Int32.Parse(ComparatuerText.Text)*2;
+                    }
+                    catch (FormatException ex)
+                    {
+                        MessageBox.Show("Entrez un nombre s'il vous plait ! ");
+                        selecteVal = elementsSelected[0].nbrInputs();
+                        Console.WriteLine(ex.Message);
+                    }
+
+                    if (selecteVal != elementsSelected[0].nbrInputs())
+                    {
+                        
+                        while (selecteVal > elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].AddInputs();
+                        }
+                        while (selecteVal < elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].RemoveInputs();
+                        }
+
+                        elementsSelected[0].redessiner(elementsSelected[0].path);
+                        canvas.UpdateLayout();
+                        elementsSelected[0].Run();
+                    }
+
+                    modifieProperties();
+
+                }
             }
         }
 

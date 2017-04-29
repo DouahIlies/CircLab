@@ -438,8 +438,53 @@
                                     <ComboBoxItem Content="32" />
                                 </ComboBox>
                             </StackPanel>
-
-
+                            <StackPanel x:Name="TypeDec" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Type"
+                                           VerticalAlignment="Center" />
+                                <ComboBox x:Name="ComboBoxPropertiesDec"
+                                          SelectedIndex="0"
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          VerticalAlignment="Stretch"
+                                         
+                                          Margin="62,2,0,0"
+                                          Width="72" SelectionChanged="ComboBoxPropertiesDec_SelectionChanged">
+                                    <ComboBoxItem Content="2-4" />
+                                    <ComboBoxItem Content="3-8" />
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel x:Name="TypeEnc" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Type"
+                                           VerticalAlignment="Center" />
+                                <ComboBox x:Name="ComboBoxPropertiesEnc"
+                                          SelectedIndex="0"
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          VerticalAlignment="Stretch"
+                                         
+                                          Margin="62,2,0,0"
+                                          Width="72" SelectionChanged="ComboBoxPropertiesEnc_SelectionChanged">
+                                    <ComboBoxItem Content="4-2" />
+                                    <ComboBoxItem Content="8-3" />
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel x:Name="NbrEnreComparateur" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Nombre de bits : "
+                                           VerticalAlignment="Center"
+                                           Margin="0,0" />
+                                <TextBox x:Name="ComparatuerText"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Left"
+                                         Height="23"
+                                         Margin="10,2,0,0"
+                                         TextWrapping="Wrap"
+                                         VerticalAlignment="Top"
+                                         Width="98" TextChanged="ComparatuerText_TextChanged"
+                                        />
+                            </StackPanel>
                         </StackPanel>
                         <Grid DockPanel.Dock="Bottom"
                               Margin="10">

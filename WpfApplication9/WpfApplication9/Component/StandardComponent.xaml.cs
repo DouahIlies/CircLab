@@ -238,7 +238,14 @@ namespace CircLab.Component
             }
             if (wire != null) wire.Destroy();
             inputStack.Children.Remove(terminal);
-            inputs_tab.RemoveAt(1);
+            try
+            {
+                inputs_tab.RemoveAt(1);
+            }
+            catch
+            {
+
+            }
 
 
         }
