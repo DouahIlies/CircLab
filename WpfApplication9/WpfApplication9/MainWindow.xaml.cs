@@ -1753,7 +1753,7 @@ namespace CircLab
             for (int i = 0; i < length; i++)
             {
                 StandardComponent newChild = null;
-                if (!(typeof(Line) == tableau[i].GetType()) && ((tableau[i] as StandardComponent).IsSelect))
+                if ((tableau[i] is StandardComponent) && ((tableau[i] as StandardComponent).IsSelect))
                 {
 
                     if (typeof(AND) == tableau[i].GetType())
@@ -2061,7 +2061,7 @@ namespace CircLab
             {
 
                 StandardComponent newChild = null;
-                if (!(typeof(Line) == tableau[i].GetType()) && ((tableau[i] as StandardComponent).IsSelect))
+                if ((tableau[i] is StandardComponent) && ((tableau[i] as StandardComponent).IsSelect))
                 {
 
                     if (typeof(AND) == tableau[i].GetType())
