@@ -477,8 +477,7 @@ namespace CircLab.Component
       
             Line lBefore;
             Line lAfter;
-            btn111 = selection1;
-            btn222 = selection2;
+        
             btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             btn1Point = btn111.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             if (e.LeftButton == MouseButtonState.Pressed && l==sender as Line)

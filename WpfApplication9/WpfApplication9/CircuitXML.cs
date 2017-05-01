@@ -9,6 +9,7 @@ using CircLab.Component;
 using CircLab.LogicGate;
 using CircLab.SequentialComponent;
 using System.Windows;
+using CircLab.ComplexComponent;
 
 namespace CircLab
 {
@@ -103,6 +104,10 @@ namespace CircLab
                     {
                         gt.SetAttributeValue("NumOutputs", ((DecompteurModN)g).Nbroutputs);
                         gt.SetAttributeValue("N", ((DecompteurModN)g).Val);
+                    }
+                    if(shape is Demultiplexer)
+                    {
+                        gt.SetAttributeValue("NumOutputs", ((Demultiplexer)g).nbrOutputs());
                     }
                     gates.Add(gt);
                     gid.Add(g, id);
@@ -238,11 +243,26 @@ namespace CircLab
                     temp = int.Parse(gate.Attribute("NumOutputs").Value);
                     temp2 = int.Parse(gate.Attribute("N").Value);
                     return new DecompteurModN(temp2, temp);
-
-
-
-
-
+                case "Multiplexer":     
+                    return new Multiplexer(numInputs, 1, int.Parse(((Double)(Math.Log(numInputs, 2))).ToString()));
+                case "Decodeur":
+                    return new CircLab.ComplexComponent.Decodeur(numInputs, int.Parse(((Double)(Math.Pow(2, numInputs))).ToString()));
+                case "Encodeur":
+                    return new CircLab.ComplexComponent.Encodeur(numInputs, int.Parse(((Double)(Math.Log(numInputs,2))).ToString()));
+                case "FullAdder":
+                    return new CircLab.ComplexComponent.FullAdder(numInputs, 2);
+                case "HalfAdder":
+                    return new CircLab.ComplexComponent.HalfAdder(numInputs, 2);
+                case "HalfSub":
+                    return new CircLab.ComplexComponent.HalfSub(numInputs, 2);
+                case "FullSub":
+                    return new CircLab.ComplexComponent.FullSub(numInputs, 2);
+                case "Comparateur":
+                    return new CircLab.ComplexComponent.Comparateur(numInputs, 3);
+                case "Demultiplexer":
+                    temp = int.Parse(gate.Attribute("NumOutputs").Value);
+                    return new CircLab.ComplexComponent.Demultiplexer(numInputs, temp, int.Parse(((Double)(Math.Log(temp, 2))).ToString()));
+          
             }
             throw new ArgumentException("unknown gate");
         }
@@ -282,11 +302,11 @@ namespace CircLab
                 Wireclass.selection1 = ((Terminal)gateSrc.OutputStack.Children[portSrc]).elSelector;
                 Wireclass.selection2 = ((Terminal)gateDest.inputStack.Children[portDest]).elSelector;
                 MainWindow.wire.relier();
+                canvas.UpdateLayout();
                 MainWindow.wire.btn111 = Wireclass.selection1;
                 MainWindow.wire.btn222 = Wireclass.selection2;
                 Wireclass.myCanvas = canvas;
-             //   MainWindow.wire.recalculer(gateSrc.rotation, true);
-               // MainWindow.wire.recalculer(gateDest.rotation, false);
+     
                 canvas.UpdateLayout();
      
  
