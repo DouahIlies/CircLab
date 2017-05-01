@@ -485,6 +485,22 @@
                                          Width="98" TextChanged="ComparatuerText_TextChanged"
                                         />
                             </StackPanel>
+                            <StackPanel x:Name="TypeReg" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Décalage"
+                                           VerticalAlignment="Center" />
+                                <ComboBox x:Name="ComboBoxPropertiesReg"
+                                          SelectedIndex="0"
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          VerticalAlignment="Stretch"
+                                         
+                                          Margin="62,2,0,0"
+                                          Width="72" SelectionChanged="ComboBoxPropertiesReg_SelectionChanged" >
+                                    <ComboBoxItem Content="Droite" />
+                                    <ComboBoxItem Content="Gauche" />
+                                </ComboBox>
+                            </StackPanel>
                         </StackPanel>
                         <Grid DockPanel.Dock="Bottom"
                               Margin="10">

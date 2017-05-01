@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using CircLab.LogicGate;
+using CircLab.SequentialComponent;
 
 namespace CircLab.Component
 {
@@ -80,6 +81,8 @@ namespace CircLab.Component
             else if (component is NAND) return true;
             else if (component is NOR) return true;
             else if (component is OR) return true;
+            else if (component is Registre) return true;
+            else if (component is CirculerRegister) return true;
             else return false;
 
         }
