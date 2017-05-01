@@ -29,11 +29,14 @@ namespace CircLab.SequentialComponent
         public DecompteurN(int N, int nbr)
             :base(1,nbr,0, "M 0,0 L 30,0 L 30,30 L 0,30 z","frequencyDivider")
         {
+            TypeLabel.Text = "Decompteur";
             _nbroutputs = nbr;
             outputs_tab=ClassConverter.ConvertToBinary(N,_nbroutputs);
             _val = N;
             oldClockValue = false;
-            
+            TypeLabel.Text = "DecN";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "Clock";
+
         }
 
         public override void Run()

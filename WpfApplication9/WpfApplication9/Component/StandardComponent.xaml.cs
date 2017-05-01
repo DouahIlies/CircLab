@@ -32,7 +32,7 @@ namespace CircLab.Component
         public string type;
         public double PosX;//Position x dans le canvas
         public double PosY;//Position y dans le canvas 
-        private int rotation = 0;
+        public int rotation = 0;
 
 
         protected ArrayList inputs_tab;
@@ -79,6 +79,13 @@ namespace CircLab.Component
             }
 
             OutputStack.Children.Remove(output);
+            if (nbrSelection > 2)//here 
+            {
+
+                OutputStack.Margin = new Thickness(nbrSelection * 1.5 * 12, 25, 0, 0);
+
+            }
+
             for (int i = 0; i < nbrOutput; i++)
             {
 
@@ -88,6 +95,7 @@ namespace CircLab.Component
                 terminal.terminal_grid.LayoutTransform = new RotateTransform(180);
                 terminal.IsOutpt = true;
                 OutputStack.Children.Add(terminal);
+
 
             }
 
@@ -102,7 +110,12 @@ namespace CircLab.Component
 
             }//Pour dessiner le composant
             typeComponenet.Height = terminal.Height * Math.Max(nbrinput, nbrOutput);
-            typeComponenet.Width = terminal.Width * 4;
+            if (nbrSelection > 2)
+            {
+                typeComponenet.Width = terminal.Width * 1.5 * nbrSelection; //here 
+            }
+            else { typeComponenet.Width = terminal.Width * 4; }
+
             typeComponenet.Data = StreamGeometry.Parse(path);
             typeComponenet.Stretch = Stretch.Fill;
             typeComponenet.StrokeThickness = 0;
@@ -122,44 +135,51 @@ namespace CircLab.Component
                 double x = terminalSelection.terminal_grid.Height;
 
                 terminalSelection.LayoutTransform = new RotateTransform(90);
-                if (i == 0)
-                {
-                    x = terminal.Width;
-                }
-                else
-                {
-                    x = 0;
-                }
 
-                terminalSelection.Margin = new Thickness(-terminal.Width / Math.Pow(2, nbrSelection) + x, 0, 0, 2);
+
+                terminalSelection.Margin = new Thickness(-terminal.Width / Math.Pow(2, nbrSelection) - terminal.Width + 3, 0, 0, 2);
                 selectionStack.Children.Add(terminalSelection);
             }
 
 
 
         }
-
         //Methode pour recalculer la position du composants, on calcule la pos de chaque terminal prenant en considération les filles liées à lui
         public void recalculer_pos()
         {
             foreach (Terminal terminal in inputStack.Children)
             {
-                terminal.recalculer();
+                terminal.recalculer(this.rotation);
             }
             foreach (Terminal terminal in OutputStack.Children)
             {
-                terminal.recalculer();
+                terminal.recalculer(this.rotation);
+            }
+            foreach (Terminal terminal in selectionStack.Children)
+            {
+               
+                terminal.recalculer(this.rotation);
             }
 
 
         }
 
-        private void Delete(object sender, RoutedEventArgs e)
+        public void Delete(object sender, RoutedEventArgs e)
+        {
+
+            this.Delete_elements();
+        }
+
+        public void Delete_elements()
         {
             //StandardComponent component =UserClass.TryFindParent<StandardComponent>((((MenuItem)sender).Parent as ContextMenu).PlacementTarget);
             foreach (StandardComponent component in MainWindow.elementsSelected)
             {
-                fenetre.miseAJourPile();
+           //     fenetre.miseAJourPile();
+                if(component is Chronogramme)
+                {
+                    ((Chronogramme)component).remove();
+                }
                 foreach (Terminal terminal in component.inputStack.Children)
                 {
                     try
@@ -184,27 +204,22 @@ namespace CircLab.Component
 
                         ((Wireclass)terminal.wires[i]).Destroy();
                     }
-                    /*       foreach (Wireclass wire in terminal.wires)
-                           {
-                               wire.Destroy();
-                           }*/
+              
+                }
+                foreach (Terminal terminal in component.selectionStack.Children)
+                {
+
+                    for (int i = terminal.wires.Count - 1; i >= 0; i--)
+                    {
+
+                        ((Wireclass)terminal.wires[i]).Destroy();
+                    }
 
                 }
                 canvas.Children.Remove(component);
                 MainWindow window = UserClass.TryFindParent<MainWindow>(canvas);
                 window.desactiveProp();
-
-
             }
-
-
-            //Control component =(Control)sender;
-            //StandardComponent test = UserClass.TryFindParent<StandardComponent>();
-            // test.typeComponenet.Height = 100;
-            //MessageBox.Show();
-
-            ///canvas.Children.Remove(UserClass.TryFindParent<StandardComponent>(text));
-
         }
 
         public abstract void Run();
@@ -405,12 +420,8 @@ namespace CircLab.Component
 
         public void update_input()
         {
-            // inputs_tab.Clear();
+    
             selections_tab.Clear();
-
-
-
-            //outputs_tab.Clear();
 
             int i = 0;
             foreach (Terminal terminal in inputStack.Children)
@@ -441,8 +452,11 @@ namespace CircLab.Component
                 i++;
             }
             i = 0;
+     
             foreach (Terminal terminal in selectionStack.Children)
             {
+                
+
                 selections_tab.Add(false);
                 if (terminal.wires.Count != 0)
                 {
@@ -467,6 +481,7 @@ namespace CircLab.Component
                     }
                 }
                 i++;
+               
             }
         }
 
@@ -483,18 +498,36 @@ namespace CircLab.Component
             }
         }
 
-        public void RotateRight(object sender, RoutedEventArgs e)
+        public void RotateRightEvent(object sender, RoutedEventArgs e)
         {
-            rotation += 90;
-            RotateComponent(rotation);
 
+            this.RotateRight();
         }
 
-        public void RotateLeft(object sender, RoutedEventArgs e)
+        public void RotateRight()
+        {
+            rotation += 90;
+            if (rotation == 360)
+            {
+                rotation = 0;
+            }
+            RotateComponent(rotation);
+            canvas.UpdateLayout();
+        }
+
+        public void RotateLeftEvent(object sender, RoutedEventArgs e)
+        {
+            this.RotateLeft();
+        }
+
+        public void RotateLeft()
         {
             rotation -= 90;
+            if (rotation == -360)
+            {
+                rotation = 0;
+            }
             RotateComponent(rotation);
-
         }
 
         public void RotateComponent(int rotation)
@@ -503,6 +536,7 @@ namespace CircLab.Component
             this.LayoutTransform = rt;
             this.recalculer_pos();
             canvas.UpdateLayout();
+            this.recalculer_pos();
 
         }
 
@@ -699,6 +733,69 @@ namespace CircLab.Component
                         newChild = new SequentialComponent.Clock((tableau[i] as SequentialComponent.Clock).LowLevelms, (tableau[i] as SequentialComponent.Clock).HighLevelms, MainWindow.Delay);
                     }
 
+                    else if (typeof(AsynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new AsynchToogle();
+                    }
+
+                    else if (typeof(Chronogramme) == tableau[i].GetType())
+                    {
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
+                    }
+                    else if (typeof(CirculerRegister) == tableau[i].GetType())
+                    {
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                    }
+                    else if (typeof(CompteurModN) == tableau[i].GetType())
+                    {
+                        newChild = new CompteurModN(1, (tableau[i] as CompteurModN).nbrOutputs());
+                    }
+                    else if (typeof(compteurN) == tableau[i].GetType())
+                    {
+                        newChild = new compteurN(1, (tableau[i] as compteurN).nbrOutputs());
+                    }
+                    else if (typeof(DecompteurN) == tableau[i].GetType())
+                    {
+                        newChild = new DecompteurN(1, (tableau[i] as DecompteurN).nbrOutputs());
+                    }
+                    else if (typeof(FlipFlop) == tableau[i].GetType())
+                    {
+                        newChild = new FlipFlop((tableau[i] as FlipFlop)._trigger);
+                    }
+                    else if (typeof(FrequencyDevider) == tableau[i].GetType())
+                    {
+                        newChild = new FrequencyDevider();
+                    }
+
+                    else if (typeof(JK) == tableau[i].GetType())
+                    {
+                        newChild = new JK((tableau[i] as JK).Trigger);
+                    }
+
+                    else if (typeof(programmablRegister) == tableau[i].GetType())
+                    {
+                        newChild = new programmablRegister((tableau[i] as programmablRegister)._trigger, (tableau[i] as programmablRegister).nbrInputs());
+                    }
+
+                    else if (typeof(Registre) == tableau[i].GetType())
+                    {
+                        newChild = new Registre((tableau[i] as Registre)._trigger, (tableau[i] as Registre).nbrInputs());
+                    }
+
+                    else if (typeof(RSHLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSHLatche();
+                    }
+
+                    else if (typeof(RSLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSLatche();
+                    }
+
+                    else if (typeof(SynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new SynchToogle();
+                    }
 
                     liste.Add(newChild);
                     newChild.AllowDrop = true;
@@ -942,6 +1039,69 @@ namespace CircLab.Component
                         newChild = new SequentialComponent.Clock((tableau[i] as SequentialComponent.Clock).LowLevelms, (tableau[i] as SequentialComponent.Clock).HighLevelms, MainWindow.Delay);
                     }
 
+                    else if (typeof(AsynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new AsynchToogle();
+                    }
+
+                    else if (typeof(Chronogramme) == tableau[i].GetType())
+                    {
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
+                    }
+                    else if (typeof(CirculerRegister) == tableau[i].GetType())
+                    {
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                    }
+                    else if (typeof(CompteurModN) == tableau[i].GetType())
+                    {
+                        newChild = new CompteurModN(1, (tableau[i] as CompteurModN).nbrOutputs());
+                    }
+                    else if (typeof(compteurN) == tableau[i].GetType())
+                    {
+                        newChild = new compteurN(1, (tableau[i] as compteurN).nbrOutputs());
+                    }
+                    else if (typeof(DecompteurN) == tableau[i].GetType())
+                    {
+                        newChild = new DecompteurN(1, (tableau[i] as DecompteurN).nbrOutputs());
+                    }
+                    else if (typeof(FlipFlop) == tableau[i].GetType())
+                    {
+                        newChild = new FlipFlop((tableau[i] as FlipFlop)._trigger);
+                    }
+                    else if (typeof(FrequencyDevider) == tableau[i].GetType())
+                    {
+                        newChild = new FrequencyDevider();
+                    }
+
+                    else if (typeof(JK) == tableau[i].GetType())
+                    {
+                        newChild = new JK((tableau[i] as JK).Trigger);
+                    }
+
+                    else if (typeof(programmablRegister) == tableau[i].GetType())
+                    {
+                        newChild = new programmablRegister((tableau[i] as programmablRegister)._trigger, (tableau[i] as programmablRegister).nbrInputs());
+                    }
+
+                    else if (typeof(Registre) == tableau[i].GetType())
+                    {
+                        newChild = new Registre((tableau[i] as Registre)._trigger, (tableau[i] as Registre).nbrInputs());
+                    }
+
+                    else if (typeof(RSHLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSHLatche();
+                    }
+
+                    else if (typeof(RSLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSLatche();
+                    }
+
+                    else if (typeof(SynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new SynchToogle();
+                    }
                     liste.Add(newChild);
                     newChild.AllowDrop = true;
                     newChild.PreviewMouseLeftButtonDown += fenetre.MouseLeftButtonDown;
@@ -962,6 +1122,7 @@ namespace CircLab.Component
             }
             return liste;
         }
+
 
         public void copier(object sender, RoutedEventArgs e)
         {

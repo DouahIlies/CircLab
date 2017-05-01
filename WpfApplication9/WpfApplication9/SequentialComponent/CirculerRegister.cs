@@ -26,7 +26,7 @@ namespace CircLab.SequentialComponent
             set { _type = value; }
         }
         private int _nbroutputs;
-        private TriggerType _trigger = TriggerType.RisingEdge;
+        public TriggerType _trigger = TriggerType.RisingEdge;
         public TriggerType Trigger
         {
             get { return _trigger; }
@@ -47,6 +47,10 @@ namespace CircLab.SequentialComponent
             {
                 outputs_tab.Add(false);
             }
+            TypeLabel.Text = "CReg";
+            ((Terminal)selectionStack.Children[0]).terminal_grid.ToolTip = "Clock";
+            ((Terminal)selectionStack.Children[1]).terminal_grid.ToolTip = "Clear";
+            ((Terminal)selectionStack.Children[2]).terminal_grid.ToolTip = "Load";
 
         }
 

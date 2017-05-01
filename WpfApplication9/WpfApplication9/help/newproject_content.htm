@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML>
+<html><head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- This line includes the general project style sheet (not required) -->
+   <link type="text/css" href="default.css" rel="stylesheet">
+
+<!-- This block defines the styles of the TOC headings, change them as needed -->
+<style type="text/css">
+       a { color: black; text-decoration: none }
+       a:visited {color: black}
+       a:hover { text-decoration: underline }
+       .navtitle    { font-size: 14pt; font-weight: bold; margin-bottom: 16px; }
+       .navbar      { font-size: 10pt; }
+       span#navsearch {display: none;}
+
+.heading1 { font-size: 10pt; color: #000000; text-decoration: none; }
+.heading2 { font-size: 10pt; color: #000000; text-decoration: none; }
+.heading3 { font-size: 10pt; color: #000000; text-decoration: none; }
+.heading4 { font-size: 10pt; color: #000000; text-decoration: none; }
+.heading5 { font-size: 10pt; color: #000000; text-decoration: none; }
+.heading6 { font-size: 10pt; color: #000000; text-decoration: none; }
+
+.hilight1 { font-size: 10pt; color: #FFFFFF; background: #004101; text-decoration: none; }
+.hilight2 { font-size: 10pt; color: #FFFFFF; background: #004101; text-decoration: none; }
+.hilight3 { font-size: 10pt; color: #FFFFFF; background: #004101; text-decoration: none; }
+.hilight4 { font-size: 10pt; color: #FFFFFF; background: #004101; text-decoration: none; }
+.hilight5 { font-size: 10pt; color: #FFFFFF; background: #004101; text-decoration: none; }
+.hilight6 { font-size: 10pt; color: #FFFFFF; background: #004101; text-decoration: none; }
+
+/* TOC LIST CSS */
+#toc    { padding:0; margin:0 }
+#toc li { margin-top:2px; margin-left:0px; padding:1px; }
+#toc ul { padding-left:0; margin-left:-16px; }
+/* TOC LIST CSS */
+
+</style>
+<!--[if lt IE 7]>
+<style type="text/css">
+ html {padding: 0; margin: 0;overflow-x: hidden;}
+ body { margin: 0; padding: 15px 0 0 10px;} 
+</style> 
+<![endif]-->
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript">
+     var parentScope = (parent.hmNavigationFrame);
+     if (!parentScope) {
+		      var s = document.createElement("script");
+		      s.setAttribute("type","text/javascript");
+		      s.setAttribute("src", "helpman_navigation.js");
+		      document.getElementsByTagName("head")[0].appendChild(s);
+	    }
+     else {
+       if (initialtocstate != "expandall") parent.hmAddCss(document, "#toc li ul { display: none }");
+     }
+     function loadicons() { var icons = new Array(); for (i=0; i<arguments.length; i++) { icons[i] = new Image(); icons[i].src = arguments[i]; } }
+     function loadtoc() { if (parentScope) parent.loadstate(document.getElementById("toc")); else loadstate(document.getElementById("toc")); }
+     function savetoc() { if (parentScope) parent.savestate(document.getElementById("toc")); else savestate(document.getElementById("toc")); }
+     function clicked(node, event) { deselect(); if (parentScope) parent.hmNodeClicked(node, event); else hmNodeClicked(node, event); }
+     function dblclicked(node) { if (parentScope) parent.hmNodeDblclicked(node); else hmNodeDblclicked(node); }
+     function deselect() { if (window.getSelection) window.getSelection().removeAllRanges(); else if (document.selection) document.selection.empty(); }
+     $(document).ready(function(){
+       loadtoc();
+       $(window).onunload = savetoc;
+     });
+   </script>
+</head>
+<body style="background-color: #FFFFFF; background-image: url(lines.gif); ">
+<p class="navtitle">AideCirlab</p>
+<p class="navbar">
+<b>Contents</b>&nbsp;|&nbsp;<a href="newproject_kwindex.htm">Index</a>&nbsp;
+<span id="navsearch">|&nbsp;<a href="newproject_ftsearch.htm">Search</a></span>
+<hr size="1" />
+
+<!-- Placeholder for the TOC - this variable is REQUIRED! -->
+<ul id="toc" style="list-style-type:none;display:block;padding-left:0">
+<li class="heading1" id="i1" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading1" id="a1" href="introduction.htm" target="hmcontent"><span class="heading1" id="s1">A propos</span></a>
+</li>
+<li class="heading1" id="i2" data-bg="button_closedbook.gif;button_openbook.gif" style="background:url(button_openbook.gif) no-repeat;cursor:pointer;padding-left:34px" onclick="return clicked(this,event)"><a class="heading1" id="a2" href="bienvenue_sur_circlab_.htm" target="hmcontent"><span class="heading1" id="s2" ondblclick="return dblclicked(this)">Bienvenue sur CircLab&nbsp;</span></a>
+<ul id="ul2" style="list-style-type:none">
+<li class="heading2" id="i2.1" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a2.1" href="etape0_se_familiariser_avec_ci.htm" target="hmcontent"><span class="heading2" id="s2.1">Etape0: Se familiariser avec CircLab</span></a>
+</li>
+<li class="heading2" id="i2.2" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a2.2" href="etape1_ajout_des_portes.htm" target="hmcontent"><span class="heading2" id="s2.2">Etape1: Ajout des portes</span></a>
+</li>
+<li class="heading2" id="i2.3" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a2.3" href="etape2_ajout_des_liaisons.htm" target="hmcontent"><span class="heading2" id="s2.3">Etape2: Ajout des liaisons</span></a>
+</li>
+<li class="heading2" id="i2.4" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a2.4" href="etape3_tester_le_circuit.htm" target="hmcontent"><span class="heading2" id="s2.4">Etape3: Tester le circuit</span></a>
+</li>
+</ul>
+</li>
+<li class="heading1" id="i3" data-bg="button_closedbook.gif;button_openbook.gif" style="background:url(button_openbook.gif) no-repeat;cursor:pointer;padding-left:34px" onclick="return clicked(this,event)"><a class="heading1" id="a3" href="bibliotheque_des_portes_logiqu.htm" target="hmcontent"><span class="heading1" id="s3" ondblclick="return dblclicked(this)">Bibliothèque des composants de base&nbsp;</span></a>
+<ul id="ul3" style="list-style-type:none">
+<li class="heading2" id="i3.1" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a3.1" href="les_input_output.htm" target="hmcontent"><span class="heading2" id="s3.1">Les InPut/OutPut</span></a>
+</li>
+<li class="heading2" id="i3.2" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a3.2" href="la_porte_non.htm" target="hmcontent"><span class="heading2" id="s3.2">La porte NON</span></a>
+</li>
+<li class="heading2" id="i3.3" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a3.3" href="la_porte_et.htm" target="hmcontent"><span class="heading2" id="s3.3">La porte ET/ou/NonOU/NonET</span></a>
+</li>
+<li class="heading2" id="i3.4" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a3.4" href="la_porte_xor_xnor.htm" target="hmcontent"><span class="heading2" id="s3.4">La porte XOR/XNOR</span></a>
+</li>
+</ul>
+</li>
+<li class="heading1" id="i4" data-bg="button_closedbook.gif;button_openbook.gif" style="background:url(button_openbook.gif) no-repeat;cursor:pointer;padding-left:34px" onclick="return clicked(this,event)"><a class="heading1" id="a4" href="bibliotheque_des_composants_co.htm" target="hmcontent"><span class="heading1" id="s4" ondblclick="return dblclicked(this)">Bibliothèque des composants combinatoires</span></a>
+<ul id="ul4" style="list-style-type:none">
+<li class="heading2" id="i4.1" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a4.1" href="multiplexeur_demultiplexeur.htm" target="hmcontent"><span class="heading2" id="s4.1">Multiplexeur/Demultiplexeur</span></a>
+</li>
+<li class="heading2" id="i4.2" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a4.2" href="decodeur_encodeur.htm" target="hmcontent"><span class="heading2" id="s4.2">Décodeur/Encodeur</span></a>
+</li>
+<li class="heading2" id="i4.3" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a4.3" href="_additionneur_soustracteur_com.htm" target="hmcontent"><span class="heading2" id="s4.3">&nbsp;Additionneur/Comparateur&nbsp;</span></a>
+</li>
+</ul>
+</li>
+<li class="heading1" id="i5" data-bg="button_closedbook.gif;button_openbook.gif" style="background:url(button_openbook.gif) no-repeat;cursor:pointer;padding-left:34px" onclick="return clicked(this,event)"><a class="heading1" id="a5" href="bibliotheque_des_composants_se.htm" target="hmcontent"><span class="heading1" id="s5" ondblclick="return dblclicked(this)">Bibliothèque des composants séquentiels</span></a>
+<ul id="ul5" style="list-style-type:none">
+<li class="heading2" id="i5.1" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a5.1" href="horloge.htm" target="hmcontent"><span class="heading2" id="s5.1">Horloge</span></a>
+</li>
+<li class="heading2" id="i5.2" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a5.2" href="les_bascules.htm" target="hmcontent"><span class="heading2" id="s5.2">Les bascules (flipflop)</span></a>
+</li>
+<li class="heading2" id="i5.3" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a5.3" href="les_registres.htm" target="hmcontent"><span class="heading2" id="s5.3">Les registres</span></a>
+</li>
+<li class="heading2" id="i5.4" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a5.4" href="compteurs__diviseurs_de_freque.htm" target="hmcontent"><span class="heading2" id="s5.4">Compteurs/ Diviseurs de fréquence&nbsp;</span></a>
+</li>
+</ul>
+</li>
+<li class="heading1" id="i6" data-bg="button_closedbook.gif;button_openbook.gif" style="background:url(button_openbook.gif) no-repeat;cursor:pointer;padding-left:34px" onclick="return clicked(this,event)"><a class="heading1" id="a6" href="bare_de_menu.htm" target="hmcontent"><span class="heading1" id="s6" ondblclick="return dblclicked(this)">Bare de Menu</span></a>
+<ul id="ul6" style="list-style-type:none">
+<li class="heading2" id="i6.1" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a6.1" href="menu_des_options.htm" target="hmcontent"><span class="heading2" id="s6.1">Menu des options</span></a>
+</li>
+<li class="heading2" id="i6.2" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a6.2" href="menu_des_modifications.htm" target="hmcontent"><span class="heading2" id="s6.2">Menu des modifications</span></a>
+</li>
+<li class="heading2" id="i6.3" style="background:url(button_topic.gif) no-repeat;padding-left:34px" onclick="return clicked(this,event)"><a class="heading2" id="a6.3" href="menu_des_proprietes_.htm" target="hmcontent"><span class="heading2" id="s6.3">Menu des propriétés&nbsp;</span></a>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">loadicons('button_topic.gif','button_openbook.gif','button_closedbook.gif');</script>
+
+<hr size="1" /><p><span style="font-size: 8px">© 2017 Enter your company name</span></p>
+<script type="text/javascript">
+document.getElementById("navsearch").style.display="inline";
+</script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+

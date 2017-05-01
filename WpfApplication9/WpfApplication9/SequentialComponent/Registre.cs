@@ -13,7 +13,7 @@ namespace CircLab.SequentialComponent
         }
 
         private int _nbroutput; //contenir le nombre de sorties 
-        private TriggerType _trigger;//contenir le type du changement 
+        public TriggerType _trigger;//contenir le type du changement 
         public TriggerType Trigger
         {
             get { return _trigger; }
@@ -27,13 +27,16 @@ namespace CircLab.SequentialComponent
         {
             _nbroutput = nbrinput;
             _trigger = trigger;
-
+            TypeLabel.Text = "Registre";
             oldClockValue = false;//initialiser l'horloge 
             outputs_tab.Clear();//initialiser les sorties
             for (int i = 0; i < _nbroutput; i++)
             {
                 outputs_tab.Add(false);
             }
+            TypeLabel.Text = "Reg";
+            ((Terminal)selectionStack.Children[0]).terminal_grid.ToolTip = "Clear";
+            ((Terminal)selectionStack.Children[1]).terminal_grid.ToolTip = "Load";
         }
 
         public override void Run()

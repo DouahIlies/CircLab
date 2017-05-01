@@ -25,10 +25,16 @@ namespace CircLab.Component
         public ArrayList wires; //Un terminal de sortie peut être brancher à plusieurs entrés 
         public Wireclass logestWire;
         public Boolean IsInversed;//
-        public bool etat; 
+        public bool etat;
+        public static int idTotal = 0;
+        public int id;
+
 
         public Terminal()
         {
+            this.id = idTotal;
+            id++;
+            
             InitializeComponent();
             IsInversed = false;
             wires = new ArrayList();
@@ -42,15 +48,17 @@ namespace CircLab.Component
             Canvas canvas = UserClass.TryFindParent<Canvas>((terminal));
   
             Wireclass wire = new Wireclass();
+     
             wire.relier();
         }
 
         //Recalcule de position de chaque terminal en recaluculant la pos de tout les fils
-        public void recalculer()
+        public void recalculer(int rotation)
         {
             foreach(Wireclass wire in wires)
             {
-                wire.recalculer();
+                
+                wire.recalculer(rotation,this.IsOutpt);
             }
         }
 

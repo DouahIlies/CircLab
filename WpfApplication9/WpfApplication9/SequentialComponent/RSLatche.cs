@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CircLab.Component;
+using System.Windows.Forms;
 
 namespace CircLab.SequentialComponent
 {
@@ -22,35 +23,59 @@ namespace CircLab.SequentialComponent
             {
                 outputs_tab.Add(false);
             }
+            TypeLabel.Text = "RS";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "R";
+            ((Terminal)inputStack.Children[1]).terminal_grid.ToolTip = "S";
+            ((Terminal)OutputStack.Children[0]).terminal_grid.ToolTip = "Q";
+            ((Terminal)OutputStack.Children[1]).terminal_grid.ToolTip = "not Q";
+
 
         }
 
         public override void Run()
         {
-            update_input(); 
-            _val = (bool)outputs_tab[0];
-            _val1 = (bool)inputs_tab[0];
-            _val2 = (bool)inputs_tab[1];
-            if (_val1 == false && _val2 == true)
+            update_input();//mettre à jour les entrées 
+            _val = (bool)outputs_tab[0];//recuperer la valeur de Q-
+            _val1 = (bool)inputs_tab[0];//recuperer la valeur de R
+            _val2 = (bool)inputs_tab[1];//recuperer la valeur de s
+            if (_val1 == false && _val2 == true) //R=0 S=1
             {
-                
+
                 outputs_tab[0] = true;
                 outputs_tab[1] = false;
             }
-            if(_val1 == true && _val2 == false)
+            if (_val1 == true && _val2 == false) //R=1 S=0
             {
                 outputs_tab[0] = false;
                 outputs_tab[1] = true;
             }
-            if (_val1 == false && _val2 == false)
+            if (_val1 == false && _val2 == false) //R=0 S=0 :loading 
             {
-                outputs_tab[0] =_val ;
+                outputs_tab[0] = _val;
                 outputs_tab[1] = !_val;
             }
-            if (_val2 == true && _val1 == true) throw new ArgumentException("cas interdit !");
+            if (_val2 == true && _val1 == true) //R=1 S=1 cas interdit 
+            {
+                validateUserEntry(); //afficher le message d'erreur 
+            }
 
-            update_output();
+            update_output();//mettre à jour les sorties 
         }
-    
+        private void validateUserEntry() //methode pour afficher le message d'erreur 
+        {
+
+            // Initializes the variables to pass to the MessageBox.Show method.
+
+            string message = "les entrées R et S ne peuvent pas être à 1 en Même temps ";
+            string caption = "Erreur !";
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result;
+
+            // Displays the MessageBox.
+
+            result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
+
+        }
+
     }
 }

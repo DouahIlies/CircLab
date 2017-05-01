@@ -3,14 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CircLab.SequentialComponent"
         mc:Ignorable="d"
-        Title="Chronogramme Window" Height="400" Width="600">
+        Title="Chronogramme Window" Height="400" Width="800">
     <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Margin="0,-28,0,28">
-        <Grid>
-            <Button x:Name="Pause" Margin="0,38.311,28.301,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="220.538" Content="Pause" Click="Pause_Continu"/>
-            <StackPanel x:Name="chronogrammeStack"  />
-            <Button x:Name="Reset" Margin="0,85.009,28.301,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="220.538" Content="Reset" Click="ResetChronogrammes"/>
+        <Grid x:Name="grid">
+
+            <StackPanel x:Name="chronogrammeStack" Background="White" Height="369" VerticalAlignment="Top" HorizontalAlignment="Left" Width="592"   />
+
+            <Grid  Background="#FF303030" HorizontalAlignment="Right" Width="248.839" Margin="0,0,0,-40" Grid.RowSpan="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="61*"/>
+                    <ColumnDefinition Width="188*"/>
+                </Grid.ColumnDefinitions>
+                <Button  x:Name="Pause" Margin="0,63.509,18.301,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="220.538" Content="Pause" Click="Pause_Continu" Grid.ColumnSpan="2" Background="#FF686868" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5"/>
+                <Button Background="#FF686868" x:Name="Saveme" Margin="0,167.509,18.301,0" HorizontalAlignment="Right" Width="220.538" Content="Save" Click="SaveEvent" Height="32" Grid.ColumnSpan="2" VerticalAlignment="Top" BorderBrush="{x:Null}"/>
+                <Button Background="#FF686868"  x:Name="Reset" Margin="0,117.009,18.301,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="220.538" Content="Reset" Click="ResetChronogrammes" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
+                <Button Background="#FF686868" x:Name="SaveAs" Margin="0,0,18.301,158.491" HorizontalAlignment="Right" Width="220.538" Content="Save as" Click="SaveMeEvent" Height="32" Grid.ColumnSpan="2" VerticalAlignment="Bottom" BorderBrush="{x:Null}"/>
+
+
+            </Grid>
+
+
+
+
+
         </Grid>
 
     </ScrollViewer>

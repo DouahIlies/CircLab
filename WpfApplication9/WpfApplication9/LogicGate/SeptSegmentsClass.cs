@@ -21,6 +21,15 @@ namespace CircLab.LogicGate
             sept.HorizontalAlignment = HorizontalAlignment.Left;
             sept.VerticalAlignment = VerticalAlignment.Top;
             grid.Children.Add(sept);
+            TypeLabel.Text = "7Segment";
+          
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "A";
+            ((Terminal)inputStack.Children[1]).terminal_grid.ToolTip = "B";
+            ((Terminal)inputStack.Children[2]).terminal_grid.ToolTip = "C";
+            ((Terminal)inputStack.Children[3]).terminal_grid.ToolTip = "D";
+            ((Terminal)inputStack.Children[4]).terminal_grid.ToolTip = "E";
+            ((Terminal)inputStack.Children[5]).terminal_grid.ToolTip = "F";
+            ((Terminal)inputStack.Children[6]).terminal_grid.ToolTip = "G";
         }
 
         
@@ -30,59 +39,59 @@ namespace CircLab.LogicGate
             update_input();
             if ((bool)inputs_tab[0] == true)
             {
-                sept.l1.Stroke = Brushes.Red;
+                sept.lA.Stroke = Brushes.Red;
             }
             else
             {
-                sept.l1.Stroke = Brushes.Gray;
+                sept.lA.Stroke = Brushes.Gray;
             }
             if ((bool)inputs_tab[1] == true)
             {
-                sept.l2.Stroke = Brushes.Red;
+                sept.lB.Stroke = Brushes.Red;
             }
             else
             {
-                sept.l2.Stroke = Brushes.Gray;
+                sept.lB.Stroke = Brushes.Gray;
             }
             if ((bool)inputs_tab[2] == true)
             {
-                sept.l3.Stroke = Brushes.Red;
+                sept.lC.Stroke = Brushes.Red;
             }
             else
             {
-                sept.l3.Stroke = Brushes.Gray;
+                sept.lC.Stroke = Brushes.Gray;
             }
             if ((bool)inputs_tab[3] == true)
             {
-                sept.l4.Stroke = Brushes.Red;
+                sept.lD.Stroke = Brushes.Red;
             }
             else
             {
-                sept.l4.Stroke = Brushes.Gray;
+                sept.lD.Stroke = Brushes.Gray;
             }
             if ((bool)inputs_tab[4] == true)
             {
-                sept.l5.Stroke = Brushes.Red;
+                sept.lE.Stroke = Brushes.Red;
             }
             else
             {
-                sept.l5.Stroke = Brushes.Gray;
+                sept.lE.Stroke = Brushes.Gray;
             }
             if ((bool)inputs_tab[5] == true)
             {
-                sept.l6.Stroke = Brushes.Red;
+                sept.lF.Stroke = Brushes.Red;
             }
             else
             {
-                sept.l6.Stroke = Brushes.Gray;
+                sept.lF.Stroke = Brushes.Gray;
             }
             if ((bool)inputs_tab[6] == true)
             {
-                sept.l7.Stroke = Brushes.Red;
+                sept.lG.Stroke = Brushes.Red;
             }
             else
             {
-                sept.l7.Stroke = Brushes.Gray;
+                sept.lG.Stroke = Brushes.Gray;
             }
         
 

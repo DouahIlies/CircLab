@@ -13,6 +13,7 @@ namespace CircLab.Component
         public Comment(string comment) : base(0, 0, 0, "", "Comment")
         {
             Label.Text = comment;
+            
         }
 
         public override void Run() { }

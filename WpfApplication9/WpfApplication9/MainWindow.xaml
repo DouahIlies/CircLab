@@ -95,7 +95,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="File"
                                                          Margin="5,0" />
-                                <TextBlock>New Circuit</TextBlock>
+                                <TextBlock>Nouveau Circuit</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem Padding="20,8,8,8"
@@ -103,7 +103,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="OpenInApp"
                                                          Margin="5,0" />
-                                <TextBlock>Open</TextBlock>
+                                <TextBlock>Ouvrir</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem Padding="20,8,8,8"
@@ -111,7 +111,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="ContentSave"
                                                          Margin="5,0" />
-                                <TextBlock>Save</TextBlock>
+                                <TextBlock>Enregistrer</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem Padding="20,8,8,8"
@@ -119,7 +119,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="ContentSaveAll"
                                                          Margin="5,0" />
-                                <TextBlock>Save as ...</TextBlock>
+                                <TextBlock>Enregistrer sous ...</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem Padding="20,8,8,8"
@@ -127,7 +127,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Settings"
                                                          Margin="5,0" />
-                                <TextBlock>Settings</TextBlock>
+                                <TextBlock>Options</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem Padding="20,8,8,8"
@@ -135,7 +135,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Help"
                                                          Margin="5,0" />
-                                <TextBlock>Help</TextBlock>
+                                <TextBlock>Aide</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem Padding="20,8,8,8"
@@ -143,7 +143,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Close" 
                                                          Margin="5,0"/>
-                                <TextBlock> Close</TextBlock>
+                                <TextBlock>Fermer</TextBlock>
                             </StackPanel>
                         </ListBoxItem>
                     </ListBox>
@@ -176,13 +176,13 @@
                         </DockPanel>
                         <CheckBox Margin="20,10,0,0"
                                   Padding="10,8,8,8" x:Name="gridActivatorCheckbox" IsChecked="{Binding Mute}">
-                            <TextBlock>Show Grid</TextBlock>
+                            <TextBlock>Afficher la Grille</TextBlock>
                         </CheckBox>
                         <ListBox Margin="0 10 0 0"
                                  SelectedIndex="0">
                             <ListBoxItem Padding="20,8,8,8" MouseLeftButtonUp="About_MouseLeftButtonUp">
                                 <StackPanel>
-                                    <TextBlock>About</TextBlock>
+                                    <TextBlock>A propos</TextBlock>
                                     <Button x:Name="aboutBtn"
                                             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                             Visibility="Collapsed">
@@ -193,14 +193,14 @@
                                                 <TextBlock>Version : 1.0.0</TextBlock>
                                                 <TextBlock>OpenSource on Github: www.github.com/DouahIlies/Circlab</TextBlock>
                                                 <TextBlock>This Project is made for eduction purposes.</TextBlock>
-                                                <TextBlock>Team :</TextBlock>
+                                                <TextBlock>Equipe :</TextBlock>
                                                 <TextBlock>- Douah Ilies</TextBlock>
                                                 <TextBlock>- Remil Youcef</TextBlock>
                                                 <TextBlock>- Medjkoune Tinhinane</TextBlock>
                                                 <TextBlock>- Boumadane Abdelmoumene</TextBlock>
                                                 <TextBlock>- Bouchada Ilyes</TextBlock>
                                                 <TextBlock>- Khenniche Rosa</TextBlock>
-                                                <TextBlock>Tutors :</TextBlock>
+                                                <TextBlock>Encadreurs :</TextBlock>
                                                 <TextBlock>M. Dahamni</TextBlock>
                                                 <TextBlock>M. Hadji</TextBlock>
                                                 <TextBlock Margin="0,5,0,0">Made with 
@@ -220,7 +220,7 @@
                                     </Button>
                                 </StackPanel>
                             </ListBoxItem>
-                            
+
                         </ListBox>
                     </StackPanel>
                 </DockPanel>
@@ -243,7 +243,7 @@
                                 <Button Click="RightDrawerHostOpen"
                                         Content="Options" />
                                 <Button Click="HelpOpen"
-                                        Content="Help" />
+                                        Content="Aide" />
                             </StackPanel>
                         </materialDesign:PopupBox>
                         <Button DockPanel.Dock="Right"
@@ -258,7 +258,7 @@
                         <TextBlock x:Name="CircuitName"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
-                                   FontSize="22"><Run Text="[Untitled] - CircLab" /></TextBlock>
+                                   FontSize="22"><Run Text="[Sans titre] - CircLab" /></TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>
@@ -279,17 +279,17 @@
                             <ToolBar Style="{DynamicResource MaterialDesignToolBar}"
                                      ClipToBounds="False">
                                 <Button x:Name="btnCapture"
-                                        ToolTip="Save As Image"
+                                        ToolTip="Capturer"
                                         Click="btnCapture_Click">
                                     <materialDesign:PackIcon Kind="Image" />
                                 </Button>
                                 <Button x:Name="btnPrint"
-                                        ToolTip="Print Circuit"
+                                        ToolTip="Imprimer"
                                         Click="btnPrint_Click">
                                     <materialDesign:PackIcon Kind="Printer" />
                                 </Button>
                                 <Button x:Name="btnSave"
-                                        ToolTip="Save"
+                                        ToolTip="Sauvegarder"
                                         Click="btnSave_Click">
                                     <materialDesign:PackIcon Kind="ContentSave" />
                                 </Button>
@@ -298,12 +298,12 @@
                         <ToolBarTray DockPanel.Dock="Top">
                             <ToolBar>
                                 <Button x:Name="retourBouton"
-                                        ToolTip="Undo"
-                                        Click="retour"
-                                        IsEnabled="False">
+                                        ToolTip="Annuler"
+                                        IsEnabled="False"
+                                        Click="retour">
                                     <materialDesign:PackIcon Kind="Undo" />
                                 </Button>
-                                <Button ToolTip="Redo"
+                                <Button ToolTip="Refaire"
                                         IsEnabled="False"
                                         Click="refaire"
                                         x:Name="refaireBouton">
@@ -311,13 +311,13 @@
                                 </Button>
                                 <Separator />
                                 <Button x:Name="Couper"
-                                        ToolTip="Cut"
+                                        ToolTip="Couper"
                                         Click="couper"
                                         IsEnabled="True">
                                     <materialDesign:PackIcon Kind="ContentCut" />
                                 </Button>
                                 <Button x:Name="Copier"
-                                        ToolTip="Copy"
+                                        ToolTip="Copier"
                                         Click="copier"
                                         IsEnabled="True">
                                     <materialDesign:PackIcon Kind="ContentCopy" />
@@ -326,7 +326,7 @@
                         </ToolBarTray>
                         <Label HorizontalAlignment="Center"
                                FontWeight="Bold"
-                               Content="Properties"
+                               Content="Propriétés"
                                FontSize="18"
                                Foreground="#DDFBFBFB"
                                Background="{x:Null}"
@@ -511,8 +511,8 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            
-                            <TextBlock HorizontalAlignment="Center"><Run Text="Delay" /></TextBlock>
+
+                            <TextBlock HorizontalAlignment="Center"><Run Text="Retarder" /></TextBlock>
                             <Slider x:Name="delay"
                                     Grid.Column="1"
                                     TickFrequency="5"
@@ -599,6 +599,11 @@
                                 MouseDown="canvas_MouseDown"
                                 Width="2000"
                                 Height="2000">
+                            <Canvas.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Click="coller" Header="Coller  ctr+v"></MenuItem>
+                                </ContextMenu>
+                            </Canvas.ContextMenu>
                             <Canvas.Background>
                                 <!-- see http://mark-dot-net.blogspot.com/2007/06/creating-hatched-patterned-brush-in-wpf.html -->
                                 <VisualBrush TileMode="Tile"
@@ -666,18 +671,18 @@
                                     BorderBrush="White"
                                     BorderThickness="0,1,0,0">
                             <TabControl.Resources>
-                                    <Style TargetType="{x:Type Button}"
+                                <Style TargetType="{x:Type Button}"
                                            BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                                        <Setter Property="Margin"
+                                    <Setter Property="Margin"
                                                 Value="5" />
-                                        <Setter Property="Height"
+                                    <Setter Property="Height"
                                                 Value="70" />
-                                        <Setter Property="Width"
+                                    <Setter Property="Width"
                                                 Value="70" />
-                                        <Setter Property="FontSize"
+                                    <Setter Property="FontSize"
                                                 Value="10" />
                                 </Style>
-                                    <Style TargetType="TabItem">
+                                <Style TargetType="TabItem">
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="TabItem">
@@ -711,46 +716,50 @@
                                     </Setter>
                                 </Style>
                             </TabControl.Resources>
-                            <TabItem Header="Basic Gates">
+                            <TabItem Header="Portes Logiques">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Disabled">
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="8,24,16,24">
                                         <Button Content="AND"
                                             Click="addGate" />
-                                    <Button Content="NAND"
+                                        <Button Content="NAND"
                                             Click="addGate" />
-                                    <Button Content="NOR"
+                                        <Button Content="NOR"
                                             Click="addGate" />
-                                    <Button Content="OR"
+                                        <Button Content="OR"
                                             Click="addGate" />
-                                    <Button Content="XOR"
+                                        <Button Content="XOR"
                                             Click="addGate" />
-                                    <Button Content="XNOR"
+                                        <Button Content="XNOR"
                                             Click="addGate" />
-                                    <Button Content="Not"
+                                        <Button Content="Not"
+                                            Click="addGate" />
+                                        <Button Content="Sept Segments"
+                                            Click="addGate" />
+                                        <Button Content="Hexa Segments"
                                             Click="addGate" />
 
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
-                            <TabItem Header="Input/Output">
+                            <TabItem Header="Enrées / Sorties">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Disabled">
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Margin="8,24,16,24">
-                                    <Button Content="Input"
+                                        <Button Content="Input"
                                             Click="addGate" />
-                                    <Button Content="Output"
+                                        <Button Content="Output"
                                             Click="addGate" />
-                                    <Button Content="Chronogram"
+                                        <Button Content="Chronogram"
                                             Click="addGate" />
-                                    <Button Content="Comment"
+                                        <Button Content="Comment"
                                             Click="addGate" />
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
-                            <TabItem Header="Complex Components">
+                            <TabItem Header="Combinatoires">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Auto">
                                     <StackPanel Orientation="Horizontal"
@@ -776,40 +785,40 @@
                                     </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
-                            <TabItem Header="Sequential Components">
+                            <TabItem Header="Séquentiels">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Auto">
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Margin="8,24,16,24">
-                                    <Button Content="Clock"
+                                        <Button Content="Clock"
                                             Click="addGate" />
-                                    <Button Content="SToggle"
+                                        <Button Content="SToggle"
                                             Click="addGate" />
-                                    <Button Content="AToggle"
+                                        <Button Content="AToggle"
                                             Click="addGate" />
-                                    <Button Content="RSLatche"
+                                        <Button Content="RSLatche"
                                             Click="addGate" />
-                                    <Button Content="RSTLatche"
+                                        <Button Content="RSTLatche"
                                             Click="addGate" />
-                                    <Button Content="JK"
+                                        <Button Content="JK"
                                             Click="addGate" />
-                                    <Button Content="Register"
+                                        <Button Content="Register"
                                             Click="addGate" />
-                                    <Button Content="PRegister"
+                                        <Button Content="PRegister"
                                             Click="addGate" />
-                                    <Button Content="CRegister"
+                                        <Button Content="CRegister"
                                             Click="addGate" />
-                                    <Button Content="FDevider"
+                                        <Button Content="FDevider"
                                             Click="addGate" />
-                                    <Button Content="CounterN"
+                                        <Button Content="CounterN"
                                             Click="addGate" />
-                                    <Button Content="CounterModN"
+                                        <Button Content="CounterModN"
                                             Click="addGate" />
-                                    <Button Content="CDownN"
+                                        <Button Content="CDownN"
                                             Click="addGate" />
-                                    <Button Content="CDownMN"
+                                        <Button Content="CDownMN"
                                             Click="addGate" />
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
                         </TabControl>

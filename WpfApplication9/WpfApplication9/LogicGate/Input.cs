@@ -20,6 +20,7 @@ namespace CircLab.LogicGate
             state = false;
             this.typeComponenet.Fill = Brushes.Red;
             typeComponenet.MouseLeftButtonUp += this.MouseClick;
+            TypeLabel.Text = "Input";
         }
 
 

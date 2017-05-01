@@ -9,28 +9,29 @@
     <Grid x:Name="grid"  Height="66" VerticalAlignment="Top">
         <Grid.ContextMenu>
             <ContextMenu>
-                <MenuItem Click="Delete" Header="Supprimer"></MenuItem>
-                <MenuItem Header="Rotate Right"
-                          Click="RotateRight"></MenuItem>
-                <MenuItem Header="Rotate Left"
-                          Click="RotateLeft"></MenuItem>
+                <MenuItem Click="Delete" Header="Supprimer ctrl+suppr"></MenuItem>
+                <MenuItem Header="Tourner à droite ctrl+R"
+                          Click="RotateRightEvent"></MenuItem>
+                <MenuItem Header="Tourner à gauche ctrl+L"
+                          Click="RotateLeftEvent"></MenuItem>
                 <MenuItem Name="Copier"
                           Click="copier"
-                          Header="Copier"></MenuItem>
+                          Header="Copier ctrl+C"></MenuItem>
                 <MenuItem Name="Couper"
                           Click="couper"
-                          Header="Couper"></MenuItem>
+                          Header="Couper ctrl+X"></MenuItem>
             </ContextMenu>
         </Grid.ContextMenu>
         <StackPanel x:Name="selectionStack" Height="33" VerticalAlignment="Top" Orientation="Horizontal" Margin="15,0,0,0" HorizontalAlignment="Left" Width="54"/>
         <TextBlock x:Name="TypeLabel"
                    Foreground="Black"
-                   HorizontalAlignment="Center"
-                   Margin="0,25,0,0"
+                   Margin="31.985,11.906,0,13.094"
                    Panel.ZIndex="2"
-                   FontSize="10"></TextBlock>
+                   FontSize="10"
+                   Text="Aloha" HorizontalAlignment="Left"
+                   />
         <StackPanel Name="inputStack" Margin="-5,25,0,0" HorizontalAlignment="Left" Width="19" Height="300" VerticalAlignment="Top"/>
-       <StackPanel x:Name="OutputStack" Margin="50,25,0,-234" HorizontalAlignment="Left" Width="19" Height="300" VerticalAlignment="Top">
+        <StackPanel x:Name="OutputStack" Margin="50,25,0,-234" HorizontalAlignment="Left" Width="19" Height="300" VerticalAlignment="Top">
             <local:Terminal x:Name="output" Margin="4.5,44,4.5,0" d:LayoutOverrides="Height" RenderTransformOrigin="-0.895,0.734" Width="Auto">
                 <local:Terminal.RenderTransform>
                     <TransformGroup>
@@ -45,6 +46,6 @@
         <TextBlock x:Name="Label"
                    Foreground="Black"
                    HorizontalAlignment="Center"></TextBlock>
-       
+
     </Grid>
 </UserControl>

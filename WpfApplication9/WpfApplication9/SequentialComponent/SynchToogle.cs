@@ -17,6 +17,7 @@ namespace CircLab.SequentialComponent
         public SynchToogle()
             :base(2,2,0, "M 0,0 L 30,0 L 30,30 L 0,30 z", "SynchToogle")
         {
+            TypeLabel.Text = "SynchToggle";
             outputs_tab.Clear();
             for (int i = 0; i < 2; i++)
             {
@@ -24,6 +25,12 @@ namespace CircLab.SequentialComponent
             }
 
             oldClockValue = false;
+
+            TypeLabel.Text = "ST";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "T";
+            ((Terminal)inputStack.Children[1]).terminal_grid.ToolTip = "Clock";
+            ((Terminal)OutputStack.Children[0]).terminal_grid.ToolTip = "Q";
+            ((Terminal)OutputStack.Children[1]).terminal_grid.ToolTip = "not Q";
         }
 
         public override void Run()

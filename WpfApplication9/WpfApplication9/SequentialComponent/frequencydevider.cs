@@ -20,6 +20,10 @@ namespace CircLab.SequentialComponent
             outputs_tab.Add(false);
             outputs_tab.Add(true);
             oldClockValue = false;
+            TypeLabel.Text = "FDevider";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "Sin";
+            ((Terminal)OutputStack.Children[0]).terminal_grid.ToolTip = "Sout";
+            ((Terminal)OutputStack.Children[1]).terminal_grid.ToolTip = "not Sout";
         }
 
         public override void Run()
