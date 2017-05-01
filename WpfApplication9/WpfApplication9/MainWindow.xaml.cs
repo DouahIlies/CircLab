@@ -23,6 +23,7 @@ using System.Windows.Markup;
 using System.Threading;
 using System.ComponentModel;
 using CircLab.ComplexComponent;
+using WpfApplication9.LogicGate;
 
 namespace CircLab
 {
@@ -32,6 +33,7 @@ namespace CircLab
     public partial class MainWindow : Window
     {
         public static string APP_TITLE = "CircLab";
+        public Canvas canvastest;
         public static List<StandardComponent> elementsSelected= new List<StandardComponent>();
         private string _filename = "";
         public static float Delay = 1;
@@ -62,6 +64,7 @@ namespace CircLab
             }
         }
 
+     
         public MainWindow()
         {
             InitializeComponent();
@@ -79,6 +82,7 @@ namespace CircLab
             this.PreviewKeyDown += new KeyEventHandler(Window1_EditFull_KeyDown);
             this.Closing += new CancelEventHandler(WindowClosing);
             sourceEllipse = null;
+           canvastest = this.canvas;
         }
 
         private object movingObject;
@@ -91,7 +95,7 @@ namespace CircLab
    
         public new void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             // In this event, we get the current mouse position on the control to use it in the MouseMove event.
             Control img = sender as Control;
             Canvas canvas = img.Parent as Canvas;
@@ -152,6 +156,9 @@ namespace CircLab
                     Frequency.Visibility = Visibility.Collapsed;
                     Type.Visibility = Visibility.Collapsed;
                     Compteur.Visibility = Visibility.Collapsed;
+                    NbrEnreComparateur.Visibility = Visibility.Collapsed;
+                    TypeDec.Visibility = Visibility.Collapsed;
+                    TypeEnc.Visibility = Visibility.Collapsed;
 
                     if (elementsSelected[0].nbrInputs() != 8)
                         ComboBoxProperties.SelectedIndex = elementsSelected[0].nbrInputs() - 2;
@@ -246,10 +253,18 @@ namespace CircLab
                     }
                     elementsSelected[0].recalculer_pos();
                 }
-                else if (elementsSelected[0] is SequentialComponent.Clock)
+                else if ((elementsSelected[0] is SequentialComponent.Clock) ||(elementsSelected[0] is SequentialComponent.Chronogramme))
                 {
                     Type.Visibility = Visibility.Collapsed;
-                    Frequency.Text = ((SequentialComponent.Clock)elementsSelected[0]).Delay.ToString();
+                    if((elementsSelected[0] is SequentialComponent.Clock))
+                    {
+                        Frequency.Text = ((SequentialComponent.Clock)elementsSelected[0]).Delay.ToString();
+                    }
+                    else
+                    {
+                        Frequency.Text = ((SequentialComponent.Chronogramme)elementsSelected[0]).Delay.ToString();
+                    }
+                       
                     ClockFrequency.Visibility = Visibility.Visible;
                     Frequency.Visibility = Visibility.Visible;
                                
@@ -311,6 +326,87 @@ namespace CircLab
                         TextCompteur.Text = "Modulo";
                     }
                 }
+                else if(elementsSelected[0] is Decodeur)
+                {
+                    TypeDec.Visibility = Visibility.Visible;
+                    GridCheckBox.Visibility = Visibility.Visible;
+                   
+                    if (elementsSelected[0].nbrInputs() == 2)
+                        ComboBoxPropertiesDec.SelectedIndex = 0;
+                    else ComboBoxPropertiesDec.SelectedIndex = 1;
+
+                    if (elementsSelected[0].nbrInputs() == 2)
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        for (int i = 2; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = false;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Collapsed;
+                        }
+
+                    }
+                    else if (elementsSelected[0].nbrInputs() == 3)
+                    {
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        for (int i = 3; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = false;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Collapsed;
+                        }
+
+                    }
+
+                }
+                else if (elementsSelected[0] is Encodeur)
+                {
+                    TypeEnc.Visibility = Visibility.Visible;
+                    GridCheckBox.Visibility = Visibility.Visible;
+                    if (elementsSelected[0].nbrInputs() == 4)
+                        ComboBoxPropertiesEnc.SelectedIndex = 0;
+                    else ComboBoxPropertiesEnc.SelectedIndex = 1;
+
+                    if (elementsSelected[0].nbrInputs() == 4)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        for (int i = 4; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = false;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Collapsed;
+                        }
+
+                    }
+                    else if (elementsSelected[0].nbrInputs() == 8)
+                    {
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        
+
+                    }
+
+                }
+                else if(elementsSelected[0] is Comparateur)
+                {
+                    NbrEnreComparateur.Visibility = Visibility.Visible;
+                    ComparatuerText.Text = (elementsSelected[0].nbrInputs()/2).ToString();
+
+                }
             }
           
             
@@ -325,7 +421,7 @@ namespace CircLab
         }
         private void CreateNewGate(string name)
         {
-            miseAJourPile();
+            //miseAJourPile();
             UIElement gate;
             switch (name)
             {
@@ -348,7 +444,7 @@ namespace CircLab
                 case "Output":
                     gate = new Output(); break;
                 case "Chronogram":
-                    gate = new Chronogramme(2); break;
+                    gate = new Chronogramme(2,MainWindow.Delay); break;
                 case "Decoder":
                     gate = new Decodeur(2, 4); break;
                 case "Encoder":
@@ -397,6 +493,10 @@ namespace CircLab
                     gate = new DecompteurN(6, 3); break;
                 case "CDownMN":
                     gate = new DecompteurModN(6, 3); break;
+                case "Hexa Segments":
+                    gate = new Hexadicimal(); break;
+                case "Sept Segments":
+                    gate = new SeptSegmentsClass(); break;
                 default:
                     throw new ArgumentException("unknown gate");
             }
@@ -409,6 +509,15 @@ namespace CircLab
         private void add7segments(object sender, RoutedEventArgs e)
         {
             SeptSegmentsClass img = new SeptSegmentsClass();
+            canvas.Children.Add(img);
+            img.AllowDrop = true;
+            img.PreviewMouseLeftButtonDown += this.MouseLeftButtonDown;
+            img.PreviewMouseMove += this.MouseMove;
+            img.PreviewMouseLeftButtonUp += this.PreviewMouseLeftButtonUp;
+        }
+        private void addHexa(object sender, RoutedEventArgs e)
+        {
+            Hexadicimal img = new Hexadicimal();
             canvas.Children.Add(img);
             img.AllowDrop = true;
             img.PreviewMouseLeftButtonDown += this.MouseLeftButtonDown;
@@ -534,6 +643,11 @@ namespace CircLab
                     if (UserClass.IsInputChangeable(elementsSelected[0]))
                     {
                         int selecteVal = ComboBoxProperties.SelectedIndex + 2;
+                        if(elementsSelected[0] is Chronogramme)
+                        {
+                            ((Chronogramme)elementsSelected[0]).nbrEntrée=selecteVal;
+                            MessageBox.Show(selecteVal.ToString());
+                        }
                         if (ComboBoxProperties.SelectedIndex == 3) selecteVal = 8;
 
                         if (selecteVal != elementsSelected[0].nbrInputs())
@@ -568,6 +682,9 @@ namespace CircLab
             Frequency.Visibility = Visibility.Collapsed;
             Type.Visibility = Visibility.Collapsed;
             Compteur.Visibility = Visibility.Collapsed;
+            TypeDec.Visibility = Visibility.Collapsed;
+            TypeEnc.Visibility = Visibility.Collapsed;
+            NbrEnreComparateur.Visibility = Visibility.Collapsed;
         }
 
         public void activeProp()
@@ -595,7 +712,7 @@ namespace CircLab
                
          private void checkBox2_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[1];
             terminal.IsInversed = checkBox2.IsChecked.Value;
             terminal.input_inversed();
@@ -604,7 +721,7 @@ namespace CircLab
 
         private void checkBox3_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[2];
             terminal.IsInversed = checkBox3.IsChecked.Value;
             terminal.input_inversed();
@@ -613,7 +730,7 @@ namespace CircLab
 
         private void checkBox4_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[3];
             terminal.IsInversed = checkBox4.IsChecked.Value;
             terminal.input_inversed();
@@ -622,7 +739,7 @@ namespace CircLab
 
         private void checkBox5_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[4];
             terminal.IsInversed = checkBox5.IsChecked.Value;
             terminal.input_inversed();
@@ -631,7 +748,7 @@ namespace CircLab
 
         private void checkBox6_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[5];
             terminal.IsInversed = checkBox6.IsChecked.Value;
             terminal.input_inversed();
@@ -640,7 +757,7 @@ namespace CircLab
 
         private void checkBox7_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[6];
             terminal.IsInversed = checkBox7.IsChecked.Value;
             terminal.input_inversed();
@@ -649,7 +766,7 @@ namespace CircLab
 
         private void checkBox8_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[7];
             terminal.IsInversed = checkBox8.IsChecked.Value;
             terminal.input_inversed();
@@ -658,7 +775,7 @@ namespace CircLab
 
         private void checkBox1_Click(object sender, RoutedEventArgs e)
         {
-            miseAJourPile();
+            //miseAJourPile();
             Terminal terminal = (Terminal)elementsSelected[0].inputStack.Children[0];
             terminal.IsInversed = checkBox1.IsChecked.Value;
             terminal.input_inversed();
@@ -781,7 +898,7 @@ namespace CircLab
             {
                 nouveau.Children.Remove(tableau[i]);
                 canvas.Children.Add(tableau[i]);
-                if (tableau[i] is Ellipse) MessageBox.Show("ok");
+                
             }
             canvas.UpdateLayout();
             Wireclass.myCanvas = canvas;
@@ -789,9 +906,9 @@ namespace CircLab
 
         public void miseAJourPile()
         {
-            Canvas canvasPrecedent = instancier(canvas);
-            undos.Push(canvasPrecedent);
-            retourBouton.IsEnabled = true;
+           //Canvas canvasPrecedent = instancier(canvas);
+           // undos.Push(canvasPrecedent);
+            //retourBouton.IsEnabled = true;
             //Console.Out.Write("*********"+undos.Count+"\n");
         }
         public Canvas instancier(Canvas canvas)
@@ -804,7 +921,6 @@ namespace CircLab
             List<Wireclass> wires = new List<Wireclass>();
 
             int length = canvas.Children.Count;
-            //Console.Out.WriteLine("**" + length + "**");
             canvas.Children.CopyTo(tableau, 0);
 
 
@@ -812,11 +928,9 @@ namespace CircLab
             {
                 UIElement newChild = null;
 
-                Console.Out.Write("test" + tableau[i].GetType());
 
                 if (typeof(AND) == tableau[i].GetType())
                 {
-                    // newChild = new AND((tableau[i] as AND).nbrinput);
                     newChild = new AND((tableau[i] as AND).nbrInputs());
                     for (int j = 0; j < (tableau[i] as AND).nbrInputs(); j++)
                     {
@@ -996,14 +1110,80 @@ namespace CircLab
                 {
                     newChild = new SequentialComponent.Clock((tableau[i] as SequentialComponent.Clock).LowLevelms, (tableau[i] as SequentialComponent.Clock).HighLevelms, MainWindow.Delay);
                 }
-                
+
                 else if (typeof(TextBlock) == tableau[i].GetType())
                 {
                     newChild = new TextBlock();
                 }
 
+                else if (typeof(AsynchToogle) == tableau[i].GetType())
+                {
+                    newChild = new AsynchToogle();
+                }
+
+                else if (typeof(Chronogramme) == tableau[i].GetType())
+                {
+                    newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
+                }
+                else if (typeof(CirculerRegister) == tableau[i].GetType())
+                {
+                    newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                }
+                else if (typeof(CompteurModN) == tableau[i].GetType())
+                {
+                    newChild = new CompteurModN(1, (tableau[i] as CompteurModN).nbrOutputs());
+                }
+                else if (typeof(compteurN) == tableau[i].GetType())
+                {
+                    newChild = new compteurN(1, (tableau[i] as compteurN).nbrOutputs());
+                }
+                else if (typeof(DecompteurN) == tableau[i].GetType())
+                {
+                    newChild = new DecompteurN(1, (tableau[i] as DecompteurN).nbrOutputs());
+                }
+                else if (typeof(FlipFlop) == tableau[i].GetType())
+                {
+                    newChild = new FlipFlop((tableau[i] as FlipFlop)._trigger);
+                }
+                else if (typeof(FrequencyDevider) == tableau[i].GetType())
+                {
+                    newChild = new FrequencyDevider();
+                }
+
+                else if (typeof(JK) == tableau[i].GetType())
+                {
+                    newChild = new JK((tableau[i] as JK)._trigger);
+                }
+
+                else if (typeof(programmablRegister) == tableau[i].GetType())
+                {
+                    newChild = new programmablRegister((tableau[i] as programmablRegister)._trigger, (tableau[i] as programmablRegister).nbrInputs());
+                }
+
+                else if (typeof(Registre) == tableau[i].GetType())
+                {
+                    newChild = new Registre((tableau[i] as Registre)._trigger, (tableau[i] as Registre).nbrInputs());
+                }
+
+                else if (typeof(RSHLatche) == tableau[i].GetType())
+                {
+                    newChild = new RSHLatche();
+                }
+
+                else if (typeof(RSLatche) == tableau[i].GetType())
+                {
+                    newChild = new RSLatche();
+                }
+
+                else if (typeof(SynchToogle) == tableau[i].GetType())
+                {
+                    newChild = new SynchToogle();
+                }
+
                 if (newChild != null)
                 {
+                    (newChild as StandardComponent).PosX = (tableau[i] as StandardComponent).PosX;
+                    (newChild as StandardComponent).PosY = (tableau[i] as StandardComponent).PosY;
                     Terminal[] tabTerminauxA = new Terminal[100];
                     Terminal[] tabTerminauxN = new Terminal[100];
                     (tableau[i] as StandardComponent).inputStack.Children.CopyTo(tabTerminauxA, 0);
@@ -1394,7 +1574,18 @@ namespace CircLab
         {
             try
             {
-                ((SequentialComponent.Clock)elementsSelected[0]).Delay = float.Parse(Frequency.Text);
+                if(elementsSelected[0] is Chronogramme)
+                {
+                    ((SequentialComponent.Chronogramme)elementsSelected[0]).Delay = float.Parse(Frequency.Text);
+                }
+                else
+                {
+                    if(elementsSelected[0] is SequentialComponent.Clock)
+                    {
+                        ((SequentialComponent.Clock)elementsSelected[0]).Delay = float.Parse(Frequency.Text);
+                    }
+                }
+               
             }
             catch
             { }
@@ -1589,6 +1780,7 @@ namespace CircLab
             CircuitName.Text = ttl.ToString();
         }
 
+
         public List<StandardComponent> parcourir_coupier()
         {
             UIElement[] tableau = new UIElement[1000];
@@ -1780,7 +1972,70 @@ namespace CircLab
                     {
                         newChild = new SequentialComponent.Clock((tableau[i] as SequentialComponent.Clock).LowLevelms, (tableau[i] as SequentialComponent.Clock).HighLevelms, MainWindow.Delay);
                     }
-                    
+
+                    else if (typeof(AsynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new AsynchToogle();
+                    }
+
+                    else if (typeof(Chronogramme) == tableau[i].GetType())
+                    {
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
+                    }
+                    else if (typeof(CirculerRegister) == tableau[i].GetType())
+                    {
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                    }
+                    else if (typeof(CompteurModN) == tableau[i].GetType())
+                    {
+                        newChild = new CompteurModN(1, (tableau[i] as CompteurModN).nbrOutputs());
+                    }
+                    else if (typeof(compteurN) == tableau[i].GetType())
+                    {
+                        newChild = new compteurN(1, (tableau[i] as compteurN).nbrOutputs());
+                    }
+                    else if (typeof(DecompteurN) == tableau[i].GetType())
+                    {
+                        newChild = new DecompteurN(1, (tableau[i] as DecompteurN).nbrOutputs());
+                    }
+                    else if (typeof(FlipFlop) == tableau[i].GetType())
+                    {
+                        newChild = new FlipFlop((tableau[i] as FlipFlop)._trigger);
+                    }
+                    else if (typeof(FrequencyDevider) == tableau[i].GetType())
+                    {
+                        newChild = new FrequencyDevider();
+                    }
+
+                    else if (typeof(JK) == tableau[i].GetType())
+                    {
+                        newChild = new JK((tableau[i] as JK)._trigger);
+                    }
+
+                    else if (typeof(programmablRegister) == tableau[i].GetType())
+                    {
+                        newChild = new programmablRegister((tableau[i] as programmablRegister)._trigger, (tableau[i] as programmablRegister).nbrInputs());
+                    }
+
+                    else if (typeof(Registre) == tableau[i].GetType())
+                    {
+                        newChild = new Registre((tableau[i] as Registre)._trigger, (tableau[i] as Registre).nbrInputs());
+                    }
+
+                    else if (typeof(RSHLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSHLatche();
+                    }
+
+                    else if (typeof(RSLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSLatche();
+                    }
+
+                    else if (typeof(SynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new SynchToogle();
+                    }
 
                     liste.Add(newChild);
                     newChild.AllowDrop = true;
@@ -1803,7 +2058,7 @@ namespace CircLab
                     catch { };
 
                     /**/
-                    miseAJourPile();
+                    //miseAJourPile();
                     foreach (Terminal terminal in (tableau[i] as StandardComponent).inputStack.Children)
                     {
                         try
@@ -2024,7 +2279,69 @@ namespace CircLab
                         newChild = new SequentialComponent.Clock((tableau[i] as SequentialComponent.Clock).LowLevelms, (tableau[i] as SequentialComponent.Clock).HighLevelms, MainWindow.Delay);
                     }
 
-                    
+                    else if (typeof(AsynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new AsynchToogle();
+                    }
+
+                    else if (typeof(Chronogramme) == tableau[i].GetType())
+                    {
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
+                    }
+                    else if (typeof(CirculerRegister) == tableau[i].GetType())
+                    {
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                    }
+                    else if (typeof(CompteurModN) == tableau[i].GetType())
+                    {
+                        newChild = new CompteurModN(1, (tableau[i] as CompteurModN).nbrOutputs());
+                    }
+                    else if (typeof(compteurN) == tableau[i].GetType())
+                    {
+                        newChild = new compteurN(1, (tableau[i] as compteurN).nbrOutputs());
+                    }
+                    else if (typeof(DecompteurN) == tableau[i].GetType())
+                    {
+                        newChild = new DecompteurN(1, (tableau[i] as DecompteurN).nbrOutputs());
+                    }
+                    else if (typeof(FlipFlop) == tableau[i].GetType())
+                    {
+                        newChild = new FlipFlop((tableau[i] as FlipFlop)._trigger);
+                    }
+                    else if (typeof(FrequencyDevider) == tableau[i].GetType())
+                    {
+                        newChild = new FrequencyDevider();
+                    }
+
+                    else if (typeof(JK) == tableau[i].GetType())
+                    {
+                        newChild = new JK((tableau[i] as JK)._trigger);
+                    }
+
+                    else if (typeof(programmablRegister) == tableau[i].GetType())
+                    {
+                        newChild = new programmablRegister((tableau[i] as programmablRegister)._trigger, (tableau[i] as programmablRegister).nbrInputs());
+                    }
+
+                    else if (typeof(Registre) == tableau[i].GetType())
+                    {
+                        newChild = new Registre((tableau[i] as Registre)._trigger, (tableau[i] as Registre).nbrInputs());
+                    }
+
+                    else if (typeof(RSHLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSHLatche();
+                    }
+
+                    else if (typeof(RSLatche) == tableau[i].GetType())
+                    {
+                        newChild = new RSLatche();
+                    }
+
+                    else if (typeof(SynchToogle) == tableau[i].GetType())
+                    {
+                        newChild = new SynchToogle();
+                    }
 
                     liste.Add(newChild);
                     newChild.AllowDrop = true;
@@ -2072,17 +2389,395 @@ namespace CircLab
 
         }
 
+
         public void coller(object sender, RoutedEventArgs e)
         {
+            StandardComponent[] tmp = new StandardComponent[1000];
+            int size = liste_copier.Count;
+            liste_copier.CopyTo(tmp);
+            //remplir(liste_tmp, tmp, size);
+
             for (int j = 0; j < liste_copier.Count; j++)
             {
                 canvas.Children.Add(liste_copier[j]);
             }
+            liste_copier.Clear();
+            remplir(liste_copier, tmp, size);
         }
 
-        private void HelpOpen(object sender, MouseButtonEventArgs e)
+        public void remplir(List<StandardComponent> liste, StandardComponent[] tableau, int size)
         {
-            System.Diagnostics.Process.Start(".\\help\\index.html");
+            //liste.Clear();
+            //System.Windows.MessageBox.Show(tableau.Length.ToString());
+            for (int i = 0; i < size; i++)
+            {
+
+                StandardComponent newChild = null;
+                if (typeof(AND) == tableau[i].GetType())
+                {
+                    newChild = new AND((tableau[i] as AND).nbrInputs());
+                    for (int j = 0; j < (tableau[i] as AND).nbrInputs(); j++)
+                    {
+
+                        Terminal terminal_1 = (Terminal)((tableau[i] as AND).inputStack.Children[j]);
+                        Terminal terminal_2 = (Terminal)((newChild as AND).inputStack.Children[j]);
+
+                        if (terminal_1.IsInversed)
+                        {
+                            terminal_2.IsInversed = true;
+                            terminal_2.input_inversed();
+                        }
+                    }
+                }
+                else if (typeof(OR) == tableau[i].GetType())
+                {
+                    newChild = new OR((tableau[i] as OR).nbrInputs());
+                    for (int j = 0; j < (tableau[i] as OR).nbrInputs(); j++)
+                    {
+
+                        Terminal terminal_1 = (Terminal)((tableau[i] as OR).inputStack.Children[j]);
+                        Terminal terminal_2 = (Terminal)((newChild as OR).inputStack.Children[j]);
+
+                        if (terminal_1.IsInversed)
+                        {
+                            terminal_2.IsInversed = true;
+                            terminal_2.input_inversed();
+                        }
+
+                    }
+                }
+
+                else if (typeof(NAND) == tableau[i].GetType())
+                {
+                    newChild = new NAND((tableau[i] as NAND).nbrInputs());
+                    for (int j = 0; j < (tableau[i] as NAND).nbrInputs(); j++)
+                    {
+
+                        Terminal terminal_1 = (Terminal)((tableau[i] as NAND).inputStack.Children[j]);
+                        Terminal terminal_2 = (Terminal)((newChild as NAND).inputStack.Children[j]);
+
+                        if (terminal_1.IsInversed)
+                        {
+                            terminal_2.IsInversed = true;
+                            terminal_2.input_inversed();
+                        }
+
+                    }
+                }
+                else if (typeof(NOR) == tableau[i].GetType())
+                {
+                    newChild = new NOR((tableau[i] as NOR).nbrInputs());
+                    for (int j = 0; j < (tableau[i] as NOR).nbrInputs(); j++)
+                    {
+                        Terminal terminal_1 = (Terminal)((tableau[i] as NOR).inputStack.Children[j]);
+                        Terminal terminal_2 = (Terminal)((newChild as NOR).inputStack.Children[j]);
+
+                        if (terminal_1.IsInversed)
+                        {
+                            terminal_2.IsInversed = true;
+                            terminal_2.input_inversed();
+                        }
+
+                    }
+                }
+
+                else if (typeof(Not) == tableau[i].GetType())
+                {
+                    newChild = new Not();
+
+                    Terminal terminal_1 = (Terminal)((tableau[i] as Not).inputStack.Children[0]);
+                    Terminal terminal_2 = (Terminal)((newChild as Not).inputStack.Children[0]);
+
+                    if (terminal_1.IsInversed)
+                    {
+                        terminal_2.IsInversed = true;
+                        terminal_2.input_inversed();
+                    }
+                }
+
+                else if (typeof(Output) == tableau[i].GetType())
+                {
+                    newChild = new Output();
+                }
+
+                else if (typeof(Input) == tableau[i].GetType())
+                {
+                    newChild = new Input();
+                    (newChild as Input).state = (tableau[i] as Input).state;
+
+                }
+
+                else if (typeof(XNOR) == tableau[i].GetType())
+                {
+                    newChild = new XNOR((tableau[i] as XNOR).nbrInputs());
+                    for (int j = 0; j < (tableau[i] as XNOR).nbrInputs(); j++)
+                    {
+
+                        Terminal terminal_1 = (Terminal)((tableau[i] as XNOR).inputStack.Children[j]);
+                        Terminal terminal_2 = (Terminal)((newChild as XNOR).inputStack.Children[j]);
+
+                        if (terminal_1.IsInversed)
+                        {
+                            terminal_2.IsInversed = true;
+                            terminal_2.input_inversed();
+                        }
+
+                    }
+                }
+                else if (typeof(XOR) == tableau[i].GetType())
+                {
+                    newChild = new XOR((tableau[i] as XOR).nbrInputs());
+                    for (int j = 0; j < (tableau[i] as XOR).nbrInputs(); j++)
+                    {
+                        Terminal terminal_1 = (Terminal)((tableau[i] as XOR).inputStack.Children[j]);
+                        Terminal terminal_2 = (Terminal)((newChild as XOR).inputStack.Children[j]);
+
+                        if (terminal_1.IsInversed)
+                        {
+                            terminal_2.IsInversed = true;
+                            terminal_2.input_inversed();
+                        }
+                    }
+                }
+
+                else if (typeof(Comparateur) == tableau[i].GetType())
+                {
+                    newChild = new Comparateur((tableau[i] as Comparateur).nbrInputs(), (tableau[i] as Comparateur).nbrOutputs());
+
+                }
+
+                else if (typeof(Decodeur) == tableau[i].GetType())
+                {
+                    newChild = new Decodeur((tableau[i] as Decodeur).nbrInputs(), (tableau[i] as Decodeur).nbrOutputs());
+                }
+
+                else if (typeof(Demultiplexer) == tableau[i].GetType())
+                {
+                    newChild = new Demultiplexer((tableau[i] as Demultiplexer).nbrInputs(), (tableau[i] as Demultiplexer).nbrOutputs(), (tableau[i] as Demultiplexer).nbrSelections());
+                }
+
+                else if (typeof(Encodeur) == tableau[i].GetType())
+                {
+                    newChild = new Encodeur((tableau[i] as Encodeur).nbrInputs(), (tableau[i] as Encodeur).nbrOutputs());
+                }
+
+                else if (typeof(FullAdder) == tableau[i].GetType())
+                {
+                    newChild = new FullAdder((tableau[i] as FullAdder).nbrInputs(), (tableau[i] as FullAdder).nbrOutputs());
+                }
+
+                else if (typeof(FullSub) == tableau[i].GetType())
+                {
+                    newChild = new FullSub((tableau[i] as FullSub).nbrInputs(), (tableau[i] as FullSub).nbrOutputs());
+                }
+
+                else if (typeof(HalfAdder) == tableau[i].GetType())
+                {
+                    newChild = new HalfAdder((tableau[i] as HalfAdder).nbrInputs(), (tableau[i] as HalfAdder).nbrOutputs());
+                }
+
+                else if (typeof(HalfSub) == tableau[i].GetType())
+                {
+                    newChild = new HalfSub((tableau[i] as HalfSub).nbrInputs(), (tableau[i] as HalfSub).nbrOutputs());
+                }
+
+                else if (typeof(Multiplexer) == tableau[i].GetType())
+                {
+                    newChild = new Multiplexer((tableau[i] as Multiplexer).nbrInputs(), (tableau[i] as Multiplexer).nbrOutputs(), (tableau[i] as Multiplexer).nbrSelections());
+                }
+
+                else if (typeof(SequentialComponent.Clock) == tableau[i].GetType())
+                {
+                    newChild = new SequentialComponent.Clock((tableau[i] as SequentialComponent.Clock).LowLevelms, (tableau[i] as SequentialComponent.Clock).HighLevelms, MainWindow.Delay);
+                }
+
+                else if (typeof(AsynchToogle) == tableau[i].GetType())
+                {
+                    newChild = new AsynchToogle();
+                }
+
+                else if (typeof(Chronogramme) == tableau[i].GetType())
+                {
+                    newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
+                }
+                else if (typeof(CirculerRegister) == tableau[i].GetType())
+                {
+                    newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                }
+                else if (typeof(CompteurModN) == tableau[i].GetType())
+                {
+                    newChild = new CompteurModN(1, (tableau[i] as CompteurModN).nbrOutputs());
+                }
+                else if (typeof(compteurN) == tableau[i].GetType())
+                {
+                    newChild = new compteurN(1, (tableau[i] as compteurN).nbrOutputs());
+                }
+                else if (typeof(DecompteurN) == tableau[i].GetType())
+                {
+                    newChild = new DecompteurN(1, (tableau[i] as DecompteurN).nbrOutputs());
+                }
+                else if (typeof(FlipFlop) == tableau[i].GetType())
+                {
+                    newChild = new FlipFlop((tableau[i] as FlipFlop)._trigger);
+                }
+                else if (typeof(FrequencyDevider) == tableau[i].GetType())
+                {
+                    newChild = new FrequencyDevider();
+                }
+
+                else if (typeof(JK) == tableau[i].GetType())
+                {
+                    newChild = new JK((tableau[i] as JK)._trigger);
+                }
+
+                else if (typeof(programmablRegister) == tableau[i].GetType())
+                {
+                    newChild = new programmablRegister((tableau[i] as programmablRegister)._trigger, (tableau[i] as programmablRegister).nbrInputs());
+                }
+
+                else if (typeof(Registre) == tableau[i].GetType())
+                {
+                    newChild = new Registre((tableau[i] as Registre)._trigger, (tableau[i] as Registre).nbrInputs());
+                }
+
+                else if (typeof(RSHLatche) == tableau[i].GetType())
+                {
+                    newChild = new RSHLatche();
+                }
+
+                else if (typeof(RSLatche) == tableau[i].GetType())
+                {
+                    newChild = new RSLatche();
+                }
+
+                else if (typeof(SynchToogle) == tableau[i].GetType())
+                {
+                    newChild = new SynchToogle();
+                }
+
+                liste.Add(newChild);
+                newChild.AllowDrop = true;
+                newChild.PreviewMouseLeftButtonDown += this.MouseLeftButtonDown;
+                newChild.PreviewMouseMove += this.MouseMove;
+                newChild.PreviewMouseLeftButtonUp += this.PreviewMouseLeftButtonUp;
+                newChild.SetValue(Canvas.LeftProperty, tableau[i].GetValue(Canvas.LeftProperty));
+                newChild.SetValue(Canvas.TopProperty, tableau[i].GetValue(Canvas.TopProperty));
+                (newChild as StandardComponent).PosX = (tableau[i] as StandardComponent).PosX;
+                (newChild as StandardComponent).PosY = (tableau[i] as StandardComponent).PosY;
+
+                try
+                {
+                    StandardComponent component = newChild as StandardComponent;
+                    component.recalculer_pos();
+                }
+                catch { };
+            }
+        }
+
+        private void ComboBoxPropertiesDec_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (elementsSelected != null)
+            {
+                if (elementsSelected.Count != 0)
+                {
+                        int selecteVal = ComboBoxPropertiesDec.SelectedIndex + 2;
+                  
+                        if (selecteVal != elementsSelected[0].nbrInputs())
+                        {
+                            
+                            while (selecteVal > elementsSelected[0].nbrInputs())
+                            {
+                                elementsSelected[0].AddInputs();
+                            }
+                            while (selecteVal < elementsSelected[0].nbrInputs())
+                            {
+                                elementsSelected[0].RemoveInputs();
+                            }
+
+                            elementsSelected[0].redessiner(elementsSelected[0].path);
+                            canvas.UpdateLayout();
+                            elementsSelected[0].Run();
+                        }
+                    
+                   modifieProperties();
+
+                }
+            }
+        }
+
+        private void ComboBoxPropertiesEnc_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (elementsSelected != null)
+            {
+                if (elementsSelected.Count != 0)
+                {
+                    int selecteVal;
+                    if (ComboBoxPropertiesEnc.SelectedIndex == 0) selecteVal = 4;
+                    else selecteVal = 8;
+
+                    if (selecteVal != elementsSelected[0].nbrInputs())
+                    {
+
+                        while (selecteVal > elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].AddInputs();
+                        }
+                        while (selecteVal < elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].RemoveInputs();
+                        }
+
+                        elementsSelected[0].redessiner(elementsSelected[0].path);
+                        canvas.UpdateLayout();
+                        elementsSelected[0].Run();
+                    }
+
+                    modifieProperties();
+
+                }
+            }
+        }
+
+        private void ComparatuerText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (elementsSelected != null)
+            {
+                if (elementsSelected.Count != 0)
+                {
+                    int selecteVal=0;
+                  
+                    try
+                    {
+                        selecteVal = Int32.Parse(ComparatuerText.Text)*2;
+                    }
+                    catch (FormatException ex)
+                    {
+                        MessageBox.Show("Entrez un nombre s'il vous plait ! ");
+                        selecteVal = elementsSelected[0].nbrInputs();
+                        Console.WriteLine(ex.Message);
+                    }
+
+                    if (selecteVal != elementsSelected[0].nbrInputs())
+                    {
+                        
+                        while (selecteVal > elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].AddInputs();
+                        }
+                        while (selecteVal < elementsSelected[0].nbrInputs())
+                        {
+                            elementsSelected[0].RemoveInputs();
+                        }
+
+                        elementsSelected[0].redessiner(elementsSelected[0].path);
+                        canvas.UpdateLayout();
+                        elementsSelected[0].Run();
+                    }
+
+                    modifieProperties();
+
+                }
+            }
         }
 
 
@@ -2116,9 +2811,53 @@ namespace CircLab
                 {
                     coller(sender, e);
                 }
+                if (e.Key == Key.Delete)
+                {
+                    if (elementsSelected.Count != 0)
+                    {
+                        elementsSelected[0].Delete_elements();
+                    }
+                }
+                if (e.Key == Key.A)
+                {
+                    elementsSelected.Clear();
+                    foreach(Object component in canvas.Children)
+                    {
+                        if(component is StandardComponent)
+                        {
+                            ((StandardComponent)component).IsSelect = true;
+                            StandardComponent.selectElement((StandardComponent)component);
+                            elementsSelected.Add((StandardComponent)component);
+                        }
+                        
+                    }
+                }
+                if (e.Key == Key.R)
+                {
+                    foreach(Object componenet in elementsSelected)
+                    {
+                        if(componenet is StandardComponent)
+                        {
+                            ((StandardComponent)componenet).RotateRight();
+                        }
+                       
+                    }
+                }
+                if (e.Key == Key.L)
+                {
+                    foreach (Object componenet in elementsSelected)
+                    {
+                        if (componenet is StandardComponent)
+                        {
+                            ((StandardComponent)componenet).RotateLeft();
+                        }
+
+                    }
+                }
 
             }
         }
+
 
     }
 

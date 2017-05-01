@@ -22,6 +22,7 @@ namespace CircLab.SequentialComponent
         public Clock(int lowLevlms, int highLevelms, float delay)
             : base(0,1,0, "M0.5,0.5 L27,0.5 L27,27.5 L0.5,27.5 z","Clock")
         {
+            TypeLabel.Text = "Clock";
             _val = false;
             this.typeComponenet.Fill = Brushes.Red;
             Path signalShape = new Path();

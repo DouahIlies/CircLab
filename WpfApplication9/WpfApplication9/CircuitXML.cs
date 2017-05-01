@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using CircLab.Component;
 using CircLab.LogicGate;
 using CircLab.SequentialComponent;
+using System.Windows;
 
 namespace CircLab
 {
@@ -33,6 +34,8 @@ namespace CircLab
                     gt.SetAttributeValue("X", g.PosX);
                     gt.SetAttributeValue("Y", g.PosY);
                     gt.SetAttributeValue("NumInputs", g.nbrInputs());
+                    gt.SetAttributeValue("Rotation", g.rotation);
+
                     if (shape is Clock)
                     {
                         gt.SetAttributeValue("HighLevelms", ((Clock)g).HighLevelms);
@@ -184,6 +187,12 @@ namespace CircLab
                     return new RSLatche();
                 case "RSHLatche":
                     return new RSHLatche();
+                case "Chronogramme":
+                    return new Chronogramme(2,MainWindow.Delay);
+                case "SeptSegmentsClass":
+                    return new SeptSegmentsClass();
+                case "Hexadicimal":
+                    return new WpfApplication9.LogicGate.Hexadicimal();
                 case "Registre":
                     temp = int.Parse(gate.Attribute("TriggerType").Value);
                     switch(temp)
@@ -249,10 +258,13 @@ namespace CircLab
                 StandardComponent shape = CreateGate(gate);
                 shape.SetValue(Canvas.LeftProperty, double.Parse(gate.Attribute("X").Value));
                 shape.SetValue(Canvas.TopProperty, double.Parse(gate.Attribute("Y").Value));
+                shape.RotateComponent(int.Parse(gate.Attribute("Rotation").Value));
                 shape.PosX = (double)shape.GetValue(Canvas.LeftProperty);
                 shape.PosY = (double)shape.GetValue(Canvas.TopProperty);
+                
                 gid[int.Parse(gate.Attribute("ID").Value)] = shape;
                 canvas.Children.Add(shape);
+         
             }
             foreach (XElement wire in circuit.Element("Wires").Elements())
             {
@@ -270,6 +282,14 @@ namespace CircLab
                 Wireclass.selection1 = ((Terminal)gateSrc.OutputStack.Children[portSrc]).elSelector;
                 Wireclass.selection2 = ((Terminal)gateDest.inputStack.Children[portDest]).elSelector;
                 MainWindow.wire.relier();
+                MainWindow.wire.btn111 = Wireclass.selection1;
+                MainWindow.wire.btn222 = Wireclass.selection2;
+                Wireclass.myCanvas = canvas;
+             //   MainWindow.wire.recalculer(gateSrc.rotation, true);
+               // MainWindow.wire.recalculer(gateDest.rotation, false);
+                canvas.UpdateLayout();
+     
+ 
             }
         }
     }

@@ -22,7 +22,8 @@ namespace CircLab.LogicGate
             typeComponenet.Width = typeComponenet.Height;
             this.typeComponenet.Fill = Brushes.Red;
             OutputStack.Children.Clear();
-            
+            TypeLabel.Text = "";
+
         }
 
 

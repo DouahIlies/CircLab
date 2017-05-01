@@ -220,7 +220,7 @@
                                     </Button>
                                 </StackPanel>
                             </ListBoxItem>
-                            
+
                         </ListBox>
                     </StackPanel>
                 </DockPanel>
@@ -438,8 +438,53 @@
                                     <ComboBoxItem Content="32" />
                                 </ComboBox>
                             </StackPanel>
-
-
+                            <StackPanel x:Name="TypeDec" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Type"
+                                           VerticalAlignment="Center" />
+                                <ComboBox x:Name="ComboBoxPropertiesDec"
+                                          SelectedIndex="0"
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          VerticalAlignment="Stretch"
+                                         
+                                          Margin="62,2,0,0"
+                                          Width="72" SelectionChanged="ComboBoxPropertiesDec_SelectionChanged">
+                                    <ComboBoxItem Content="2-4" />
+                                    <ComboBoxItem Content="3-8" />
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel x:Name="TypeEnc" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Type"
+                                           VerticalAlignment="Center" />
+                                <ComboBox x:Name="ComboBoxPropertiesEnc"
+                                          SelectedIndex="0"
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          VerticalAlignment="Stretch"
+                                         
+                                          Margin="62,2,0,0"
+                                          Width="72" SelectionChanged="ComboBoxPropertiesEnc_SelectionChanged">
+                                    <ComboBoxItem Content="4-2" />
+                                    <ComboBoxItem Content="8-3" />
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel x:Name="NbrEnreComparateur" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Nombre de bits : "
+                                           VerticalAlignment="Center"
+                                           Margin="0,0" />
+                                <TextBox x:Name="ComparatuerText"
+                                         Grid.Column="1"
+                                         HorizontalAlignment="Left"
+                                         Height="23"
+                                         Margin="10,2,0,0"
+                                         TextWrapping="Wrap"
+                                         VerticalAlignment="Top"
+                                         Width="98" TextChanged="ComparatuerText_TextChanged"
+                                        />
+                            </StackPanel>
                         </StackPanel>
                         <Grid DockPanel.Dock="Bottom"
                               Margin="10">
@@ -450,7 +495,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            
+
                             <TextBlock HorizontalAlignment="Center"><Run Text="Delay" /></TextBlock>
                             <Slider x:Name="delay"
                                     Grid.Column="1"
@@ -605,18 +650,18 @@
                                     BorderBrush="White"
                                     BorderThickness="0,1,0,0">
                             <TabControl.Resources>
-                                    <Style TargetType="{x:Type Button}"
+                                <Style TargetType="{x:Type Button}"
                                            BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                                        <Setter Property="Margin"
+                                    <Setter Property="Margin"
                                                 Value="5" />
-                                        <Setter Property="Height"
+                                    <Setter Property="Height"
                                                 Value="70" />
-                                        <Setter Property="Width"
+                                    <Setter Property="Width"
                                                 Value="70" />
-                                        <Setter Property="FontSize"
+                                    <Setter Property="FontSize"
                                                 Value="10" />
                                 </Style>
-                                    <Style TargetType="TabItem">
+                                <Style TargetType="TabItem">
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="TabItem">
@@ -657,36 +702,40 @@
                                                 Margin="8,24,16,24">
                                         <Button Content="AND"
                                             Click="addGate" />
-                                    <Button Content="NAND"
+                                        <Button Content="NAND"
                                             Click="addGate" />
-                                    <Button Content="NOR"
+                                        <Button Content="NOR"
                                             Click="addGate" />
-                                    <Button Content="OR"
+                                        <Button Content="OR"
                                             Click="addGate" />
-                                    <Button Content="XOR"
+                                        <Button Content="XOR"
                                             Click="addGate" />
-                                    <Button Content="XNOR"
+                                        <Button Content="XNOR"
                                             Click="addGate" />
-                                    <Button Content="Not"
+                                        <Button Content="Not"
+                                            Click="addGate" />
+                                        <Button Content="Sept Segments"
+                                            Click="addGate" />
+                                        <Button Content="Hexa Segments"
                                             Click="addGate" />
 
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
                             <TabItem Header="Input/Output">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Disabled">
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Margin="8,24,16,24">
-                                    <Button Content="Input"
+                                        <Button Content="Input"
                                             Click="addGate" />
-                                    <Button Content="Output"
+                                        <Button Content="Output"
                                             Click="addGate" />
-                                    <Button Content="Chronogram"
+                                        <Button Content="Chronogram"
                                             Click="addGate" />
-                                    <Button Content="Comment"
+                                        <Button Content="Comment"
                                             Click="addGate" />
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
                             <TabItem Header="Complex Components">
@@ -718,37 +767,37 @@
                             <TabItem Header="Sequential Components">
                                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                               VerticalScrollBarVisibility="Auto">
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Margin="8,24,16,24">
-                                    <Button Content="Clock"
+                                        <Button Content="Clock"
                                             Click="addGate" />
-                                    <Button Content="SToggle"
+                                        <Button Content="SToggle"
                                             Click="addGate" />
-                                    <Button Content="AToggle"
+                                        <Button Content="AToggle"
                                             Click="addGate" />
-                                    <Button Content="RSLatche"
+                                        <Button Content="RSLatche"
                                             Click="addGate" />
-                                    <Button Content="RSTLatche"
+                                        <Button Content="RSTLatche"
                                             Click="addGate" />
-                                    <Button Content="JK"
+                                        <Button Content="JK"
                                             Click="addGate" />
-                                    <Button Content="Register"
+                                        <Button Content="Register"
                                             Click="addGate" />
-                                    <Button Content="PRegister"
+                                        <Button Content="PRegister"
                                             Click="addGate" />
-                                    <Button Content="CRegister"
+                                        <Button Content="CRegister"
                                             Click="addGate" />
-                                    <Button Content="FDevider"
+                                        <Button Content="FDevider"
                                             Click="addGate" />
-                                    <Button Content="CounterN"
+                                        <Button Content="CounterN"
                                             Click="addGate" />
-                                    <Button Content="CounterModN"
+                                        <Button Content="CounterModN"
                                             Click="addGate" />
-                                    <Button Content="CDownN"
+                                        <Button Content="CDownN"
                                             Click="addGate" />
-                                    <Button Content="CDownMN"
+                                        <Button Content="CDownMN"
                                             Click="addGate" />
-                                </StackPanel>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
                         </TabControl>
