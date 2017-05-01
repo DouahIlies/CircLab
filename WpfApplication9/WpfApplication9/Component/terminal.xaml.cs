@@ -50,6 +50,7 @@ namespace CircLab.Component
         {
             foreach(Wireclass wire in wires)
             {
+                
                 wire.recalculer(rotation,this.IsOutpt);
             }
         }

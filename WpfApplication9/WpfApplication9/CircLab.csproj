@@ -123,6 +123,7 @@
     <Compile Include="Component\Wireclass.xaml.cs">
       <DependentUpon>Wireclass.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogicGate\Hexadicimal.cs" />
     <Compile Include="LogicGate\SeptSegmentsClass.cs" />
     <Compile Include="LogicGate\Sept_Segments.xaml.cs">
       <DependentUpon>Sept_Segments.xaml</DependentUpon>

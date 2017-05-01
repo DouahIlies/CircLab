@@ -6,14 +6,14 @@
              xmlns:local="clr-namespace:CircLab.LogicGate"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Height="179" Width="60" Background="White">
-        <Line x:Name="l1" X1="10" X2="50" Y1="15" Y2="15" StrokeThickness="5" Stroke="Gray"/>
-        <Line x:Name="l2" X1="10" X2="10" Y1="15" Y2="80" StrokeThickness="5" Stroke="Gray" ></Line>
-        <Line x:Name="l3" X1="10" X2="50" Y1="85" Y2="85" StrokeThickness="5" Stroke="Gray"/>
-        <Line x:Name="l4" X1="50" X2="50" Y1="15" Y2="80" StrokeThickness="5" Stroke="Gray"/>
-        <Line x:Name="l5" X1="10" X2="10" Y1="90" Y2="145" StrokeThickness="5" Stroke="Gray" ></Line>
-        <Line x:Name="l6" X1="10" X2="50" Y1="145" Y2="145" StrokeThickness="5" Stroke="Gray"/>
-        <Line x:Name="l7" X1="50" X2="50" Y1="90" Y2="145" StrokeThickness="5" Stroke="Gray"/>
+    <Grid Height="179" Width="60" Background="White" x:Name="sevenSegmentsGrid">
+        <Line ToolTip="A" x:Name="lA" X1="10" X2="50" Y1="15" Y2="15" StrokeThickness="5" Stroke="Gray"/>
+        <Line ToolTip="F" x:Name="lF" X1="10" X2="10" Y1="15" Y2="80" StrokeThickness="5" Stroke="Gray" ></Line>
+        <Line ToolTip="G" x:Name="lG" X1="10" X2="50" Y1="85" Y2="85" StrokeThickness="5" Stroke="Gray"/>
+        <Line ToolTip="B" x:Name="lB" X1="50" X2="50" Y1="15" Y2="80" StrokeThickness="5" Stroke="Gray"/>
+        <Line ToolTip="E" x:Name="lE" X1="10" X2="10" Y1="90" Y2="145" StrokeThickness="5" Stroke="Gray" Height="179" VerticalAlignment="Bottom" ></Line>
+        <Line ToolTip="D" x:Name="lD" X1="10" X2="50" Y1="145" Y2="145" StrokeThickness="5" Stroke="Gray"/>
+        <Line ToolTip="C" x:Name="lC" X1="50" X2="50" Y1="90" Y2="145" StrokeThickness="5" Stroke="Gray"/>
 
     </Grid>
 </UserControl>

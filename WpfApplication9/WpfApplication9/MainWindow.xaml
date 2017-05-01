@@ -714,6 +714,10 @@
                                             Click="addGate" />
                                         <Button Content="Not"
                                             Click="addGate" />
+                                        <Button Content="Sept Segments"
+                                            Click="addGate" />
+                                        <Button Content="Hexa Segments"
+                                            Click="addGate" />
 
                                     </StackPanel>
                                 </ScrollViewer>

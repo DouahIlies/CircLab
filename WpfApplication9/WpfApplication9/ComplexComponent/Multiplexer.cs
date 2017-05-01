@@ -27,19 +27,7 @@ namespace CircLab.ComplexComponent
         {
             TypeLabel.Text = "Mux";
 
-            /*
-            for (int i = 0; i < nbrselection; i++)
-            {
-                RotateTransform rt = new RotateTransform(90);
-                Terminal terminal = new Terminal();
-                terminal.Margin = new Thickness(0, ((nbrselection * terminal.Height)) / (Math.Pow(2, nbrselection)) - terminal.Height / 2, 0, (terminal.Height / 3));
-
-                terminal.terminal_grid.LayoutTransform = rt;
-                terminal.IsOutpt = true;
-                inputStack_Copy.Children.Add(terminal);
-
-            }
-            */
+         
         }
         public override void Run()
         {

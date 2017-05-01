@@ -22,6 +22,7 @@ namespace CircLab.LogicGate
     {
         public Sept_Segments()
         {
+           
             InitializeComponent();
         }
     }

@@ -118,20 +118,14 @@ namespace CircLab.Component
 
             for (int i = 0; i < nbrSelection; i++)
             {
+             
                 Terminal terminalSelection = new Terminal();
-                double x = terminalSelection.terminal_grid.Height;
+
+                terminal.IsOutpt = false;
 
                 terminalSelection.LayoutTransform = new RotateTransform(90);
-                if (i == 0)
-                {
-                    x = terminal.Width;
-                }
-                else
-                {
-                    x = 0;
-                }
-
-                terminalSelection.Margin = new Thickness(-terminal.Width / Math.Pow(2, nbrSelection) + x, 0, 0, 2);
+               
+                
                 selectionStack.Children.Add(terminalSelection);
             }
 
@@ -148,6 +142,11 @@ namespace CircLab.Component
             }
             foreach (Terminal terminal in OutputStack.Children)
             {
+                terminal.recalculer(this.rotation);
+            }
+            foreach (Terminal terminal in selectionStack.Children)
+            {
+               
                 terminal.recalculer(this.rotation);
             }
 
@@ -440,8 +439,11 @@ namespace CircLab.Component
                 i++;
             }
             i = 0;
+     
             foreach (Terminal terminal in selectionStack.Children)
             {
+                
+
                 selections_tab.Add(false);
                 if (terminal.wires.Count != 0)
                 {
@@ -466,6 +468,7 @@ namespace CircLab.Component
                     }
                 }
                 i++;
+                terminal.IsOutpt = true;
             }
         }
 
@@ -724,7 +727,7 @@ namespace CircLab.Component
 
                     else if (typeof(Chronogramme) == tableau[i].GetType())
                     {
-                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs());
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {
@@ -1030,7 +1033,7 @@ namespace CircLab.Component
 
                     else if (typeof(Chronogramme) == tableau[i].GetType())
                     {
-                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs());
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {

@@ -142,7 +142,11 @@ namespace CircLab
                 case "RSHLatche":
                     return new RSHLatche();
                 case "Chronogramme":
-                    return new Chronogramme(2);
+                    return new Chronogramme(2,MainWindow.Delay);
+                case "SeptSegmentsClass":
+                    return new SeptSegmentsClass();
+                case "Hexadicimal":
+                    return new WpfApplication9.LogicGate.Hexadicimal();
                 case "Registre":
                     temp = int.Parse(gate.Attribute("TriggerType").Value);
                     switch(temp)

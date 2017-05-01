@@ -81,7 +81,7 @@ namespace CircLab.Component
             else if (component is NAND) return true;
             else if (component is NOR) return true;
             else if (component is OR) return true;
-            else if (component is Chronogramme) return true;
+          
             else return false;
 
         }

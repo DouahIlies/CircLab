@@ -23,6 +23,7 @@ using System.Windows.Markup;
 using System.Threading;
 using System.ComponentModel;
 using CircLab.ComplexComponent;
+using WpfApplication9.LogicGate;
 
 namespace CircLab
 {
@@ -252,10 +253,18 @@ namespace CircLab
                     }
                     elementsSelected[0].recalculer_pos();
                 }
-                else if (elementsSelected[0] is SequentialComponent.Clock)
+                else if ((elementsSelected[0] is SequentialComponent.Clock) ||(elementsSelected[0] is SequentialComponent.Chronogramme))
                 {
                     Type.Visibility = Visibility.Collapsed;
-                    Frequency.Text = ((SequentialComponent.Clock)elementsSelected[0]).Delay.ToString();
+                    if((elementsSelected[0] is SequentialComponent.Clock))
+                    {
+                        Frequency.Text = ((SequentialComponent.Clock)elementsSelected[0]).Delay.ToString();
+                    }
+                    else
+                    {
+                        Frequency.Text = ((SequentialComponent.Chronogramme)elementsSelected[0]).Delay.ToString();
+                    }
+                       
                     ClockFrequency.Visibility = Visibility.Visible;
                     Frequency.Visibility = Visibility.Visible;
                                
@@ -435,7 +444,7 @@ namespace CircLab
                 case "Output":
                     gate = new Output(); break;
                 case "Chronogram":
-                    gate = new Chronogramme(2); break;
+                    gate = new Chronogramme(2,MainWindow.Delay); break;
                 case "Decoder":
                     gate = new Decodeur(2, 4); break;
                 case "Encoder":
@@ -484,6 +493,10 @@ namespace CircLab
                     gate = new DecompteurN(6, 3); break;
                 case "CDownMN":
                     gate = new DecompteurModN(6, 3); break;
+                case "Hexa Segments":
+                    gate = new Hexadicimal(); break;
+                case "Sept Segments":
+                    gate = new SeptSegmentsClass(); break;
                 default:
                     throw new ArgumentException("unknown gate");
             }
@@ -496,6 +509,15 @@ namespace CircLab
         private void add7segments(object sender, RoutedEventArgs e)
         {
             SeptSegmentsClass img = new SeptSegmentsClass();
+            canvas.Children.Add(img);
+            img.AllowDrop = true;
+            img.PreviewMouseLeftButtonDown += this.MouseLeftButtonDown;
+            img.PreviewMouseMove += this.MouseMove;
+            img.PreviewMouseLeftButtonUp += this.PreviewMouseLeftButtonUp;
+        }
+        private void addHexa(object sender, RoutedEventArgs e)
+        {
+            Hexadicimal img = new Hexadicimal();
             canvas.Children.Add(img);
             img.AllowDrop = true;
             img.PreviewMouseLeftButtonDown += this.MouseLeftButtonDown;
@@ -1092,7 +1114,7 @@ namespace CircLab
 
                 else if (typeof(Chronogramme) == tableau[i].GetType())
                 {
-                    newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs());
+                    newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
                 }
                 else if (typeof(CirculerRegister) == tableau[i].GetType())
                 {
@@ -1543,7 +1565,18 @@ namespace CircLab
         {
             try
             {
-                ((SequentialComponent.Clock)elementsSelected[0]).Delay = float.Parse(Frequency.Text);
+                if(elementsSelected[0] is Chronogramme)
+                {
+                    ((SequentialComponent.Chronogramme)elementsSelected[0]).Delay = float.Parse(Frequency.Text);
+                }
+                else
+                {
+                    if(elementsSelected[0] is SequentialComponent.Clock)
+                    {
+                        ((SequentialComponent.Clock)elementsSelected[0]).Delay = float.Parse(Frequency.Text);
+                    }
+                }
+               
             }
             catch
             { }
@@ -1938,7 +1971,7 @@ namespace CircLab
 
                     else if (typeof(Chronogramme) == tableau[i].GetType())
                     {
-                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs());
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {
@@ -2244,7 +2277,7 @@ namespace CircLab
 
                     else if (typeof(Chronogramme) == tableau[i].GetType())
                     {
-                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs());
+                        newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {
@@ -2556,7 +2589,7 @@ namespace CircLab
 
                 else if (typeof(Chronogramme) == tableau[i].GetType())
                 {
-                    newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs());
+                    newChild = new Chronogramme((tableau[i] as Chronogramme).nbrInputs(),MainWindow.Delay);
                 }
                 else if (typeof(CirculerRegister) == tableau[i].GetType())
                 {
