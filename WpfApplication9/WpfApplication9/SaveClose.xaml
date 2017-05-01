@@ -19,7 +19,7 @@
             </Grid.RowDefinitions>
             <StackPanel>
                 <TextBlock x:Name="FileName"></TextBlock>
-                <TextBlock>Warning! Do you want to save the circuit?</TextBlock>
+                <TextBlock>Attention! Voulez vous sauvegarder ?</TextBlock>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
@@ -33,7 +33,7 @@
                     <Button.CommandParameter>
                         <system:Boolean>True</system:Boolean>
                     </Button.CommandParameter>
-                    Cancel
+                    Annuler
                 </Button>
                 <Button IsDefault="True"
                         Click="DontSave_Click"
@@ -42,7 +42,7 @@
                     <Button.CommandParameter>
                         <system:Boolean>True</system:Boolean>
                     </Button.CommandParameter>
-                    Don't Save
+                    Ne pas enregister
                 </Button>
                 <Button IsDefault="True"
                         Click="Save_Click"
@@ -51,7 +51,7 @@
                     <Button.CommandParameter>
                         <system:Boolean>True</system:Boolean>
                     </Button.CommandParameter>
-                    Save
+                    Enregistrer
                 </Button>
             </StackPanel>
         </Grid>

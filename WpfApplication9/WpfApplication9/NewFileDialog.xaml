@@ -21,14 +21,14 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBlock>New Circuit</TextBlock>
+            <TextBlock>Nouveau Circuit</TextBlock>
             <TextBlock Grid.Row="1"
-                       VerticalAlignment="Center">Width</TextBlock>
+                       VerticalAlignment="Center">Largeur</TextBlock>
             <TextBox x:Name="CircuitWidth"
                      Grid.Row="1"
                      Grid.Column="1">2000</TextBox>
             <TextBlock Grid.Row="2"
-                       VerticalAlignment="Center">Height</TextBlock>
+                       VerticalAlignment="Center">Hauteur</TextBlock>
             <TextBox x:Name="CircuitHeight"
                      Grid.Row="2"
                      Grid.Column="1">2000</TextBox>
@@ -44,7 +44,7 @@
                     <Button.CommandParameter>
                         <system:Boolean>True</system:Boolean>
                     </Button.CommandParameter>
-                    CANCEL
+                    Annuler
                 </Button>
                 <Button IsDefault="True"
                         Click="Create_Click"
@@ -53,7 +53,7 @@
                     <Button.CommandParameter>
                         <system:Boolean>True</system:Boolean>
                     </Button.CommandParameter>
-                    Create
+                    Créer
                 </Button>
             </StackPanel>
         </Grid>

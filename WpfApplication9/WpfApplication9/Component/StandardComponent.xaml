@@ -10,9 +10,9 @@
         <Grid.ContextMenu>
             <ContextMenu>
                 <MenuItem Click="Delete" Header="Supprimer"></MenuItem>
-                <MenuItem Header="Rotate Right"
+                <MenuItem Header="Tourner à droite"
                           Click="RotateRightEvent"></MenuItem>
-                <MenuItem Header="Rotate Left"
+                <MenuItem Header="Tourner à gauche"
                           Click="RotateLeftEvent"></MenuItem>
                 <MenuItem Name="Copier"
                           Click="copier"
