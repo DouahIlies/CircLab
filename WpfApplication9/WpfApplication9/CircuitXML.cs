@@ -79,9 +79,9 @@ namespace CircLab
                             gt.SetAttributeValue("TriggerType", 2);
                         else if (((CirculerRegister)shape).Trigger == CirculerRegister.TriggerType.HighLevel)
                             gt.SetAttributeValue("TriggerType", 3);
-                        if (((CirculerRegister)shape).CircularType == CirculerRegister.Type.Left)
+                        if (((CirculerRegister)shape)._type == CirculerRegister.Type.Left)
                             gt.SetAttributeValue("CircularType", 0);
-                        else if (((CirculerRegister)shape).CircularType == CirculerRegister.Type.Right)
+                        else if (((CirculerRegister)shape)._type == CirculerRegister.Type.Right)
                             gt.SetAttributeValue("CircularType", 1);
                     }
                     if (shape is compteurN)

@@ -1152,7 +1152,7 @@ namespace CircLab
 
                 else if (typeof(JK) == tableau[i].GetType())
                 {
-                    newChild = new JK((tableau[i] as JK)._trigger);
+                    newChild = new JK((tableau[i] as JK).Trigger);
                 }
 
                 else if (typeof(programmablRegister) == tableau[i].GetType())
@@ -2009,7 +2009,7 @@ namespace CircLab
 
                     else if (typeof(JK) == tableau[i].GetType())
                     {
-                        newChild = new JK((tableau[i] as JK)._trigger);
+                        newChild = new JK((tableau[i] as JK).Trigger);
                     }
 
                     else if (typeof(programmablRegister) == tableau[i].GetType())
@@ -2315,7 +2315,7 @@ namespace CircLab
 
                     else if (typeof(JK) == tableau[i].GetType())
                     {
-                        newChild = new JK((tableau[i] as JK)._trigger);
+                        newChild = new JK((tableau[i] as JK).Trigger);
                     }
 
                     else if (typeof(programmablRegister) == tableau[i].GetType())
@@ -2627,7 +2627,7 @@ namespace CircLab
 
                 else if (typeof(JK) == tableau[i].GetType())
                 {
-                    newChild = new JK((tableau[i] as JK)._trigger);
+                    newChild = new JK((tableau[i] as JK).Trigger);
                 }
 
                 else if (typeof(programmablRegister) == tableau[i].GetType())
