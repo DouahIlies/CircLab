@@ -793,7 +793,7 @@ namespace CircLab
 
         private  void PreviewMouseLeftButtonUp2(object sender, MouseButtonEventArgs e)
         {
-
+           // MessageBox.Show("krahna");
             if (sourceEllipse != null)
             {
 
@@ -814,9 +814,9 @@ namespace CircLab
                     { 
                       
                         
-                        if (Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).X - e.GetPosition(canvas).X) < 20 && Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).Y - e.GetPosition(canvas).Y) < 20)
+                        if (Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).X - e.GetPosition(canvas).X) < 15 && Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).Y - e.GetPosition(canvas).Y) < 15)
                         {
-                            //MessageBox.Show("911");
+                            
                             Wireclass.selection2 = terminal.elSelector;
                         }
                     }
@@ -824,9 +824,19 @@ namespace CircLab
                     {
 
 
-                        if (Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).X - e.GetPosition(canvas).X) < 20 && Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).Y - e.GetPosition(canvas).Y) < 20)
+                        if (Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).X - e.GetPosition(canvas).X) < 15 && Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).Y - e.GetPosition(canvas).Y) < 15)
                         {
-                            //MessageBox.Show("911");
+                            
+                            Wireclass.selection2 = terminal.elSelector;
+                        }
+                    }
+                    foreach (Terminal terminal in standardcomponent.selectionStack.Children)
+                    {
+
+
+                        if (Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).X - e.GetPosition(canvas).X) < 15 && Math.Abs(terminal.elSelector.TransformToAncestor(canvas).Transform(new Point(0, 0)).Y - e.GetPosition(canvas).Y) < 10)
+                        {
+                          
                             Wireclass.selection2 = terminal.elSelector;
                         }
                     }
@@ -838,6 +848,7 @@ namespace CircLab
                 {
                     wire.relier();
                 }
+              
                 
             }
 
