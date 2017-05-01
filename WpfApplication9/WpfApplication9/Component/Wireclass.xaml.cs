@@ -149,8 +149,8 @@ namespace CircLab.Component
 
         public void relier()
         {
-
-                Ellipse select;
+         
+            Ellipse select;
                 destination = UserClass.TryFindParent<Terminal>(selection2);
                 source = UserClass.TryFindParent<Terminal>(selection1);
 
@@ -158,35 +158,39 @@ namespace CircLab.Component
                 {
                     if (destination.IsOutpt == true)
                     {
+                    
                         select = selection2;
                         selection2 = selection1;
                         selection1 = select;
                         Terminal temp = destination;
                         destination = source;
                         source = temp;
+                 
                     }
                     else
                     {
-                        //selected = false;
-                        return;
+
+                    //selected = false;
+                
+                    return;
                     }
                 }
                 else
                 {
                     if (destination.IsOutpt == true)
                     {
-                        //selected = false;
+                    
                         return;
                     }
                 }
 
                 if (destination.wires.Count >= 1)
                 {
-                    //selected = false;
-                    return;
+          
+                return;
                 }
-
-                btn111 = selection1;
+       
+            btn111 = selection1;
                 btn222 = selection2;
                 destination.wires.Add(this);
                 destination.etat = this._state;
@@ -261,7 +265,11 @@ namespace CircLab.Component
                 {
                     terminal.wires.Remove(this);
                 }
-          
+                foreach (Terminal terminal in componenet.selectionStack.Children)
+                {
+                    terminal.wires.Remove(this);
+                }
+
                 componenet.Run();
             }
             try
@@ -303,7 +311,9 @@ namespace CircLab.Component
                 }*/
 
             myCanvas.UpdateLayout();
-               
+            
+            
+             
             btn1Point = btn111.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             l1 = (Line)listeLine[0];
@@ -467,8 +477,7 @@ namespace CircLab.Component
       
             Line lBefore;
             Line lAfter;
-            btn111 = selection1;
-            btn222 = selection2;
+        
             btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             btn1Point = btn111.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
             if (e.LeftButton == MouseButtonState.Pressed && l==sender as Line)

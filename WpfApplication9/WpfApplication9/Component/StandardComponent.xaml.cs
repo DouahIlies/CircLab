@@ -78,7 +78,7 @@ namespace CircLab.Component
                     terminal.Margin = new Thickness(0, ((Math.Max(nbrinput, nbrOutput) * terminal.Height)) / (Math.Pow(2, nbrinput)) - terminal.Height / 2, 0, terminal.Height / (nbrinput + 10));
             }
 
-            OutputStack.Children.Remove(output);
+            OutputStack.Children.Clear();
             for (int i = 0; i < nbrOutput; i++)
             {
 
@@ -119,14 +119,14 @@ namespace CircLab.Component
             for (int i = 0; i < nbrSelection; i++)
             {
              
-                Terminal terminalSelection = new Terminal();
+                 terminal = new Terminal();
 
                 terminal.IsOutpt = false;
 
-                terminalSelection.LayoutTransform = new RotateTransform(90);
+                terminal.LayoutTransform = new RotateTransform(90);
                
                 
-                selectionStack.Children.Add(terminalSelection);
+                selectionStack.Children.Add(terminal);
             }
 
 
@@ -193,10 +193,16 @@ namespace CircLab.Component
 
                         ((Wireclass)terminal.wires[i]).Destroy();
                     }
-                    /*       foreach (Wireclass wire in terminal.wires)
-                           {
-                               wire.Destroy();
-                           }*/
+              
+                }
+                foreach (Terminal terminal in component.selectionStack.Children)
+                {
+
+                    for (int i = terminal.wires.Count - 1; i >= 0; i--)
+                    {
+
+                        ((Wireclass)terminal.wires[i]).Destroy();
+                    }
 
                 }
                 canvas.Children.Remove(component);
@@ -403,12 +409,8 @@ namespace CircLab.Component
 
         public void update_input()
         {
-            // inputs_tab.Clear();
+    
             selections_tab.Clear();
-
-
-
-            //outputs_tab.Clear();
 
             int i = 0;
             foreach (Terminal terminal in inputStack.Children)
@@ -468,7 +470,7 @@ namespace CircLab.Component
                     }
                 }
                 i++;
-                terminal.IsOutpt = true;
+               
             }
         }
 
