@@ -78,7 +78,14 @@ namespace CircLab.Component
                     terminal.Margin = new Thickness(0, ((Math.Max(nbrinput, nbrOutput) * terminal.Height)) / (Math.Pow(2, nbrinput)) - terminal.Height / 2, 0, terminal.Height / (nbrinput + 10));
             }
 
-            OutputStack.Children.Clear();
+            OutputStack.Children.Remove(output);
+            if (nbrSelection > 2)//here 
+            {
+
+                OutputStack.Margin = new Thickness(nbrSelection * 1.5 * 12, 25, 0, 0);
+
+            }
+
             for (int i = 0; i < nbrOutput; i++)
             {
 
@@ -88,6 +95,7 @@ namespace CircLab.Component
                 terminal.terminal_grid.LayoutTransform = new RotateTransform(180);
                 terminal.IsOutpt = true;
                 OutputStack.Children.Add(terminal);
+
 
             }
 
@@ -102,7 +110,12 @@ namespace CircLab.Component
 
             }//Pour dessiner le composant
             typeComponenet.Height = terminal.Height * Math.Max(nbrinput, nbrOutput);
-            typeComponenet.Width = terminal.Width * 4;
+            if (nbrSelection > 2)
+            {
+                typeComponenet.Width = terminal.Width * 1.5 * nbrSelection; //here 
+            }
+            else { typeComponenet.Width = terminal.Width * 4; }
+
             typeComponenet.Data = StreamGeometry.Parse(path);
             typeComponenet.Stretch = Stretch.Fill;
             typeComponenet.StrokeThickness = 0;
@@ -118,21 +131,19 @@ namespace CircLab.Component
 
             for (int i = 0; i < nbrSelection; i++)
             {
-             
-                 terminal = new Terminal();
+                Terminal terminalSelection = new Terminal();
+                double x = terminalSelection.terminal_grid.Height;
 
-                terminal.IsOutpt = false;
+                terminalSelection.LayoutTransform = new RotateTransform(90);
 
-                terminal.LayoutTransform = new RotateTransform(90);
-               
-                
-                selectionStack.Children.Add(terminal);
+
+                terminalSelection.Margin = new Thickness(-terminal.Width / Math.Pow(2, nbrSelection) - terminal.Width + 3, 0, 0, 2);
+                selectionStack.Children.Add(terminalSelection);
             }
 
 
 
         }
-
         //Methode pour recalculer la position du composants, on calcule la pos de chaque terminal prenant en considération les filles liées à lui
         public void recalculer_pos()
         {

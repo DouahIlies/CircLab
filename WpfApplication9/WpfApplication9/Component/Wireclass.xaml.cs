@@ -190,15 +190,15 @@ namespace CircLab.Component
                 return;
                 }
        
-            btn111 = selection1;
+                btn111 = selection1;
                 btn222 = selection2;
                 destination.wires.Add(this);
                 destination.etat = this._state;
                 source.wires.Add(this);
 
 
-                btn2Point = selection2.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
-                btn1Point = selection1.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
+                btn2Point = btn222.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
+                btn1Point = btn111.TransformToAncestor(myCanvas).Transform(new Point(0, 0));
 
      
                 l1.Stroke = new SolidColorBrush(Colors.Black);
