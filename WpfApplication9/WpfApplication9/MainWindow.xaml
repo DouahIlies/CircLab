@@ -583,6 +583,11 @@
                                 MouseDown="canvas_MouseDown"
                                 Width="2000"
                                 Height="2000">
+                            <Canvas.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Click="coller" Header="Coller  ctr+v"></MenuItem>
+                                </ContextMenu>
+                            </Canvas.ContextMenu>
                             <Canvas.Background>
                                 <!-- see http://mark-dot-net.blogspot.com/2007/06/creating-hatched-patterned-brush-in-wpf.html -->
                                 <VisualBrush TileMode="Tile"
