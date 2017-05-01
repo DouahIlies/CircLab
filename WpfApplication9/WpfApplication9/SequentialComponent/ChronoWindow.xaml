@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CircLab.SequentialComponent"
         mc:Ignorable="d"
-        Title="Chronogramme Window" Height="400" Width="600">
+        Title="Chronogramme Window" Height="400" Width="800">
     <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Margin="0,-28,0,28">
         <Grid>
             <Button x:Name="Pause" Margin="0,38.311,28.301,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="220.538" Content="Pause" Click="Pause_Continu"/>

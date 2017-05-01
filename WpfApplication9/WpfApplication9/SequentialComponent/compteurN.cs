@@ -38,6 +38,8 @@ namespace CircLab.SequentialComponent
             {
                 outputs_tab.Add(false);
             }
+            TypeLabel.Text = "ComptN";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "Clock";
 
         }
 

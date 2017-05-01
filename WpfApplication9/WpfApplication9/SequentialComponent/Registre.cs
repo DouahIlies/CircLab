@@ -39,6 +39,9 @@ namespace CircLab.SequentialComponent
             {
                 outputs_tab.Add(false);
             }
+            TypeLabel.Text = "Reg";
+            ((Terminal)selectionStack.Children[0]).terminal_grid.ToolTip = "Clear";
+            ((Terminal)selectionStack.Children[1]).terminal_grid.ToolTip = "Load";
         }
 
         public override void Run()

@@ -41,6 +41,7 @@ namespace CircLab.SequentialComponent
 
         private void Pause_Continu(object sender, RoutedEventArgs e)
         {
+            Pause.Content = ((string)Pause.Content == "Pause")? "Continuer" : "Pause";
             this.t.IsEnabled = !this.t.IsEnabled;
         }
 

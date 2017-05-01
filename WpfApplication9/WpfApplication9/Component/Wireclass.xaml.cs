@@ -88,7 +88,7 @@ namespace CircLab.Component
             listeLine.Add(l2);
             listeLine.Add(l3);
 
-            myCanvas.Children.Add(l2);
+            canvas.Children.Add(l2);
             l2.PreviewMouseMove += MouseMoveHorizental;
 
             l2.PreviewMouseLeftButtonDown += this.MouseLeftButtonDownHorizental;
@@ -96,9 +96,9 @@ namespace CircLab.Component
             //   l1.PreviewMouseLeftButtonDown += this.MouseLeftButtonDown1;
             l3.PreviewMouseMove += MouseMoveVertical;
             l3.PreviewMouseLeftButtonDown += this.MouseLeftButtonDownVertical;
-            myCanvas.Children.Add(l1);
+            canvas.Children.Add(l1);
 
-            myCanvas.Children.Add(l3);
+            canvas.Children.Add(l3);
 
 
 

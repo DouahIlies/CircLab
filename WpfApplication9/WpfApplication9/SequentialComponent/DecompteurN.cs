@@ -33,7 +33,9 @@ namespace CircLab.SequentialComponent
             outputs_tab=ClassConverter.ConvertToBinary(N,_nbroutputs);
             _val = N;
             oldClockValue = false;
-            
+            TypeLabel.Text = "DecN";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "Clock";
+
         }
 
         public override void Run()

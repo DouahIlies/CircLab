@@ -37,6 +37,11 @@ namespace CircLab.SequentialComponent
             {
                 outputs_tab.Add(false);
             }
+            TypeLabel.Text = "PReg";
+            ((Terminal)selectionStack.Children[0]).terminal_grid.ToolTip = "Clear";
+            ((Terminal)selectionStack.Children[1]).terminal_grid.ToolTip = "Clock";
+            ((Terminal)selectionStack.Children[2]).terminal_grid.ToolTip = "Cmd1";
+            ((Terminal)selectionStack.Children[3]).terminal_grid.ToolTip = "Cmd2";
         }
 
         public override void Run()

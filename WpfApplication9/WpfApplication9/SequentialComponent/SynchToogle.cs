@@ -24,6 +24,12 @@ namespace CircLab.SequentialComponent
             }
 
             oldClockValue = false;
+
+            TypeLabel.Text = "ST";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "T";
+            ((Terminal)inputStack.Children[1]).terminal_grid.ToolTip = "Clock";
+            ((Terminal)OutputStack.Children[0]).terminal_grid.ToolTip = "Q";
+            ((Terminal)OutputStack.Children[1]).terminal_grid.ToolTip = "not Q";
         }
 
         public override void Run()

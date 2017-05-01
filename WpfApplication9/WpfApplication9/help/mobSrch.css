@@ -1,0 +1,102 @@
+body {
+   background-color: transparent;
+   font-family: ArialMT, Arial, Helvetica, Sans-Serif;
+}
+#pageWrapper {
+	position: absolute;
+	top: 0px; left: 0px; bottom: 5px;
+	width: 512px;
+    background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.50);
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.40);
+	padding: 10px 0 3px 8px;
+	margin: 0;
+}
+#closeButton {
+	position: absolute;
+	top: 5px; right: 5px;
+	border: 1px solid black;
+	background-color: red;
+	-webkit-border-radius: 5px;
+	width: 20px;
+	height: 22px;
+	color: white;
+	font-size: 25px;
+	font-weight: bold;
+	text-shadow: 1px 1px #ff0000;
+}
+#closeButton div.closer {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: -3px;
+	left: 2px;
+}
+#pageContent {
+   position: relative;
+   top: 10px;
+   z-index: 1;
+   width:503px;
+   overflow: auto;
+   border: 0px solid red;
+   -webkit-border-radius: 8px;
+   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.40);
+   background-color: rgba(0, 0, 0, 0.05);
+}
+#pageScroller {
+   width: 493px;
+   overflow: auto;
+   border: 0px solid blue; 
+   padding: 0px 0px 5px 5px;
+}
+a {
+	color: blue;
+}
+a:visited {
+	color: blue;
+}
+/* Styles for the Zoom search engine components */
+
+.submit { font-size: 11pt; font-weight: bold; line-height: 1.0; margin-bottom: 5px; margin-top: 0px;}
+input.zoom_searchbox { font-size: 11pt; margin-bottom: 5px;}
+input.zoom_button { font-size: 11pt; font-weight: bold;  }
+.zoom_results_per_page { display: block; font-size: 100%; margin-left: 0px;}
+.zoom_match { display: block; font-size: 100%; margin-left: 0px; margin-bottom: 8px;}
+
+.searchheading { font-size: 10pt; font-weight: bold; margin-top: 5px; }
+.summary { font-size: 10pt; }
+.result_pagescount { font-size: 10pt; }
+.suggestion { font-size: 10pt; }
+
+p.zoom_advertising { display: none; }
+.result_pages { position: absolute; bottom: 12px; font-size: 95%; }
+.highlight { background: #FFFF40; }
+.results { font-size: 9pt; }
+.description { font-size: 9pt; }
+.context { font-size: 9pt; }
+.result_title { font-size: 9pt; }
+.category { color: #999999; }
+.sorting { text-align: right; float: right; padding-right: 10px; margin-top: -25px;}
+.zoom_searchform { font-size: 100%; }
+.zoom_categories { font-size: 80%; }
+.zoom_categories ul { display: inline; margin: 0px; padding: 0px;}
+.zoom_categories li { display: inline; margin-left: 15px; list-style-type: none; }
+
+.result_image { float: left; display: block; }
+.result_image img { margin: 10px; width: 80px; border: 0px; }
+.result_block { margin-top: 15px; margin-bottom: 15px; clear: left; }
+.result_altblock { margin-top: 15px; margin-bottom: 15px; clear: left; }
+.searchtime { font-size: 80%; }
+.recommended {
+background: #DFFFBF;
+border-top: 1px dotted #808080;
+border-bottom: 1px dotted #808080;
+margin-top: 15px;
+margin-bottom: 15px;
+}
+.recommended_heading { float: right; font-weight: bold; }
+.recommend_block { margin-top: 15px; margin-bottom: 15px; clear: left; }
+.recommend_title { font-size: 100%; }
+.recommend_description { font-size: 100%; color: #008000; }
+.recommend_infoline { font-size: 80%; font-style: normal; color: #808080;}

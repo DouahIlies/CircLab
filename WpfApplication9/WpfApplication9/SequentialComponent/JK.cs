@@ -26,16 +26,17 @@ namespace CircLab.SequentialComponent
         public JK(TriggerType trigger)
             : base(3, 2,0, "M 0,0 L 30,0 L 30,30 L 0,30 z", "JK")
         {
-            TypeLabel.Text = "JK";
-             _trigger = trigger;
+            _trigger = trigger;
             outputs_tab.Clear();
             for (int i = 0; i < 2; i++)
             {
                 outputs_tab.Add(false);
             }
             oldClockValue = false;
-            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "J Input";
-            ((Terminal)inputStack.Children[1]).terminal_grid.ToolTip = "K Input";
+
+            TypeLabel.Text = "JK";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "J";
+            ((Terminal)inputStack.Children[1]).terminal_grid.ToolTip = "K";
             ((Terminal)inputStack.Children[2]).terminal_grid.ToolTip = "Clock";
             ((Terminal)OutputStack.Children[0]).terminal_grid.ToolTip = "Q";
             ((Terminal)OutputStack.Children[1]).terminal_grid.ToolTip = "not Q";

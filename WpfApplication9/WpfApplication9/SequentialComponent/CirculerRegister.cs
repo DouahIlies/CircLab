@@ -18,6 +18,11 @@ namespace CircLab.SequentialComponent
             Right, Left
         }
         private Type _type;
+        public Type CircularType
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
         private int _nbroutputs;
         private TriggerType _trigger = TriggerType.RisingEdge;
         public TriggerType Trigger
@@ -40,6 +45,10 @@ namespace CircLab.SequentialComponent
             {
                 outputs_tab.Add(false);
             }
+            TypeLabel.Text = "CReg";
+            ((Terminal)selectionStack.Children[0]).terminal_grid.ToolTip = "Clock";
+            ((Terminal)selectionStack.Children[1]).terminal_grid.ToolTip = "Clear";
+            ((Terminal)selectionStack.Children[2]).terminal_grid.ToolTip = "Load";
 
         }
 

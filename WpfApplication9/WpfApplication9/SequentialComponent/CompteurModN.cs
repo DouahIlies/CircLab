@@ -38,7 +38,8 @@ namespace CircLab.SequentialComponent
             {
                 outputs_tab.Add(false);
             }
-
+            TypeLabel.Text = "ComptModN";
+            ((Terminal)inputStack.Children[0]).terminal_grid.ToolTip = "Clock";
         }
 
         public override void Run()

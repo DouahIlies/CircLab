@@ -494,12 +494,22 @@ namespace CircLab
             if (dlg.Selected == SaveClose.Result.DONT_SAVE)
             {
                 this.Closing -= WindowClosing;
+                foreach (Window w in Application.Current.Windows)
+                {
+                    if (w != this)
+                        w.Close();
+                }
                 Close();
             }
             if(dlg.Selected == SaveClose.Result.SAVE)
             {
                 btnSave_Click(null, null);
                 this.Closing -= WindowClosing;
+                foreach (Window w in Application.Current.Windows)
+                {
+                    if (w != this)
+                        w.Close();
+                }
                 Close();
             }
 
@@ -512,8 +522,7 @@ namespace CircLab
         }
         private void HelpOpen(object sender, RoutedEventArgs e)
         {
-            Help helpWindow = new Help();
-            helpWindow.Show();
+            System.Diagnostics.Process.Start(".\\help\\index.html");
         }
 
         private void ComboBoxProperties_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2069,6 +2078,11 @@ namespace CircLab
             {
                 canvas.Children.Add(liste_copier[j]);
             }
+        }
+
+        private void HelpOpen(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start(".\\help\\index.html");
         }
 
 

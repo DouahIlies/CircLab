@@ -55,6 +55,52 @@ namespace CircLab
                         else if (((Registre)shape).Trigger == Registre.TriggerType.HighLevel)
                             gt.SetAttributeValue("TriggerType", 3);
                     }
+                    if (shape is programmablRegister)
+                    {
+                        if (((programmablRegister)shape).Trigger == programmablRegister.TriggerType.FallingEdge)
+                            gt.SetAttributeValue("TriggerType", 0);
+                        else if (((programmablRegister)shape).Trigger == programmablRegister.TriggerType.RisingEdge)
+                            gt.SetAttributeValue("TriggerType", 1);
+                        else if (((programmablRegister)shape).Trigger == programmablRegister.TriggerType.LowLevel)
+                            gt.SetAttributeValue("TriggerType", 2);
+                        else if (((programmablRegister)shape).Trigger == programmablRegister.TriggerType.HighLevel)
+                            gt.SetAttributeValue("TriggerType", 3);
+                    }
+                    if (shape is CirculerRegister)
+                    {
+                        if (((CirculerRegister)shape).Trigger == CirculerRegister.TriggerType.FallingEdge)
+                            gt.SetAttributeValue("TriggerType", 0);
+                        else if (((CirculerRegister)shape).Trigger == CirculerRegister.TriggerType.RisingEdge)
+                            gt.SetAttributeValue("TriggerType", 1);
+                        else if (((CirculerRegister)shape).Trigger == CirculerRegister.TriggerType.LowLevel)
+                            gt.SetAttributeValue("TriggerType", 2);
+                        else if (((CirculerRegister)shape).Trigger == CirculerRegister.TriggerType.HighLevel)
+                            gt.SetAttributeValue("TriggerType", 3);
+                        if (((CirculerRegister)shape).CircularType == CirculerRegister.Type.Left)
+                            gt.SetAttributeValue("CircularType", 0);
+                        else if (((CirculerRegister)shape).CircularType == CirculerRegister.Type.Right)
+                            gt.SetAttributeValue("CircularType", 1);
+                    }
+                    if (shape is compteurN)
+                    {
+                        gt.SetAttributeValue("NumOutputs", ((compteurN)g).Nbroutputs);
+                        gt.SetAttributeValue("N", ((compteurN)g).Val);
+                    }
+                    if (shape is CompteurModN)
+                    {
+                        gt.SetAttributeValue("NumOutputs", ((CompteurModN)g).Nbroutputs);
+                        gt.SetAttributeValue("N", ((CompteurModN)g).Val);
+                    }
+                    if (shape is DecompteurN)
+                    {
+                        gt.SetAttributeValue("NumOutputs", ((DecompteurN)g).Nbroutputs);
+                        gt.SetAttributeValue("N", ((DecompteurN)g).Val);
+                    }
+                    if (shape is DecompteurModN)
+                    {
+                        gt.SetAttributeValue("NumOutputs", ((DecompteurModN)g).Nbroutputs);
+                        gt.SetAttributeValue("N", ((DecompteurModN)g).Val);
+                    }
                     gates.Add(gt);
                     gid.Add(g, id);
                     id++;
@@ -100,7 +146,7 @@ namespace CircLab
 
         private static StandardComponent CreateGate(XElement gate)
         {
-            int temp;
+            int temp, temp2;
             int numInputs = int.Parse(gate.Attribute("NumInputs").Value);
             switch (gate.Attribute("Type").Value)
             {
@@ -124,9 +170,9 @@ namespace CircLab
                 case "Output":
                     return new Output();
                 case "Clock":
-                    int highms = int.Parse(gate.Attribute("HighLevelms").Value);
-                    int lowms = int.Parse(gate.Attribute("LowLevelms").Value);
-                    return new Clock(highms, lowms, MainWindow.Delay);
+                    temp = int.Parse(gate.Attribute("HighLevelms").Value);
+                    temp2 = int.Parse(gate.Attribute("LowLevelms").Value);
+                    return new Clock(temp, temp2, MainWindow.Delay);
                 case "JK":
                     temp = int.Parse(gate.Attribute("TriggerType").Value);
                     return new JK((temp == 0) ? JK.TriggerType.FallingEdge : JK.TriggerType.RisingEdge);
@@ -147,6 +193,47 @@ namespace CircLab
                         case 2: return new Registre(Registre.TriggerType.LowLevel, numInputs);
                         default: return new Registre(Registre.TriggerType.HighLevel, numInputs);
                     }
+                case "programmablRegister":
+                    temp = int.Parse(gate.Attribute("TriggerType").Value);
+                    switch (temp)
+                    {
+                        case 0: return new programmablRegister(programmablRegister.TriggerType.FallingEdge, numInputs);
+                        case 1: return new programmablRegister(programmablRegister.TriggerType.RisingEdge, numInputs);
+                        case 2: return new programmablRegister(programmablRegister.TriggerType.LowLevel, numInputs);
+                        default: return new programmablRegister(programmablRegister.TriggerType.HighLevel, numInputs);
+                    }
+                case "CirculerRegister":
+                    temp = int.Parse(gate.Attribute("TriggerType").Value);
+                    switch (temp)
+                    {
+                        case 0: return new CirculerRegister(CirculerRegister.TriggerType.FallingEdge, numInputs, CirculerRegister.Type.Left);
+                        case 1: return new CirculerRegister(CirculerRegister.TriggerType.RisingEdge, numInputs, CirculerRegister.Type.Left);
+                        case 2: return new CirculerRegister(CirculerRegister.TriggerType.LowLevel, numInputs, CirculerRegister.Type.Left);
+                        default: return new CirculerRegister(CirculerRegister.TriggerType.HighLevel, numInputs, CirculerRegister.Type.Left);
+                    }
+                case "FrequencyDevider":
+                    return new FrequencyDevider();
+                case "compteurN":
+                    temp = int.Parse(gate.Attribute("NumOutputs").Value);
+                    temp2 = int.Parse(gate.Attribute("N").Value);
+                    return new compteurN(temp2, temp);
+                case "CompteurModN":
+                    temp = int.Parse(gate.Attribute("NumOutputs").Value);
+                    temp2 = int.Parse(gate.Attribute("N").Value);
+                    return new CompteurModN(temp2, temp);
+                case "DecompteurN":
+                    temp = int.Parse(gate.Attribute("NumOutputs").Value);
+                    temp2 = int.Parse(gate.Attribute("N").Value);
+                    return new DecompteurN(temp2, temp);
+                case "DecompteurModN":
+                    temp = int.Parse(gate.Attribute("NumOutputs").Value);
+                    temp2 = int.Parse(gate.Attribute("N").Value);
+                    return new DecompteurModN(temp2, temp);
+
+
+
+
+
             }
             throw new ArgumentException("unknown gate");
         }
