@@ -280,6 +280,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="icon.ico" />
     <Resource Include="help\%24HMSKINPREVIEW.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
