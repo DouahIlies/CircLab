@@ -278,6 +278,10 @@ namespace CircLab
                                 ComboBoxPropertiesReg.SelectedIndex = 1;
                             }
                         }
+                        else if ((elementsSelected[0] is SequentialComponent.programmablRegister))
+                    {
+                        comboBoxtype(((SequentialComponent.programmablRegister)elementsSelected[0]).Trigger.ToString());
+                    }
                         Type.Visibility = Visibility.Visible;
                     }
                     elementsSelected[0].recalculer_pos();
@@ -438,6 +442,42 @@ namespace CircLab
 
                     }
 
+                }else if(elementsSelected[0] is Multiplexer)
+                {
+                    TypeDec.Visibility = Visibility.Visible;
+                    GridCheckBox.Visibility = Visibility.Visible;
+
+                    if (elementsSelected[0].nbrInputs() == 4)
+                        ComboBoxPropertiesDec.SelectedIndex = 0;
+                    else ComboBoxPropertiesDec.SelectedIndex = 1;
+
+                    if (elementsSelected[0].nbrInputs() == 4)
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                        for (int i = 2; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = false;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Collapsed;
+                        }
+
+                    }
+                    else if (elementsSelected[0].nbrInputs() == 8)
+                    {
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            ((CheckBox)GridCheckBox.Children[i]).IsChecked = ((Terminal)elementsSelected[0].inputStack.Children[i]).IsInversed;
+                            ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
+                        }
+                    }
+                }
+                else if(elementsSelected[0] is Demultiplexer)
+                {
+
                 }
                 else if(elementsSelected[0] is Comparateur)
                 {
@@ -519,7 +559,7 @@ namespace CircLab
                 case "Register":
                     gate = new Registre(Registre.TriggerType.RisingEdge, 4); break;
                 case "PRegister":
-                    gate = new programmablRegister(programmablRegister.TriggerType.RisingEdge, 3); break;
+                    gate = new programmablRegister(programmablRegister.TriggerType.RisingEdge, 2); break;
                 case "CRegister":
                     gate = new CirculerRegister(CirculerRegister.TriggerType.RisingEdge, 4, CirculerRegister.Type.Left); break;
                 case "FDevider":
@@ -682,7 +722,8 @@ namespace CircLab
                     if (UserClass.IsInputChangeable(elementsSelected[0]))
                     {
                         int selecteVal = ComboBoxProperties.SelectedIndex + 2;
-                        if(elementsSelected[0] is Chronogramme)
+                       // if(elementsSelected[0] is programmablRegister) selecteVal= ComboBoxProperties.SelectedIndex + 4;
+                        if (elementsSelected[0] is Chronogramme)
                         {
                             ((Chronogramme)elementsSelected[0]).nbrEntrée=selecteVal;
                             MessageBox.Show(selecteVal.ToString());
@@ -2643,25 +2684,28 @@ namespace CircLab
             {
                 if (elementsSelected.Count != 0)
                 {
-                        int selecteVal = ComboBoxPropertiesDec.SelectedIndex + 2;
-                  
-                        if (selecteVal != elementsSelected[0].nbrInputs())
-                        {
-                            
-                            while (selecteVal > elementsSelected[0].nbrInputs())
-                            {
-                                elementsSelected[0].AddInputs();
-                            }
-                            while (selecteVal < elementsSelected[0].nbrInputs())
-                            {
-                                elementsSelected[0].RemoveInputs();
-                            }
-
-                            elementsSelected[0].redessiner(elementsSelected[0].path);
-                            canvas.UpdateLayout();
-                            elementsSelected[0].Run();
-                        }
-                    
+                    int selecteVal;
+                    if(elementsSelected[0] is Decodeur) selecteVal = ComboBoxPropertiesDec.SelectedIndex + 2;
+        
+                    else
+                    {
+                        if (ComboBoxPropertiesDec.SelectedIndex == 0) selecteVal = 4;
+                        else selecteVal = 8;
+                    }
+                    if (selecteVal != elementsSelected[0].nbrInputs())
+                    {              
+                         while (selecteVal > elementsSelected[0].nbrInputs())
+                         {
+                            elementsSelected[0].AddInputs();
+                         }
+                         while (selecteVal < elementsSelected[0].nbrInputs())
+                         {
+                            elementsSelected[0].RemoveInputs();
+                         }
+                         elementsSelected[0].redessiner(elementsSelected[0].path);
+                         canvas.UpdateLayout();
+                         elementsSelected[0].Run();
+                    } 
                    modifieProperties();
 
                 }
