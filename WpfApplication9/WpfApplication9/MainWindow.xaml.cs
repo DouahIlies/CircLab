@@ -160,6 +160,7 @@ namespace CircLab
                     NbrEnreComparateur.Visibility = Visibility.Collapsed;
                     TypeDec.Visibility = Visibility.Collapsed;
                     TypeEnc.Visibility = Visibility.Collapsed;
+                    TypeReg.Visibility = Visibility.Collapsed;
 
                     if (elementsSelected[0].nbrInputs() != 8)
                         ComboBoxProperties.SelectedIndex = elementsSelected[0].nbrInputs() - 2;
@@ -252,6 +253,33 @@ namespace CircLab
                             ((CheckBox)GridCheckBox.Children[i]).Visibility = Visibility.Visible;
                         }
                     }
+
+                    if (UserClass.IsFrontChangeable(elementsSelected[0]) && UserClass.IsNiveauChangeable(elementsSelected[0]))
+                    {
+                        NiveauBas.Visibility = Visibility.Visible;
+                        NiveauHaut.Visibility = Visibility.Visible;
+                        Type.Visibility = Visibility.Visible;
+
+                       
+                        if ((elementsSelected[0] is SequentialComponent.Registre))
+                        {
+                            comboBoxtype(((SequentialComponent.Registre)elementsSelected[0]).Trigger.ToString());
+                        }
+                        else if ((elementsSelected[0] is SequentialComponent.CirculerRegister))
+                        {
+                            comboBoxtype(((SequentialComponent.CirculerRegister)elementsSelected[0]).Trigger.ToString());
+                            TypeReg.Visibility = Visibility.Visible;
+                            if (((CirculerRegister)elementsSelected[0]).typeDec == CirculerRegister.Type.Right)
+                            {
+                                ComboBoxPropertiesReg.SelectedIndex = 0;
+                            }
+                            else
+                            {
+                                ComboBoxPropertiesReg.SelectedIndex = 1;
+                            }
+                        }
+                        Type.Visibility = Visibility.Visible;
+                    }
                     elementsSelected[0].recalculer_pos();
                 }
                 else if ((elementsSelected[0] is SequentialComponent.Clock) ||(elementsSelected[0] is SequentialComponent.Chronogramme))
@@ -287,6 +315,15 @@ namespace CircLab
                     else if ((elementsSelected[0] is SequentialComponent.CirculerRegister))
                     {
                         comboBoxtype(((SequentialComponent.CirculerRegister)elementsSelected[0]).Trigger.ToString());
+                        TypeReg.Visibility = Visibility.Visible;
+                        if (((CirculerRegister)elementsSelected[0]).typeDec == CirculerRegister.Type.Right)
+                        {
+                            ComboBoxPropertiesReg.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            ComboBoxPropertiesReg.SelectedIndex = 1;
+                        }
                     }
                     else if ((elementsSelected[0] is SequentialComponent.programmablRegister))
                     {
@@ -408,6 +445,7 @@ namespace CircLab
                     ComparatuerText.Text = (elementsSelected[0].nbrInputs()/2).ToString();
 
                 }
+             
             }
           
             
@@ -686,6 +724,7 @@ namespace CircLab
             TypeDec.Visibility = Visibility.Collapsed;
             TypeEnc.Visibility = Visibility.Collapsed;
             NbrEnreComparateur.Visibility = Visibility.Collapsed;
+            TypeReg.Visibility = Visibility.Collapsed;
         }
 
         public void activeProp()
@@ -1069,9 +1108,9 @@ namespace CircLab
                             gt.SetAttributeValue("TriggerType", 2);
                         else if (((CirculerRegister)shape).Trigger == CirculerRegister.TriggerType.HighLevel)
                             gt.SetAttributeValue("TriggerType", 3);
-                        if (((CirculerRegister)shape)._type == CirculerRegister.Type.Left)
+                        if (((CirculerRegister)shape).typeDec == CirculerRegister.Type.Left)
                             gt.SetAttributeValue("CircularType", 0);
-                        else if (((CirculerRegister)shape)._type == CirculerRegister.Type.Right)
+                        else if (((CirculerRegister)shape).typeDec == CirculerRegister.Type.Right)
                             gt.SetAttributeValue("CircularType", 1);
                     }
                     if (shape is compteurN)
@@ -1714,7 +1753,7 @@ namespace CircLab
             for (int i = 0; i < length; i++)
             {
                 StandardComponent newChild = null;
-                if (!(typeof(Line) == tableau[i].GetType()) && ((tableau[i] as StandardComponent).IsSelect))
+                if ((tableau[i] is StandardComponent) && ((tableau[i] as StandardComponent).IsSelect))
                 {
 
                     if (typeof(AND) == tableau[i].GetType())
@@ -1908,7 +1947,7 @@ namespace CircLab
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {
-                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister).typeDec);
                     }
                     else if (typeof(CompteurModN) == tableau[i].GetType())
                     {
@@ -2022,7 +2061,7 @@ namespace CircLab
             {
 
                 StandardComponent newChild = null;
-                if (!(typeof(Line) == tableau[i].GetType()) && ((tableau[i] as StandardComponent).IsSelect))
+                if ((tableau[i] is StandardComponent) && ((tableau[i] as StandardComponent).IsSelect))
                 {
 
                     if (typeof(AND) == tableau[i].GetType())
@@ -2214,7 +2253,7 @@ namespace CircLab
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {
-                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister).typeDec);
                     }
                     else if (typeof(CompteurModN) == tableau[i].GetType())
                     {
@@ -2526,7 +2565,7 @@ namespace CircLab
                 }
                 else if (typeof(CirculerRegister) == tableau[i].GetType())
                 {
-                    newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                    newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister).typeDec);
                 }
                 else if (typeof(CompteurModN) == tableau[i].GetType())
                 {
@@ -2699,6 +2738,35 @@ namespace CircLab
                     }
 
                     modifieProperties();
+
+                }
+            }
+        }
+
+        private void ComboBoxPropertiesReg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ComboBoxPropertiesReg.SelectedIndex == 0)
+            {
+                try
+                {
+                    ((CirculerRegister)elementsSelected[0]).typeDec = CirculerRegister.Type.Right;
+                }
+                catch
+                {
+
+                }
+
+
+
+            }
+            else
+            {
+                try
+                {
+                    ((CirculerRegister)elementsSelected[0]).typeDec = CirculerRegister.Type.Left;
+                }
+                catch
+                {
 
                 }
             }

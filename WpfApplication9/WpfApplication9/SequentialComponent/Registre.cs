@@ -1,12 +1,7 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CircLab.Component;
-
+﻿using CircLab.Component;
+using System;
+using System.Windows;
+using System.Windows.Media;
 
 namespace CircLab.SequentialComponent
 {
@@ -68,9 +63,79 @@ namespace CircLab.SequentialComponent
             oldClockValue = newClockValue; //sauvegarde de l'etat de l'horloge
             update_output();//mettre à jour les sorties 
         }
+
+        public override void redessiner(string path)
+        {
+            Terminal terminal = new Terminal();
+            int nbrInput;
+            foreach (Terminal tmp in inputStack.Children)
+            {
+                terminal = tmp;
+            }
+
+            if (this.nbrInputs() == 0)
+            {
+                nbrInput = 1;
+            }
+            else nbrInput = this.nbrInputs();
+
+            if(nbrInput!=OutputStack.Children.Count)
+            {
+                while (OutputStack.Children.Count < nbrInput)
+                {
+                    terminal = new Terminal();
+                    terminal.terminal_grid.LayoutTransform = new RotateTransform(180);
+                    terminal.IsOutpt = true;
+                    OutputStack.Children.Add(terminal);
+                    outputs_tab.Add(false);
+                }
+                while (OutputStack.Children.Count > nbrInput)
+                {
+                    terminal = null;
+                    Wireclass wire = null;
+
+                    foreach (Terminal tmp in OutputStack.Children)
+                    {
+                        terminal = tmp;
+                    }
+                    foreach (Wireclass tmp in terminal.wires)
+                    {
+                        wire = tmp;
+                    }
+                    if (wire != null) wire.Destroy();
+                    OutputStack.Children.Remove(terminal);
+                    try
+                    {
+                        outputs_tab.RemoveAt(1);
+                    }
+                    catch { }
+
+                }
+            }
+
+            output.Margin = new Thickness(4.5, 0, 4.5, 0);
+            grid.Height = nbrInput * 22 + 25;
+            typeComponenet.Height = terminal.Height * nbrInput;
+            typeComponenet.Width = terminal.Width * 4;
+
+            typeComponenet.Data = StreamGeometry.Parse(path);
+            typeComponenet.Stretch = Stretch.Fill;
+            typeComponenet.StrokeThickness = 0;
+            typeComponenet.Fill = Brushes.RoyalBlue;
+            typeComponenet.Margin = new Thickness(14, 25, 0, 0);
+            typeComponenet.HorizontalAlignment = HorizontalAlignment.Left;
+            typeComponenet.VerticalAlignment = VerticalAlignment.Top;
+            recalculer_pos();
+            if (IsSelect) selectElement(this);
+            canvas.UpdateLayout();
+
+        }
+
     }
 
 }
+
+    
 
 
 

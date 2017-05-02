@@ -485,6 +485,22 @@
                                          Width="98" TextChanged="ComparatuerText_TextChanged"
                                         />
                             </StackPanel>
+                            <StackPanel x:Name="TypeReg" Orientation="Horizontal">
+                                <TextBlock 
+                                           Text="Décalage"
+                                           VerticalAlignment="Center" />
+                                <ComboBox x:Name="ComboBoxPropertiesReg"
+                                          SelectedIndex="0"
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          VerticalAlignment="Stretch"
+                                         
+                                          Margin="62,2,0,0"
+                                          Width="72" SelectionChanged="ComboBoxPropertiesReg_SelectionChanged" >
+                                    <ComboBoxItem Content="Droite" />
+                                    <ComboBoxItem Content="Gauche" />
+                                </ComboBox>
+                            </StackPanel>
                         </StackPanel>
                         <Grid DockPanel.Dock="Bottom"
                               Margin="10">
@@ -583,6 +599,11 @@
                                 MouseDown="canvas_MouseDown"
                                 Width="2000"
                                 Height="2000">
+                            <Canvas.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Click="coller" Header="Coller  ctr+v"></MenuItem>
+                                </ContextMenu>
+                            </Canvas.ContextMenu>
                             <Canvas.Background>
                                 <!-- see http://mark-dot-net.blogspot.com/2007/06/creating-hatched-patterned-brush-in-wpf.html -->
                                 <VisualBrush TileMode="Tile"

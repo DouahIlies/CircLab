@@ -9,17 +9,17 @@
     <Grid x:Name="grid"  Height="66" VerticalAlignment="Top">
         <Grid.ContextMenu>
             <ContextMenu>
-                <MenuItem Click="Delete" Header="Supprimer"></MenuItem>
-                <MenuItem Header="Tourner à droite"
+                <MenuItem Click="Delete" Header="Supprimer ctrl+suppr"></MenuItem>
+                <MenuItem Header="Tourner à droite ctrl+R"
                           Click="RotateRightEvent"></MenuItem>
-                <MenuItem Header="Tourner à gauche"
+                <MenuItem Header="Tourner à gauche ctrl+L"
                           Click="RotateLeftEvent"></MenuItem>
                 <MenuItem Name="Copier"
                           Click="copier"
-                          Header="Copier"></MenuItem>
+                          Header="Copier ctrl+C"></MenuItem>
                 <MenuItem Name="Couper"
                           Click="couper"
-                          Header="Couper"></MenuItem>
+                          Header="Couper ctrl+X"></MenuItem>
             </ContextMenu>
         </Grid.ContextMenu>
         <StackPanel x:Name="selectionStack" Height="33" VerticalAlignment="Top" Orientation="Horizontal" Margin="15,0,0,0" HorizontalAlignment="Left" Width="54"/>

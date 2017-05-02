@@ -744,7 +744,7 @@ namespace CircLab.Component
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {
-                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister).typeDec);
                     }
                     else if (typeof(CompteurModN) == tableau[i].GetType())
                     {
@@ -1050,7 +1050,7 @@ namespace CircLab.Component
                     }
                     else if (typeof(CirculerRegister) == tableau[i].GetType())
                     {
-                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister)._type);
+                        newChild = new CirculerRegister((tableau[i] as CirculerRegister)._trigger, (tableau[i] as CirculerRegister).nbrInputs(), (tableau[i] as CirculerRegister).typeDec);
                     }
                     else if (typeof(CompteurModN) == tableau[i].GetType())
                     {
