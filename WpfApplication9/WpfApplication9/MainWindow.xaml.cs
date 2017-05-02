@@ -710,7 +710,7 @@ namespace CircLab
         }
         private void HelpOpen(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(".\\help\\index.html");
+            System.Diagnostics.Process.Start(System.AppDomain.CurrentDomain.BaseDirectory + "\\help\\index.html");
         }
 
         private void ComboBoxProperties_SelectionChanged(object sender, SelectionChangedEventArgs e)
