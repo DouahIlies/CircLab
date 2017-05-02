@@ -83,6 +83,7 @@ namespace CircLab.Component
             else if (component is OR) return true;
             else if (component is Registre) return true;
             else if (component is CirculerRegister) return true;
+            else if (component is programmablRegister) return true;
             else return false;
 
         }

@@ -38,5 +38,69 @@ namespace CircLab.ComplexComponent
             outputs_tab.Add(inputs_tab[val]);
             update_output();
         }
+
+        public override void redessiner(string path)
+        {
+            Terminal terminal = new Terminal();
+            if (inputStack.Children.Count == 4 && selectionStack.Children.Count > 2)
+            {
+                for (int i = selectionStack.Children.Count; i > 2; i--)
+                {
+                    terminal = null;
+                    Wireclass wire = null;
+
+                    foreach (Terminal tmp in selectionStack.Children)
+                    {
+                        terminal = tmp;
+                    }
+                    foreach (Wireclass tmp in terminal.wires)
+                    {
+                        wire = tmp;
+                    }
+                    if (wire != null) wire.Destroy();
+                    selectionStack.Children.Remove(terminal);
+                    try
+                    {
+                        selections_tab.RemoveAt(1);
+                    }
+                    catch { }
+
+                }
+            }
+
+            else if (inputStack.Children.Count == 8 && selectionStack.Children.Count < 3)
+            {
+                selectionStack.Margin = new Thickness(terminal.Width, 0, terminal.Width, 0);
+                for (int i = selectionStack.Children.Count; i < 3; i++)
+                {
+                    
+                    terminal = new Terminal();
+                  
+                    terminal.LayoutTransform = new RotateTransform(90);
+                    terminal.IsOutpt = false;
+                    terminal.Margin = new Thickness(-terminal.Width / Math.Pow(2, 3) - terminal.Width + 3, 0, 0, 2);
+                    selectionStack.Children.Add(terminal);
+                    
+                    selections_tab.Add(false);
+                }
+            }
+
+             
+
+            grid.Height = inputStack.Children.Count * 22 + 25;
+            typeComponenet.Height = terminal.Height * inputStack.Children.Count;
+            typeComponenet.Width = terminal.Width * 4;
+
+            typeComponenet.Data = StreamGeometry.Parse(path);
+            typeComponenet.Stretch = Stretch.Fill;
+            typeComponenet.StrokeThickness = 0;
+            typeComponenet.Fill = Brushes.RoyalBlue;
+            typeComponenet.Margin = new Thickness(14, 25, 0, 0);
+            typeComponenet.HorizontalAlignment = HorizontalAlignment.Left;
+            typeComponenet.VerticalAlignment = VerticalAlignment.Top;
+            recalculer_pos();
+            if (IsSelect) selectElement(this);
+            canvas.UpdateLayout();
+        }
     }
 }
