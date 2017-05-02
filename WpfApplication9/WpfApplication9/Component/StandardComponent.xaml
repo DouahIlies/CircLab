@@ -25,10 +25,10 @@
         <StackPanel x:Name="selectionStack" Height="33" VerticalAlignment="Top" Orientation="Horizontal" Margin="15,0,0,0" HorizontalAlignment="Left" Width="54"/>
         <TextBlock x:Name="TypeLabel"
                    Foreground="Black"
-                   Margin="31.985,11.906,0,13.094"
+                   Margin="31.985,11.906,0,0"
                    Panel.ZIndex="2"
                    FontSize="10"
-                   Text="Aloha" HorizontalAlignment="Left"
+                   Text="Aloha" HorizontalAlignment="Left" Height="13.094" VerticalAlignment="Top"
                    />
         <StackPanel Name="inputStack" Margin="-5,25,0,0" HorizontalAlignment="Left" Width="19" Height="300" VerticalAlignment="Top"/>
         <StackPanel x:Name="OutputStack" Margin="50,25,0,-234" HorizontalAlignment="Left" Width="19" Height="300" VerticalAlignment="Top">
