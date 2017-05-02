@@ -32,8 +32,8 @@ namespace CircLab
                     XElement gt = new XElement("Gate");
                     gt.SetAttributeValue("Type", g.GetType().Name);
                     gt.SetAttributeValue("ID", id);
-                    gt.SetAttributeValue("X", g.PosX);
-                    gt.SetAttributeValue("Y", g.PosY);
+                    gt.SetAttributeValue("X", Math.Round(g.PosX));
+                    gt.SetAttributeValue("Y", Math.Round(g.PosY));
                     gt.SetAttributeValue("NumInputs", g.nbrInputs());
                     gt.SetAttributeValue("Rotation", g.rotation);
 
@@ -128,6 +128,24 @@ namespace CircLab
                         {
                             XElement wire = new XElement("Wire",
                                     new XElement("From"), new XElement("To"));
+                            wire.SetAttributeValue("isSelect", "0");
+                            Terminal sourceTerminal = ((Wireclass)input.wires[0]).source;
+                            StandardComponent sourceComponent = UserClass.TryFindParent<StandardComponent>(sourceTerminal);
+                            wire.Element("From").SetAttributeValue("ID", gid[sourceComponent]);
+                            wire.Element("From").SetAttributeValue("Port", sourceComponent.OutputStack.Children.IndexOf(sourceTerminal));
+                            wire.Element("To").SetAttributeValue("ID", gid[g]);
+                            wire.Element("To").SetAttributeValue("Port", i);
+                            wires.Add(wire);
+                        }
+                    }
+                    for (int i = 0; i < g.selectionStack.Children.Count; i++)
+                    {
+                        var input = g.selectionStack.Children[i] as Terminal;
+                        if (input.wires.Count > 0)
+                        {
+                            XElement wire = new XElement("Wire",
+                                    new XElement("From"), new XElement("To"));
+                            wire.SetAttributeValue("isSelect", "1");
                             Terminal sourceTerminal = ((Wireclass)input.wires[0]).source;
                             StandardComponent sourceComponent = UserClass.TryFindParent<StandardComponent>(sourceTerminal);
                             wire.Element("From").SetAttributeValue("ID", gid[sourceComponent]);
@@ -177,6 +195,8 @@ namespace CircLab
                     return new Input();
                 case "Output":
                     return new Output();
+                case "Comment":
+                    return new Comment("Label");
                 case "Clock":
                     temp = int.Parse(gate.Attribute("HighLevelms").Value);
                     temp2 = int.Parse(gate.Attribute("LowLevelms").Value);
@@ -211,10 +231,10 @@ namespace CircLab
                     temp = int.Parse(gate.Attribute("TriggerType").Value);
                     switch (temp)
                     {
-                        case 0: return new programmablRegister(programmablRegister.TriggerType.FallingEdge, numInputs);
-                        case 1: return new programmablRegister(programmablRegister.TriggerType.RisingEdge, numInputs);
-                        case 2: return new programmablRegister(programmablRegister.TriggerType.LowLevel, numInputs);
-                        default: return new programmablRegister(programmablRegister.TriggerType.HighLevel, numInputs);
+                        case 0: return new programmablRegister(programmablRegister.TriggerType.FallingEdge, numInputs - 2);
+                        case 1: return new programmablRegister(programmablRegister.TriggerType.RisingEdge, numInputs - 2);
+                        case 2: return new programmablRegister(programmablRegister.TriggerType.LowLevel, numInputs - 2);
+                        default: return new programmablRegister(programmablRegister.TriggerType.HighLevel, numInputs - 2);
                     }
                 case "CirculerRegister":
                     temp = int.Parse(gate.Attribute("TriggerType").Value);
@@ -291,6 +311,7 @@ namespace CircLab
                 canvas.UpdateLayout();
                 MainWindow.wire = new Wireclass();
                 int temp;
+                
                 if(!int.TryParse(wire.Element("From").Attribute("ID").Value,out temp)) continue;
                 StandardComponent gateSrc = gid[temp];
                 if (!int.TryParse(wire.Element("To").Attribute("ID").Value, out temp)) continue;
@@ -300,7 +321,14 @@ namespace CircLab
                 if (!int.TryParse(wire.Element("To").Attribute("Port").Value, out temp)) continue;
                 int portDest = temp;
                 Wireclass.selection1 = ((Terminal)gateSrc.OutputStack.Children[portSrc]).elSelector;
-                Wireclass.selection2 = ((Terminal)gateDest.inputStack.Children[portDest]).elSelector;
+                if (wire.Attribute("isSelect").Value == "0")
+                {
+                    Wireclass.selection2 = ((Terminal)gateDest.inputStack.Children[portDest]).elSelector;
+                }
+                else
+                {
+                    Wireclass.selection2 = ((Terminal)gateDest.selectionStack.Children[portDest]).elSelector;
+                }
                 MainWindow.wire.relier();
                 canvas.UpdateLayout();
                 MainWindow.wire.btn111 = Wireclass.selection1;
