@@ -20,7 +20,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         Foreground="#DDFFFFFF"
-        Icon="logo.bmp"
+        Icon="icon.ico"
         x:Name="mwindow"
         mc:Ignorable="d"
         KeyUp="mwindow_KeyUp">
